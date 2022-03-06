@@ -19,13 +19,19 @@
 <h1 id="title"></h1>
 <details id="description">
 </details>
-<div class="modal-overlay closed" id="modal-overlay"></div>
-<div class="modal closed" id="edittagwindow"><!--タグ編集用ポップアウト-->
-    <div class="modal-guts">
+<div class="edit-overlay closed" id="edit-overlay"></div>
+<div class="edit closed" id="edit"><!--タグ編集用ポップアウト-->
+    <div class="edit-guts">
         <table>
             <tr>
                 <td>
-                    <button class="close-button" id="closeedit">編集完了</button>
+                    <button class="close-edit" id="close-edit">編集完了</button>
+                </td>
+                <td id="edittag" class="tags"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input id="newtag" type="text"><button id="sendnewtag">送信</button>
                 </td>
             </tr>
         </table>
@@ -34,10 +40,10 @@
 <table>
     <tr>
         <td>
-            <button id="startedit" class="open-button">タグを編集</button>
+            <button id="open-edit" class="open-edit">タグを編集</button>
         </td>
         <td>タグ:</td>
-        <td id="tags"></td>
+        <td class="tags"></td>
     </tr>
 </table>
 <div id =videodiv></div>

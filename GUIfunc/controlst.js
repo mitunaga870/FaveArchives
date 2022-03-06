@@ -1,19 +1,24 @@
+require('dotenv').config();
 const getstdata = require('../generalfunc/sqlfanc/getalldata');
 const abb = require('../generalfunc/abbreviation');
+const addtag = require('../GUIfunc/edittagfunc/addtag');
 const url = new URL(window.location.href);
 const params = url.searchParams;
 const id = params.get('v');
 const titletag = document.getElementById('title');
 const detailbox = document.getElementById('description');
-const tagbox = document.getElementById('tags');
+const tagbox = document.getElementsByClassName('tags');
 const video = document.getElementById('videodiv');
 const prayer = document.createElement('iframe');
-var modal = document.querySelector("#modal");
-var modalOverlay = document.querySelector("#modal-overlay");
-var closeButton = document.querySelector("closeedit");
-var openButton = document.querySelector("startedit");
+const newtagtxbox = document.getElementById('newtag');
+var edit = document.querySelector("#edit");
+var editOverlay = document.querySelector("#edit-overlay");
+var closeButton = document.querySelector("#close-edit");
+var openButton = document.querySelector("#open-edit");
+var settagsButton = document.querySelector("#sendnewtag");
 
 (async () => {
+    //初期データ取得処理
     const stdata = await getstdata(id);
     titletag.textContent = stdata.title;
     detailbox.textContent = stdata.description;
@@ -31,16 +36,31 @@ var openButton = document.querySelector("startedit");
     if(stdata.private==0) {
         prayer.src = "https://www.youtube.com/embed/" + id;
         video.appendChild(prayer);
+    }else {
+        if (process.env.ArchivesDirectory!=undefined) {
+            prayer.src = process.env.ArchivesDirectory +"/"+stdata.title+".mp4";
+        }
     }
     //閉じるボタン
     closeButton.addEventListener("click", function () {
-        modal.classList.toggle("closed");
-        modalOverlay.classList.toggle("closed");
+        edit.classList.toggle("closed");
+        editOverlay.classList.toggle("closed");
     });
 
     //開くボタン
     openButton.addEventListener("click", function () {
-        modal.classList.toggle("closed");
-        modalOverlay.classList.toggle("closed");
+        edit.classList.toggle("closed");
+        editOverlay.classList.toggle("closed");
     });
+    
+    //タグ追加処理
+    openButton.addEventListener("click", async function () {
+        var newtag =  await addtag(id,newtagtxbox.value);
+        tagbox.removeChild(child);
+        for(var i in newtag){
+            var tag = document.createElement('div');
+            tag.textContent = stdata.tags[i].tag;
+            tagbox.appendChild(tag);
+        }
+    })
 })();
