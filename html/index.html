@@ -17,29 +17,37 @@
 	</header>
 	<body bgcolor="#282828" text="#ececec">
 		<div id="parent">
-			<p>推し速報</p>
-		<div id="child1"><p id="child1msg"></p> </div>
+		<div id="child1"><p>推し速報</p> </div>
 		<div id="child2">
-			<p>アラートスイッチ</p>
+			<p>アラートスイッチ</p><br>
+			<select id="aleatthing"></select>
 			<table id="aleatmaintable">
 				<tr>
 					<td>
-						<button id="smallbt" class="recbt">録画<br>ON</button>
+						<button id="recbt" class="smallbt">録画<br>ON</button>
 					</td>
 					<td rowspan="2">
-						<button id="longbt" class="alexabt">Alexa<br>ON</button>
+						<button id="alexabt" class="longbt">Alexa<br>ON</button>
 					</td>
 					<td rowspan="2">
-					<button id="longbt" class="fitbitbt">fitbit<br>ON</button>
+						<button id="subalexabt" class="longbt">Alexa枠通知<br>ON</button>
+					</td>
+					<td rowspan="2">
+						<button id="fitbitbt" class="longbt">fitbit<br>ON</button>
+					</td>
+					<td rowspan="2">
+						<button id="subfitbitbt" class="longbt">fitbit枠通知<br>ON</button>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<button id="smallbt" class="areambt">アラーム<br>ON</button>
+						<button id="areambt" class="smallbt">アラーム<br>ON</button>
 					</td>
 				</tr>
-			</table>
+			</table><br>
+			<button id="rand">ランダムアーカイブ</button>
 		</div>
 		</div>
+		<script src="../GUIfunc/indexbutton.js"></script>
 	</body>
 </html>

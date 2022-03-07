@@ -2,16 +2,20 @@ header{
     background-color: #414141;
 }
 #child1 {
-    flex-grow: 1;
+    width: 30%;
 }
 #child2 {
-    flex-grow: 1;
+    width: 70%;
 }
 
 #parent {
     display: flex;
 }
-#smallbt {
+#rand {
+    height: 50px;
+    width: 310px;
+}
+.smallbt {
     height: 100px;
     width: 100px;
     display       : inline-block;
@@ -27,12 +31,12 @@ header{
     box-shadow    : 6px 6px 3px #666666;  /* 影の設定 */
     border        : 2px solid #ffffff;    /* 枠の指定 */
 }
-#smallbt:hover {
+.smallbt:hover {
     box-shadow    : none;        /* カーソル時の影消去 */
     background    : #ececec;     /* 背景色     */
     color         : #666666;     /* 文字色     */
 }
-#longbt {
+.longbt {
     height: 200px;
     width: 100px;
     display       : inline-block;
@@ -48,7 +52,7 @@ header{
     box-shadow    : 6px 6px 3px #666666;  /* 影の設定 */
     border        : 2px solid #ffffff;    /* 枠の指定 */
 }
-#longbt:hover {
+.longbt:hover {
     box-shadow    : none;        /* カーソル時の影消去 */
     background    : #ececec;     /* 背景色     */
     color         : #666666;     /* 文字色     */

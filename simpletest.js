@@ -1,10 +1,7 @@
-const button = document.querySelector('.js-button');
+const gas = require("./generalfunc/gas");
 
 (async () => {
-    button.addEventListener('click',clickEvent => {
-        const elemetnt = document.getElementById('search');
-        let sarchurl = "../html/serchreslut.html";
-        const keywords = elemetnt.value.split(/\s/);
-        location.href = sarchurl;
-    });
+    gas('recsw',[]).then(res=>{
+        console.log(res.data.response.result);
+    }).catch(error=>{console.log(error)});
 })();

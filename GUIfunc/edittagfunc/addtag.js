@@ -1,10 +1,10 @@
 const quary = require('../../generalfunc/sqlfanc/query');
-const scan = require('../../generalfunc/scan');
 
 module.exports = async (id,newtagstr)=>{
-    var temp = async quary("select tag from tags where videoid=\'"+id+'\';');
+    var temp = await quary('select tag from tags where videoid=\''+id+'\';');
+    var addedtag = [];
     for (var i in temp){
-
+        addedtag.push(temp[i].tag);
     }
     var newtags =[];
     var temp = newtagstr.split(/\s/);
