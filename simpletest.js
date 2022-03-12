@@ -1,7 +1,6 @@
 const gas = require("./generalfunc/gas");
+const quary = require('./generalfunc/sqlfanc/query');
 
 (async () => {
-    gas('recsw',[]).then(res=>{
-        console.log(res.data.response.result);
-    }).catch(error=>{console.log(error)});
+
 })();

@@ -65,35 +65,35 @@ const selection = document.querySelector('#aleatthing');
     })
     //録画オン・オフ
     recbutton.addEventListener('click',async function () {
-        await gas('recsw',[]).then(res=>{
+        await gas('recsw',[select.value]).then(res=>{
             temp = res.data.response.result;
         }).catch(error=>{console.log(error)});
         recbt.innerText = "録画"+temp;
     });
     //アラームオン・オフ
     arambutton.addEventListener('click',async function () {
-        await gas('areamsw',[]).then(res=>{
+        await gas('areamsw',[select.value]).then(res=>{
             temp = res.data.response.result;
         }).catch(error=>{console.log(error)});
         areambt.innerText = "アラーム"+temp;
     });
     //alexaオン・オフ
     alexabutton.addEventListener('click',async function () {
-        await gas('alexasw',[]).then(res=>{
+        await gas('alexasw',[select.value]).then(res=>{
             temp = res.data.response.result;
         }).catch(error=>{console.log(error)});
         alexabt.innerText = "Alexa"+temp;
     });
     //fitbitオン・オフ
     fitbitbutton.addEventListener('click',async function () {
-        await gas('fitbitsw',[]).then(res=>{
+        await gas('fitbitsw',[select.value]).then(res=>{
             temp = res.data.response.result;
         }).catch(error=>{console.log(error)});
         fitbit.innerText = "Fitbit"+temp;
     });
     //alexa枠通知オン・オフ
     subalexabutton.addEventListener('click',async function () {
-        await gas('subalexasw',[]).then(res=>{
+        await gas('subalexasw',[select.value]).then(res=>{
             temp = res.data.response.result;
         }).catch(error=>{console.log(error)});
         subalexabt.innerText = "Alexa枠通知"+temp;
@@ -101,7 +101,7 @@ const selection = document.querySelector('#aleatthing');
     //fitbit枠通知オン・オフ
     subfitbitbutton.addEventListener('click',async function () {
         const button = document.getElementById('subfitbitbt');
-        await gas('subfitbitsw',[]).then(res=>{
+        await gas('subfitbitsw',[select.value]).then(res=>{
             temp = res.data.response.result;
         }).catch(error=>{console.log(error)});
         subfitbit.innerText = "Fitbit枠通知"+temp;

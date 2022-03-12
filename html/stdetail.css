@@ -7,9 +7,9 @@ header {
 /* 動画を囲うdiv */
 #videodiv {
     position: relative;
-    width:100%; /* 横幅は100%で固定 */
+    width:70%; /* 横幅は100%で固定 */
     height:0; /* 高さは0にしておく(padding-topで高さを指定するため) */
-    padding-top: 56.25%; /* 高さを指定(16:9) */
+    padding-top: 39.375%; /* 高さを指定(16:9) */
 }
 
 /* YouTube埋め込み用のiframe */
@@ -44,11 +44,12 @@ details {
     background: white;
     box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
 }
+
 .closed {
     display: none;
 }
 
-.edit-overlay {
+#overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -62,4 +63,47 @@ a{
 }
 #taglist{
     display: flex;
+}
+#manu{
+    height: 30%;
+    width: 100%;
+    display: flex;
+}
+.list{
+    width: 33%;
+}
+.scroll{
+    height: 35%;
+}
+.editsongsbox{
+    display: block;
+    width: 600px;
+    max-width: 100%;
+    height: 300px;
+    position: fixed;
+    z-index: 100;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    /* margin: -200px 0 0 -200px; */
+    background: white;
+    box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
+}
+.closed{
+    display: none;
+}
+#prayer{
+    display: flex;
+}
+#other{
+    position: relative;
+    width:30%; /* 横幅は100%で固定 */
+    height:0; /* 高さは0にしておく(padding-topで高さを指定するため) */
+    padding-top: 39.375%; /* 高さを指定(16:9) */
+}
+#buttons2{
+    height: 20%;
+}
+#coment{
+    height: 80%;
 }

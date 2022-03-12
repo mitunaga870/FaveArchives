@@ -6,15 +6,19 @@ const params = url.searchParams;
 let table = document.createElement('table');
 const result = document.getElementById('result');
 const keywords = params.get('q');
+const type = params.get('f');
 
 (async () => {
-    const resid = await getid(keywords);
-    if (resid.length==0){
+    const res = await getid(keywords);
+    const resid = res.ids;
+    result.append("検索結果："+resid.length+"件");
+    var list = await getstdata(resid,res.rate,type);
+    result.innerText = "";
+    if (list.length==0){
         result.append("条件に一致するアーカイブはありません");
         return;
     }
-    result.append("検索結果："+resid.length+"件")
-    var list = await getstdata(resid);
+    result.append("検索結果："+list.length+"件");
     for (var i in list){
         var tr = document.createElement('tr');
         var tr2 = document.createElement('tr');
@@ -27,7 +31,6 @@ const keywords = params.get('q');
         title.id = "title";
         link.textContent = list[i].title;
         var url = "../html/stdetail.html?v="+list[i].videoid;
-        console.log(url)
         link.href = url;
         title.appendChild(link);
         tr.appendChild(title);

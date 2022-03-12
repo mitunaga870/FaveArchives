@@ -33,7 +33,7 @@ module.exports = async (basetxt) =>{
         ids.push(temp[i].videoid);
     }
     //曲リストに検索
-    querytx = "select videoid from songs where songname like "
+    querytx = "select songs.videoid from songs join songlist on songs.songid = songlist.songid where songlist.songname like "
     for (var i in searchtxts){
         querytx += "\'%"+searchtxts[i]+"%\'";
         if (searchtxts[parseInt(i)+1]!=undefined){
@@ -55,8 +55,17 @@ module.exports = async (basetxt) =>{
         }else{
             querytx +=";"
         }
+    };
+    //一致率取得（重複数）
+    var count = {};
+    for (var i = 0; i < ids.length; i++) {
+        var elm = ids[i];
+        count[elm] = (count[elm] || 0) + 1;
     }
     //重複を削除
     const fillteredids = Array.from(new Set(ids));
-    return fillteredids;
+    return {
+        ids:fillteredids,
+        rate:count
+    };
 }

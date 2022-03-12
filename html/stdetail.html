@@ -1,52 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>アーカイブの詳細</title>
-    <link rel="stylesheet" href="stdetail.css">
-</head>
-<header id="header">
-    <h1>
-        <a href="index.html">
-            <img src="../Asset/icon.png"  height="70" width="70">
-        </a>
-        <input type="text" id="search"  size="40">
-        <button class="searching">検索</button>
-        <script src="../GUIfunc/getsearch.js"></script>
-    </h1>
-</header>
-<body bgcolor="#282828" text="#ececec">
-<h1 id="title"></h1>
-<details id="description">
-</details>
-<div class="edit-overlay closed" id="edit-overlay"></div>
-<div class="edit closed" id="edit"><!--タグ編集用ポップアウト-->
-    <div class="edit-guts">
+    <head>
+        <meta charset="UTF-8">
+        <title>アーカイブの詳細</title>
+        <link rel="stylesheet" href="stdetail.css">
+    </head>
+    <header id="header">
+        <h1>
+            <a href="index.html">
+                <img src="../Asset/icon.png"  height="70" width="70">
+            </a>
+            <select id="filler">
+                <option value="すべて">すべて</option>
+                <option value="歌雑談">歌雑談</option>
+                <option value="ゲーム">ゲーム</option>
+            </select>
+            <input type="text" id="search"  size="40">
+            <button class="searching">検索</button>
+            <script src="../GUIfunc/getsearch.js"></script>
+        </h1>
+    </header>
+    <body bgcolor="#282828" text="#ececec">
+        <h1 id="title"></h1>
+        <details id="description">
+        </details>
+        <div class="overlay closed" id="overlay"></div>
+        <div class="edit closed" id="edit"><!--タグ編集用ポップアウト-->
+        <div class="edit-guts">
+            <table>
+                <tr>
+                    <td>
+                    <button class="close-edit" id="close-edit">編集完了</button>
+                    </td>
+                    <td id = "edittag"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input id="newtag" type="text"><button id="sendnewtag">送信</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <table>
+        <tr>
+            <td>
+                <button id="open-edit" class="open-edit">タグを編集</button>
+            </td>
+            <td>タグ:</td>
+            <td id = "taglist"></td>
+        </tr>
+    </table>
+    <div id="prayer">
+        <div id =videodiv></div>
+        <div id="other">
+            <div id="buttons2"></div>
+            <div id="coment"></div>
+        </div>
+    </div>
+    <div class="editsongsbox closed" id="editsongsbox">
+        <div>
+            <table id="addsong">
+                <thead>
+                    <tr>
+                        <td>
+                            id
+                        </td>
+                        <td>
+                            タイトル
+                        </td>
+                        <td>
+                            タイムスタンプ
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div>
         <table>
             <tr>
                 <td>
-                    <button class="close-edit" id="close-edit">編集完了</button>
+                    <input onchange="TEST_OBJECT.onSearchFieldChange(this.value);"  type="text" id="searchsongs"><br>
+                    <select id="songlist">
+                        <option value="0">新規曲追加</option>
+                    </select>
                 </td>
-                <td id = "edittag"></td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center">
-                    <input id="newtag" type="text"><button id="sendnewtag">送信</button>
+                <td>
+                    <input type="text" id="songname">
+                </td>
+                <td>
+                    <input type="time" id="timestump" step="1">
+                </td>
+                <td>
+                    <button id="setsong">セット</button>
                 </td>
             </tr>
         </table>
+        </div>
+        <script language="javascript" type="text/javascript">
+            var TEST_OBJECT = {
+                onSearchFieldChange : function(value){
+                    var selectBox = document.getElementById("songlist");
+                    var items = selectBox.children;
+                    if (value === "") {
+                        for(var i=items.length-1; i>=0; i--){
+                            items[i].style.display = "";
+                            items[i].selected = false;
+                        }
+                        return;
+                    }
+
+                    var reg = new RegExp(".*"+value+".*","i");
+                    for(var i=items.length-1; i>=0; i--){
+                        if ( items[i].textContent.match(reg) ){
+                            items[i].style.display = "";
+                        } else {
+                            items[i].style.display = "none";
+                        }
+                        items[i].selected = false;
+                    }
+                }
+            }
+        </script>
+        <button id="sendsong">送信</button>
     </div>
-</div>
-<table>
-    <tr>
-        <td>
-            <button id="open-edit" class="open-edit">タグを編集</button>
-        </td>
-        <td>タグ:</td>
-        <td id = "taglist"></td>
-    </tr>
-</table>
-<div id =videodiv></div>
-<script src="../GUIfunc/controlst.js"></script>
-</body>
+    <div id="manu">
+        <div class="list">
+            目次<br>
+            <button id = "editcont">を編集</button><button id = "addnow">現在地点に追加</button>
+            <div id = "contentlist" class="scroll"></div>
+        </div>
+        <div class="list">
+            曲リスト<br>
+            <button id = "editsongs">編集</button>
+            <div id = "mainlist" class="scroll">
+                <table id="songlist0"></table>
+            </div>
+        </div>
+        <div id ="oherarchive" class="list"></div>
+    </div>
+    <script src="../GUIfunc/controlst.js"></script>
+    </body>
 </html>
