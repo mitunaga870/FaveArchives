@@ -4,6 +4,12 @@ th{
 header {
     background-color: #414141;
 }
+.flex{
+    display: flex;
+}
+.headerlink{
+    padding  : 20px;
+}
 /* 動画を囲うdiv */
 #videodiv {
     position: relative;
@@ -58,8 +64,9 @@ details {
     z-index: 50;
     background: rgba(0, 0, 0, 0.6);
 }
-a{
+a {
     text-decoration: none;
+    color: #ececec;
 }
 #taglist{
     display: flex;
@@ -72,14 +79,11 @@ a{
 .list{
     width: 33%;
 }
-.scroll{
-    height: 35%;
-}
 .editsongsbox{
     display: block;
-    width: 600px;
+    width: 1000px;
     max-width: 100%;
-    height: 300px;
+    height: 400px;
     position: fixed;
     z-index: 100;
     left: 50%;
@@ -88,6 +92,7 @@ a{
     /* margin: -200px 0 0 -200px; */
     background: white;
     box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
+    color: #414141;
 }
 .closed{
     display: none;
@@ -95,15 +100,44 @@ a{
 #prayer{
     display: flex;
 }
-#other{
+#other {
     position: relative;
-    width:30%; /* 横幅は100%で固定 */
-    height:0; /* 高さは0にしておく(padding-topで高さを指定するため) */
-    padding-top: 39.375%; /* 高さを指定(16:9) */
+    width: 30%; /* 横幅は100%で固定 */
+    height: 39.375%; /* 高さは0にしておく(padding-topで高さを指定するため) */
 }
 #buttons2{
+    position: relative;
     height: 20%;
 }
 #coment{
+    position: relative;
     height: 80%;
+}
+#popouttable{
+    height: 220px;
+    overflow: scroll;
+}
+.edetailbox{
+    display: block;
+    width: 1000px;
+    max-width: 100%;
+    height: 200px;
+    position: fixed;
+    z-index: 100;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    /* margin: -200px 0 0 -200px; */
+    background: white;
+    box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
+    color: #414141;
+}
+.closed{
+    display: none;
+}
+.scroll{
+    overflow: scroll;
+}
+#detailtabel{
+    height: 150px;
 }

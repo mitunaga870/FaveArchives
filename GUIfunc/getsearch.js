@@ -5,7 +5,7 @@ const button = document.querySelector('.searching');
     const elemetnt = document.getElementById('search');
     const fileer = document.getElementById('filler');
     let sarchurl = "../html/serchreslut.html";
-    sarchurl += "?q="+elemetnt.value;
+    sarchurl += "?q="+elemetnt.value.replace(/\'/g,"\\\'");
     sarchurl += "&f="+fileer.value;
     location.href = sarchurl;
   });

@@ -26,10 +26,9 @@ a {
     color: #ececec;
 }
 /*ここまでデフォ*/
-th{
-    text-align: left;
+#searchbox{
+    height: 30%;
 }
-#description{
-    font-size: small;
-    color: #a7a7a7;
+#listbox{
+    height: 70%;
 }

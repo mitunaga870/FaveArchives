@@ -6,11 +6,10 @@
 		<link rel="stylesheet" href="index.css">
 	</head>
 	<header id="header" >
-		<button class="sidebar-toggle"></button>
+		<div class="flex">
 		<h1 align="center">
 			<a href="index.html">
-				<img src="../Asset/icon.png"  height="70" width="70">
-				V tools</a>
+				<img src="../Asset/icon-long.png"  height="100" width="300"></a>
 			<select id="filler">
 				<option value="すべて">すべて</option>
 				<option value="歌雑談">歌雑談</option>
@@ -19,11 +18,25 @@
 		<input type="text" id="search"  size="40">
 		<button class="searching">検索</button>
 		</h1>
+			<a href="songplayer.html">
+		<div class="headerlink">
+				<p>ランダムお歌</p>
+		</div>
+		</a>
+		<a href="sonlist.html">
+		<div class="headerlink">
+			<p>お歌リスト編集</p>
+		</div></a>
+		</div>
+		<script src="../GUIfunc/getsearch.js"></script>
 	</header>
 	<body bgcolor="#282828" text="#ececec">
 		<div id="parent">
 			<div class="sidebar"></div>
-			<div id="child1"><p>推し速報</p> </div>
+			<div id="child1"><p>推し速報</p>
+				<div id="staleatbox">
+				</div>
+			</div>
 			<div id="child2">
 				<p>アラートスイッチ</p><br>
 				<select id="aleatthing"></select>
@@ -55,6 +68,6 @@
 			</div>
 		</div>
 		<script src="../GUIfunc/getsearch.js"></script>
-		<script src="../GUIfunc/indexbutton.js"></script>
 	</body>
+	<script src="../GUIfunc/indexbutton.js"></script>
 </html>

@@ -1,34 +1,28 @@
 const query = require('../../generalfunc/sqlfanc/query');
 
-module.exports = async (id,rate,filter) =>{
+module.exports = async (id,rate,filter,onlyexist =  true) =>{
+    let q = "";
     var result;
-    if(filter == undefined||filter.match("すべて")){
-        if(Array.isArray(id)){
-            var temp ="\'";
-            for (var i in id){
-                temp+=id[i]+"\'"
-                if (id[parseInt(i)+1]!=undefined){
-                    temp += ",\'";
-                }
+    if(Array.isArray(id)){
+        var temp ="\'";
+        for (var i in id){
+            temp+=id[i]+"\'"
+            if (id[parseInt(i)+1]!=undefined){
+                temp += ",\'";
             }
-            result = await query('select videodetail.videoid,videodetail.title,videodetail.name,publishedtime.publishedAt,videodetail.description from videodetail inner join publishedtime on videodetail.videoid= publishedtime.videoid where videodetail.videoid in ('+temp+') order by publishedAt desc;');
-        }else {
-            result = await query('select videodetail.videoid,videodetail.title,videodetail.name,publishedtime.publishedAt,videodetail.description from videodetail inner join publishedtime on videodetail.videoid= publishedtime.videoid where videodetail.videoid = \''+id+'\' order by publishedAt desc;');
         }
+        q+='select videodetail.videoid,videodetail.title,videodetail.userid,publishedtime.publishedAt,videodetail.description from videodetail inner join publishedtime on videodetail.videoid= publishedtime.videoid where videodetail.videoid in ('+temp+')';
     }else {
-        if (Array.isArray(id)) {
-            var temp = "\'";
-            for (var i in id) {
-                temp += id[i] + "\'"
-                if (id[parseInt(i) + 1] != undefined) {
-                    temp += ",\'";
-                }
-            }
-            result = await query('select videodetail.videoid,videodetail.title,videodetail.name,publishedtime.publishedAt,videodetail.description from videodetail inner join publishedtime on videodetail.videoid= publishedtime.videoid where videodetail.videoid in (' + temp + ') and videodetail.type = \''+filter+'\' order by publishedAt desc;');
-        } else {
-            result = await query('select videodetail.videoid,videodetail.title,videodetail.name,publishedtime.publishedAt,videodetail.description from videodetail inner join publishedtime on videodetail.videoid= publishedtime.videoid where videodetail.videoid = \'' + id + '\' and videodetail.type = \''+filter+'\' order by publishedAt desc;');
-        }
+        q+='select videodetail.videoid,videodetail.title,videodetail.userid,publishedtime.publishedAt,videodetail.description from videodetail inner join publishedtime on videodetail.videoid= publishedtime.videoid where videodetail.videoid = \''+id+'\'';
     }
+    if(filter.match('すべて')) {}else {
+        q +=' and videodetail.type = \''+filter+'\''
+    }
+    if(onlyexist){
+        q += ' and videodetail.private != \'-1\''
+    }
+    q+=' order by publishedAt desc;';
+    result = await query(q);
     temp = Object.keys(rate);
     result.forEach((value)=>{
         temp.forEach((key)=>{

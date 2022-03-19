@@ -6,6 +6,8 @@ const addsong = require('../GUIfunc/editsongsfunc/addsong');
 const settime = require('../GUIfunc/setprayertime');
 const getsonglist = require('../generalfunc/sqlfanc/getsonglist');
 const getsongs = require('../GUIfunc/editsongsfunc/getsongs');
+const createuserselection = require('../GUIfunc/setuserselect');
+const setdetail = require('../generalfunc/sqlfanc/setvideodetail');
 const url = new URL(window.location.href);
 const params = url.searchParams;
 const id = params.get('v');
@@ -22,6 +24,12 @@ const newsongtitle = document.getElementById('songname');
 const songtime = document.getElementById('timestump');
 const addsonlist = document.getElementById('addsong');
 const songlist = document.getElementById('songlist0');
+const titlebox = document.getElementById('titlebox');
+const detailbox2 = document.getElementById('descriptionbox');
+const userselect = document.getElementById('userselect');
+const ctypeselect = document.getElementById('ctypeselect');
+const typeselect = document.getElementById('typeselect');
+const priselect = document.getElementById('priselect');
 const edit = document.querySelector("#edit");
 const editOverlay = document.querySelector("#overlay");
 const closeButton = document.querySelector("#close-edit");
@@ -30,6 +38,7 @@ const settagsButton = document.querySelector("#sendnewtag");
 const editsongsbox = document.querySelector('#editsongsbox');
 const editsongsbutton = document.querySelector('#editsongs');
 const sendsonglist = document.querySelector('#sendsong');
+const senddetail = document.querySelector('#senddetail');
 let rowid = 0;
 
 (async () => {
@@ -50,12 +59,20 @@ let rowid = 0;
         tag2.className = "edittag";
         edittagbox.appendChild(tag2);
     }
+    //詳細情報セット
+    await createuserselection(userselect);
+    titlebox.value = stdata.title;
+    detailbox2.value = stdata.description;
+    ctypeselect.value = stdata.contenttype;
+    typeselect.value = stdata.type;
+    userselect.value = stdata.userid;
+    priselect.value = stdata.private;
     //曲リスト編集ページ系の情報セット
     const songdata = await getsonglist(id);
     songdata.allsong.forEach((song)=>{
         let option = document.createElement('option');
         option.value = song.songid;
-        option.innerText = song.songname;
+        option.innerText = song.songname+"/"+song.singer;
         songselect.appendChild(option);
     });
     //プレイヤーセット
@@ -163,6 +180,10 @@ let rowid = 0;
         console.log(senddata);
         addsong(id,senddata);
     });
+    senddetail.addEventListener('click',async function (){
+        await setdetail(id,titlebox.value,detailbox2.value,ctypeselect.value,priselect.value,typeselect.value,userselect.value);
+        document.getElementById('edetailbox').classList.toggle('closed');
+    })
 })();
 
 async function deltag(main){

@@ -5,20 +5,31 @@
         <title>アーカイブの詳細</title>
         <link rel="stylesheet" href="stdetail.css">
     </head>
-    <header id="header">
-        <h1>
-            <a href="index.html">
-                <img src="../Asset/icon.png"  height="70" width="70">
-            </a>
-            <select id="filler">
-                <option value="すべて">すべて</option>
-                <option value="歌雑談">歌雑談</option>
-                <option value="ゲーム">ゲーム</option>
-            </select>
-            <input type="text" id="search"  size="40">
-            <button class="searching">検索</button>
-            <script src="../GUIfunc/getsearch.js"></script>
-        </h1>
+    <header id="header" >
+        <div class="flex">
+            <h1 align="center">
+                <a href="index.html">
+                    <img src="../Asset/icon-long.png"  height="100" width="300"></a>
+                <select id="filler">
+                    <option value="すべて">すべて</option>
+                    <option value="歌雑談">歌雑談</option>
+                    <option value="ゲーム">ゲーム</option>
+                </select>
+                <input type="text" id="search"  size="40">
+                <button class="searching">検索</button>
+            </h1>
+            <div class="headerlink">
+                <a href="songplayer.html">
+                    <p>ランダムお歌</p>
+                </a>
+            </div>
+            <div class="headerlink">
+                <a href="sonlist.html">
+                    <p>お歌リスト編集</p>
+                </a>
+            </div>
+        </div>>
+        <script src="../GUIfunc/getsearch.js"></script>
     </header>
     <body bgcolor="#282828" text="#ececec">
         <h1 id="title"></h1>
@@ -51,15 +62,82 @@
             <td id = "taglist"></td>
         </tr>
     </table>
+    <div id="edetailbox" class="edetailbox closed">
+        <div align="left"><button onclick="document.getElementById('edetailbox').classList.toggle('closed');">閉じる</button></div>
+        <div class="scroll" id="detailtabel">
+        <table>
+            <thead>
+            <tr>
+                <td>
+                    タイトル
+                </td>
+                <td>
+                    詳細情報
+                </td>
+                <td>
+                    動画種類
+                </td>
+                <td>
+                    配信者
+                </td>
+                <td>
+                    ジャンルタイプ
+                </td>
+                <td>
+                    アーカイブの状況
+                </td>
+            </tr>
+            </thead>
+            <tr>
+                <td id="titlecell">
+                    <input type="text" id="titlebox" size="60">
+                </td>
+                <td id="descriptioncell">
+                    <form>
+                    <textarea wrap=”soft” id="descriptionbox"></textarea>
+                    </form>
+                </td>
+                <td id="ctypecell">
+                    <select id="ctypeselect">
+                        <option value="video">動画</option>
+                        <option value="live">配信</option>
+                    </select>
+                </td>
+                <td id="usercell">
+                    <select id="userselect">
+                    </select>
+                </td>
+                <td id="typecell">
+                    <select id="typeselect">
+                        <option value="歌雑談">歌雑談</option>
+                        <option value="ASMR">ASMR</option>
+                        <option value="ゲーム">ゲーム</option>
+                    </select>
+                </td>
+                <td id="pricell">
+                    <select id="priselect">
+                        <option value="1">非公開（録画データあり）</option>
+                        <option value="0">公開</option>
+                        <option value="-1">非公開（録画データなし）</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        </div>
+        <div align="left"><button id="senddetail">送信</button></div>
+    </div>
     <div id="prayer">
         <div id =videodiv></div>
         <div id="other">
-            <div id="buttons2"></div>
+            <div id="buttons2">
+                <button onclick="document.getElementById('edetailbox').classList.toggle('closed');">詳細情報編集</button>
+            </div>
             <div id="coment"></div>
         </div>
     </div>
     <div class="editsongsbox closed" id="editsongsbox">
-        <div>
+        <div align="left"><button onclick="document.getElementById('editsongsbox').classList.toggle('closed');">閉じる</button></div>
+        <div id="popouttable">
             <table id="addsong">
                 <thead>
                     <tr>
@@ -80,7 +158,7 @@
         <table>
             <tr>
                 <td>
-                    <input onchange="TEST_OBJECT.onSearchFieldChange(this.value);"  type="text" id="searchsongs"><br>
+                    <input onchange="TEST_OBJECT.onSearchFieldChange(this.value,'songlist');"  type="text" id="searchsongs"><br>
                     <select id="songlist">
                         <option value="0">新規曲追加</option>
                     </select>
@@ -99,8 +177,8 @@
         </div>
         <script language="javascript" type="text/javascript">
             var TEST_OBJECT = {
-                onSearchFieldChange : function(value){
-                    var selectBox = document.getElementById("songlist");
+                onSearchFieldChange : function(value,target){
+                    var selectBox = document.getElementById(target);
                     var items = selectBox.children;
                     if (value === "") {
                         for(var i=items.length-1; i>=0; i--){

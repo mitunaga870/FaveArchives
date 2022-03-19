@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>検索結果</title>
-    <link rel="stylesheet" href="serchreslut.css">
+    <title>ランダムお歌</title>
+    <link rel="stylesheet" href="songplayer.css">
 </head>
 <header id="header" >
     <div class="flex">
@@ -31,7 +31,16 @@
     <script src="../GUIfunc/getsearch.js"></script>
 </header>
 <body bgcolor="#282828" text="#ececec">
-<div id = 'result'></div>
-<script src="../GUIfunc/setsherchresult.js"></script>
+<h1 id="title"></h1>
+<div id="prayer">
+    <div id =videodiv></div>
+    <div id="other">
+        <div id="buttons2">
+            <button id="skip">次の曲</button>
+        </div>
+        <div id="coment" class="scroll"></div>
+    </div>
+</div>
+<script src="../GUIfunc/songplayer.js"></script>
 </body>
 </html>

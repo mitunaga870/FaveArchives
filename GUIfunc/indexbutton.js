@@ -29,7 +29,7 @@ const selection = document.querySelector('#aleatthing');
         fitbit.innerText="fitbit"+temp.fitbitsw;
         subfitbit.innerText="fitbit枠通知"+temp.subfitbitsw;
     }).catch(error=>{console.log(error)});
-    //アラートスイッチの対象を追加
+    //アラートスイッチの対象を追加、及び配信中・待機中のとき速報追加及び視聴ボタン
     var def = document.createElement('option');
     def.innerText="すべて";
     def.value = "-1";
@@ -46,6 +46,13 @@ const selection = document.querySelector('#aleatthing');
             op.innerText = "枠"+i+"："+title;
             op.value = i;
             select.appendChild(op);
+            let a = document.createElement('a');
+            a.href = "../html/streamwatch.html?id=" + temp.streamdetail[i].id;
+            let div = document.createElement('div');
+            div.className = "aleat";
+            div.innerText = temp.streamdetail[i].content+"\n"+temp.streamdetail[i].title+"\n"+temp.streamdetail[i].scheduletime;
+            a.appendChild(div);
+            document.getElementById('staleatbox').appendChild(a);
         }
     }).catch(error=>{console.log(error)});
     //対象変更時

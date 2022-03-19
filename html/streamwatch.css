@@ -1,0 +1,84 @@
+header {
+    background-color: #414141;
+}
+.flex{
+    display: flex;
+}
+.headerlink{
+    height: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    transition    : .10s;         /* なめらか変化 */
+}
+.headerlink:hover{
+    padding-left: 30px;
+    padding-right: 30px;
+    color: #414141;
+    position: relative;top: 5px;
+    background: #a7a7a7;
+}
+/*ここまでヘッダー*/
+th{
+    text-align: left;
+}
+a {
+    text-decoration: none;
+    color: #ececec;
+}
+/*ここまでデフォ*/
+/* 動画を囲うdiv */
+#videodiv {
+    position: relative;
+    width:70%; /* 横幅は100%で固定 */
+    height:0; /* 高さは0にしておく(padding-topで高さを指定するため) */
+    padding-top: 39.375%; /* 高さを指定(16:9) */
+}
+
+/* YouTube埋め込み用のiframe */
+iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+a{
+    text-decoration: none;
+}
+#taglist{
+    display: flex;
+}
+#manu{
+    height: 30%;
+    width: 100%;
+    display: flex;
+}
+.list{
+    width: 33%;
+}
+#prayer{
+    display: flex;
+}
+#other {
+    position: relative;
+    width: 30%; /* 横幅は100%で固定 */
+    height: 39.375%; /* 高さは0にしておく(padding-topで高さを指定するため) */
+}
+#buttons2{
+    position: relative;
+    height: 20%;
+}
+#coment{
+    position: relative;
+    height: 80%;
+}
+.scroll{
+    overflow: scroll;
+}

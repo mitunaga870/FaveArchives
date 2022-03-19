@@ -1,6 +1,23 @@
 header{
     background-color: #414141;
 }
+.flex{
+    display: flex;
+}
+.headerlink{
+    height: 100%;
+        padding-left: 20px;
+        padding-right: 20px;
+        transition    : .10s;         /* なめらか変化 */
+}
+.headerlink:hover{
+    font-size     : 16pt;
+    padding-left: 30px;
+    padding-right: 30px;
+    color: #414141;
+    position: relative;top: 5px;
+    background: #a7a7a7;
+}
 #child1 {
     width: 30%;
 }
@@ -60,4 +77,12 @@ header{
 a {
     text-decoration: none;
     color: #ececec;
+}
+.aleat{
+    background: #954b49;
+    color: #414141;
+    text-shadow:1px 1px 0 #ececec, -1px -1px 0 #ececec,
+    -1px 1px 0 #ececec, 1px -1px 0 #ececec,
+    0px 1px 0 #ececec,  0-1px 0 #ececec,
+    -1px 0 0 #ececec, 1px 0 0 #ececec;
 }
