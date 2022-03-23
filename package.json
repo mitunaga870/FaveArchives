@@ -1,17 +1,39 @@
 {
-  "name": "tooloffave",
+  "name": "favearchive",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-win": "node_modules/.bin/electron-builder --win --x64"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^17.1.0",
-    "electron-builder": "^22.14.13"
+    "electron": "^17.1.0"
+  },
+  "build": {
+    "appId": "mytools.favearchive",
+    "files": [
+      "Asset",
+      "generalfunc",
+      "GUIfunc",
+      "html",
+      ".env",
+      "index.js",
+      "package.json",
+      "package-lock.json"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "Asset/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
   },
   "dependencies": {
     "dotenv": "^16.0.0",

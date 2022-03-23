@@ -24,9 +24,9 @@ require('dotenv').config();
                 prayer.enablejsapi = true;
                 video.appendChild(prayer);
             }else {
-                if (process.env.ArchivesDirectory!=undefined) {
+                if (true) {//設定存在時のみに後設定
                     const prayer = document.createElement('video');
-                    var src = process.env.ArchivesDirectory +"/"+stdata.videoid+".mp4";
+                    var src ="E:/deta/OSHI/archives/list/"+stdata.videoid+".mp4";
                     if (fs.existsSync(src)){
                         prayer.src= "file:///"+src;
                         prayer.controls=true;
@@ -62,7 +62,6 @@ function delay(n){
 }
 
 function del(id){
-    console.log(id);
     const target = document.getElementById(id);
     target.remove();
 }

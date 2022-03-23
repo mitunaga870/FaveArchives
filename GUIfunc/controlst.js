@@ -1,4 +1,3 @@
-require('dotenv').config();
 const getstdata = require('../generalfunc/sqlfanc/getalldata');
 const abb = require('../generalfunc/abbreviation');
 const addtag = require('../GUIfunc/edittagfunc/addtag');
@@ -86,9 +85,9 @@ let rowid = 0;
         prayer.enablejsapi = true;
         video.appendChild(prayer);
     }else {
-        if (process.env.ArchivesDirectory!=undefined) {
+        if (true) {//設定の存在に左右させる
             const prayer = document.createElement('video');
-            var src = "file:///"+process.env.ArchivesDirectory +"/"+id+".mp4";
+            var src = "file:///E:/deta/OSHI/archives/list" +"/"+id+".mp4";
             console.log(src)
             prayer.src= src;
             prayer.controls=true;
