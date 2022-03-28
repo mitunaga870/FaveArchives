@@ -15,6 +15,7 @@ const fitbit = document.getElementById('fitbitbt');
 const subfitbit = document.getElementById('subfitbitbt');
 const select = document.getElementById('aleatthing');
 const selection = document.querySelector('#aleatthing');
+const store = require('../generalfunc/store');
 
 (async () => {
     let temp;
@@ -115,7 +116,12 @@ const selection = document.querySelector('#aleatthing');
     });
     //ランダムアーカイブボタン
     randbutton.addEventListener('click',async function () {
-        const temp = await quary('select videoid from videodetail order by RAND() LIMIT 1;');
+        let q = 'select videoid from videodetail';
+        if(store.get('privatefilter')){
+            q += ' where private != \'1\''
+        }
+        q += ' order by RAND() LIMIT 1;';
+        const temp = await quary(q);
         document.location="../html/stdetail.html?v=" + temp[0].videoid;
     });
 })();

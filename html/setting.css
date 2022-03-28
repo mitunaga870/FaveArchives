@@ -25,29 +25,34 @@ a {
     text-decoration: none;
     color: #ececec;
 }
+.scroll{
+    overflow: scroll;
+}
+.closed{
+    display: none;
+}
 /*ここまでデフォ*/
-#searchbox{
-    height: 30%;
-}
-#listbox{
-    height: 70%;
-}
-.row{
-    margin-bottom: 10px;
-    background: #525252;
-    display: flex;
-}
-.title{
-    font-size: 20px;
-    width: 70%;
-}
-.singer{
-    font-size: 15px;
+#sidebar{
     width: 30%;
+    height: 100%;
 }
-.none{
-    display: none;
+#main{
+    width: 70%;
+    height: 100%;
 }
-.none2{
-    display: none;
+.button{
+    width: 100%;
+    height: 20%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    background: #a7a7a7;
+}
+.button:hover{
+    background: #954b49;
+}
+.setting{
+    height: 90%;
+}
+#send{
+    height: 10%;
 }

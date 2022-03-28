@@ -7,11 +7,12 @@ module.exports=async (id,songs)=>{
         let songid = parseInt(value[0]);
         let songname = value[1];
         let time = value[2];
-        if (songid==0) {
+        if (songid==0){
             await quary('insert into songlist (songname) values (?);', [songname]);
-            songid = await quary('SELECT LAST_INSERT_ID();');
-            songid = songid[0]['LAST_INSERT_ID()'];
+            let id = await quary('SELECT songid from songlist where songname = \''+songname+'\' order by songid desc;');
+            console.log(id)
+            songid = id[0].songid;
         }
-        await quary('insert into songs (videoid,songid,timestump) values (?,?,?);',[id,songid,time]);
+        await quary('insert into songs (videoid,songid,timestump) values (?,?,?);', [id, songid, time]);
     }
 }

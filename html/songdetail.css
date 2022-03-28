@@ -26,28 +26,3 @@ a {
     color: #ececec;
 }
 /*ここまでデフォ*/
-#searchbox{
-    height: 30%;
-}
-#listbox{
-    height: 70%;
-}
-.row{
-    margin-bottom: 10px;
-    background: #525252;
-    display: flex;
-}
-.title{
-    font-size: 20px;
-    width: 70%;
-}
-.singer{
-    font-size: 15px;
-    width: 30%;
-}
-.none{
-    display: none;
-}
-.none2{
-    display: none;
-}
