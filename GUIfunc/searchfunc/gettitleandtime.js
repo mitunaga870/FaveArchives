@@ -1,4 +1,5 @@
 const query = require('../../generalfunc/sqlfanc/query');
+const store = require('../../generalfunc/store');
 
 module.exports = async (id,rate,filter,onlyexist =  true) =>{
     let q = "";
@@ -20,6 +21,9 @@ module.exports = async (id,rate,filter,onlyexist =  true) =>{
     }
     if(onlyexist){
         q += ' and videodetail.private != \'-1\''
+    }
+    if(store.get('privatefilter')){
+        q += ' and videodetail.private != \'1\''
     }
     q+=' order by publishedAt desc;';
     result = await query(q);

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>ランダムお歌</title>
-    <link rel="stylesheet" href="sonlist.css">
+    <title>メインメニュー</title>
+    <link rel="stylesheet" href="setting.css">
 </head>
 <header id="header" >
     <div class="flex">
@@ -35,16 +35,34 @@
     <script src="../GUIfunc/getsearch.js"></script>
 </header>
 <body bgcolor="#282828" text="#ececec">
-<div id="searchbox">
-    <input type="text" id="songname" onchange="search('songname','listbox')">
-    <select id="idtype" onchange="settype(document.getElementById('idtype'))">
-        <option value="all">すべて</option>
-        <option value="spotify">Spotify連帯済み</option>
-        <option value="optional">任意情報指定済み</option>
-        <option value="undefined">詳細情報未登録</option>
-    </select>
+<div class="flex">
+    <div id="sidebar" class="scroll">
+        <button class="button" onclick="change('generalset');">一般</button>
+        <button class="button" onclick="change('fileset');">ファイル</button>
+    </div>
+    <div id="main">
+        <div id="page">
+        <div id="generalset" class="setting">
+            <div id="private">
+                <p>非公開アーカイブを検索対象にするか</p>
+                <select id="priselection">
+                    <option value="1">しない</option>
+                    <option value="0">する</option>
+                </select>
+            </div>
+        </div>
+        <div id="fileset" class="setting closed">
+            <div id="filepath">
+                <p>アーカイブの保存ディレクトリ</p>
+                <input type="text" id="path">
+            </div>
+        </div>
+        </div>
+        <div id="send">
+            <button id="sendbt" class="general">送信</button>
+        </div>
+    </div>
 </div>
-<div id="listbox" class="scroll"></div>
-<script src="../GUIfunc/songlist.js"></script>
+<script src="../GUIfunc/setting.js"></script>
 </body>
 </html>

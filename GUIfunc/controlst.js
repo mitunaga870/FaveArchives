@@ -39,8 +39,11 @@ const editsongsbutton = document.querySelector('#editsongs');
 const sendsonglist = document.querySelector('#sendsong');
 const senddetail = document.querySelector('#senddetail');
 let rowid = 0;
+const Store = require('electron-store');
+const store = new Store();
 
-(async () => {
+(async ()=>{
+    console.log(store.get('test'));
     //初期データ取得処理
     const stdata = await getstdata(id);
     titletag.textContent = stdata.title;
@@ -115,8 +118,8 @@ let rowid = 0;
     
     //タグ追加処理
     settagsButton.addEventListener("click", async function () {
-        await deltag(tagbox);
-        await deltag(edittagbox);
+        await delchild(tagbox);
+        await delchild(edittagbox);
         var newtag =  await addtag(id,newtagtxbox.value);
         for(var i in newtag){
             var tag = document.createElement('div');
@@ -177,7 +180,10 @@ let rowid = 0;
             senddata.push(temp);
         }
         console.log(senddata);
-        addsong(id,senddata);
+        await (id,senddata);
+        let songs = await getsongs(id);
+        await setsongs(songs);
+        editsongsbox.classList.toggle('closed');
     });
     senddetail.addEventListener('click',async function (){
         await setdetail(id,titlebox.value,detailbox2.value,ctypeselect.value,priselect.value,typeselect.value,userselect.value);
@@ -185,7 +191,7 @@ let rowid = 0;
     })
 })();
 
-async function deltag(main){
+async function delchild(main){
     while (main.lastChild){
         console.log(main.lastChild);
         main.removeChild(main.lastChild);
@@ -206,7 +212,9 @@ function del(id){
     target.remove();
 }
 
-function setsongs(songs){
+async function setsongs(songs){
+    await delchild(addsonlist);
+    await delchild(songlist);
     for (var value of songs){
         let temprow = addsonlist.insertRow();
         let tempid = rowid++;

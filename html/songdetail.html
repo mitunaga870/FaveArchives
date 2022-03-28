@@ -35,16 +35,26 @@
     <script src="../GUIfunc/getsearch.js"></script>
 </header>
 <body bgcolor="#282828" text="#ececec">
-<div id="searchbox">
-    <input type="text" id="songname" onchange="search('songname','listbox')">
-    <select id="idtype" onchange="settype(document.getElementById('idtype'))">
-        <option value="all">すべて</option>
-        <option value="spotify">Spotify連帯済み</option>
-        <option value="optional">任意情報指定済み</option>
-        <option value="undefined">詳細情報未登録</option>
+    <h1>詳細情報編集</h1>
+    <select id="idtype" onchange="changetype(document.getElementById('idtype').value);">
+        <option value="spotify">spotify連携</option>
+        <option value="optional">手動入力</option>
     </select>
-</div>
-<div id="listbox" class="scroll"></div>
-<script src="../GUIfunc/songlist.js"></script>
+    <div id="spodiv">
+        <div id="now"></div>
+        <div id="srecult">
+            検索結果
+        </div>
+    </div>
+    <div id="opdiv" class="none">
+        <button id="makeoptional" onclick="makeoptional(songid,detail)">主導入力を開始</button>
+        <div id="form" class="none">
+            title:<input type="text" id="songname"><br>
+            singer:<input type="text" id="singer"><br>
+            尺:<input type="time" id="duration">
+            <button onclick="sendoptional(songid);">送信</button>
+        </div>
+    </div>
+    <script src="../GUIfunc/editsongdetail.js"></script>
 </body>
 </html>

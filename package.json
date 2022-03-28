@@ -12,7 +12,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^17.1.0"
+    "electron": "^17.1.0",
+    "remote": "^0.2.6"
   },
   "build": {
     "appId": "mytools.favearchive",
@@ -38,6 +39,7 @@
   "dependencies": {
     "dotenv": "^16.0.0",
     "electron-prompt": "^1.7.0",
+    "electron-store": "^8.0.1",
     "express": "^4.17.3",
     "googleapis": "^95.0.0",
     "mysql": "^2.18.1",

@@ -8,12 +8,15 @@ require('dotenv').config();
 (async ()=>{
     while (true){
         let playlist = await getplaylist();
+        console.log(playlist);
         for(let item of playlist){
             title.innerText = item.songname + "/" + item.singer;
             let stdata = await getid(item.songid);
             if(stdata==0){
+                console.log("アーカイブなし");
                 continue;
             }
+            console.log(stdata)
             if(stdata.private==0) {
                 const prayer = document.createElement('iframe');
                 prayer.frameBorder =0;
@@ -56,7 +59,7 @@ async function dts(time){
 
 function delay(n){
     return new Promise(async function(resolve){
-        setTimeout(resolve,n);
+        setTimeout(resolve,n+1000);
         document.querySelector('#skip').addEventListener('click',resolve);
     });
 }

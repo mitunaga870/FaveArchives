@@ -1,5 +1,7 @@
 // アプリケーション作成用のモジュールを読み込み
-const {app, BrowserWindow} = require('electron');
+const {app, BrowserWindow ,ipcMain ,dialog} = require('electron');
+const Store = require('electron-store');
+Store.initRenderer();
 
 // メインウィンドウ
 let mainWindow;
@@ -20,8 +22,10 @@ function createWindow() {
     // （今回はmain.jsと同じディレクトリのindex.html）
     mainWindow.loadFile('html/index.html');
 
+
+
     // デベロッパーツールの起動
-    //mainWindow.webContents.openDevTools();
+    mainWindow.webContents.openDevTools();
 
     // メインウィンドウが閉じられたときの処理
     mainWindow.on('closed', () => {
@@ -45,3 +49,11 @@ app.on('activate', () => {
         createWindow();
     }
 });
+
+ipcMain.handle('comfirm',async (event, args) => {
+    return (await dialog.showMessageBox({
+        title: "確認",
+        message: args[0],
+        buttons: ['CANCEL', 'OK'],
+    })).response;
+})
