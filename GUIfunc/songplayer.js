@@ -1,5 +1,6 @@
 const getplaylist = require('../GUIfunc/songplayerfunc/gesplaylist');
 const getid = require('../GUIfunc/songplayerfunc/getst');
+const makeiframe = require('../generalfunc/mekeiframe');
 const fs = require('fs');
 const video = document.getElementById('videodiv');
 const title = document.getElementById('title');
@@ -18,16 +19,11 @@ require('dotenv').config();
             }
             console.log(stdata)
             if(stdata.private==0) {
-                const prayer = document.createElement('iframe');
-                prayer.frameBorder =0;
-                prayer.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-                prayer.allowFullscreen=true;
-                prayer.src = "https://www.youtube.com/embed/" + stdata.videoid+"?autoplay=1&start="+await dts(stdata.timestump);
-                prayer.id = "video";
-                prayer.enablejsapi = true;
-                video.appendChild(prayer);
+                let iframe = document.createElement('div');
+                iframe.id = 'video'
+                video.appendChild(iframe);
+                await makeiframe(stdata.videoid,stdata.timestump)
             }else {
-                if (true) {//設定存在時のみに後設定
                     const prayer = document.createElement('video');
                     var src ="E:/deta/OSHI/archives/list/"+stdata.videoid+".mp4";
                     if (fs.existsSync(src)){
@@ -37,10 +33,6 @@ require('dotenv').config();
                         prayer.id = "video";
                         prayer.currentTime = await dts(stdata.timestump);
                         video.appendChild(prayer);
-                    }else {
-                        console.log("動画が存在しません");
-                        continue;
-                    }
                 }
             }
             await delay(item.duration);
@@ -67,4 +59,8 @@ function delay(n){
 function del(id){
     const target = document.getElementById(id);
     target.remove();
+}
+
+async function TimeManager(start,duration,type){
+
 }
