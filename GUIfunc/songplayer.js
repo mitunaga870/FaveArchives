@@ -5,6 +5,10 @@ const fs = require('fs');
 const video = document.getElementById('videodiv');
 const title = document.getElementById('title');
 require('dotenv').config();
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 (async ()=>{
     while (true){
