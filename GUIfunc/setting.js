@@ -5,19 +5,19 @@ const sendbt = document.querySelector('#sendbt');
 
 (async ()=>{
     let nowsection = 'generalset';
-    setsettiong('general');
-    sendbt.addEventListener('click',function () {
+    setsettiong();
+    sendbt.addEventListener('click',async function () {
         let target = document.getElementById('sendbt').className;
-        if(target.match("generalset")){
-            store.set('privatefilter',Boolean(parseInt(priselect.value)));
+        if(target.match("general")){
+            await store.set('privatefilter',Boolean(parseInt(priselect.value)));
         }else if(target.match('fileset')){
-            store.set('archivespath',document.getElementById('path').value);
+            await store.set('archivespath',document.getElementById('archive-path').value);
+            await store.set('chatpath',document.getElementById('chat-path').value);
         }
         setsettiong(target);
     })
 })();
-function setsettiong(settingtype){
-    if(settingtype.match('general')){
+function setsettiong(){
         let privatefilter = store.get('privatefilter');
         console.log(privatefilter);
         if(privatefilter){
@@ -25,8 +25,8 @@ function setsettiong(settingtype){
         }else {
             priselect.value = "0";
         }
-    }else if (settingtype.match('fileset')){
         let path = store.get('archivespath');
-        document.getElementById('path').value = path;
-    }
+        console.log(path)
+        document.getElementById('archive-path').value = path;
+        document.getElementById('chat-path').value = store.get('chatpath');
 }

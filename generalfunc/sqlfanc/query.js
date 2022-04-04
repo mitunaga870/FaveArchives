@@ -4,7 +4,7 @@ const util = require('util')
 
 module.exports = async (query,arr) => {
     const connection = mysql.createConnection({
-        host: '35.232.157.200',
+        host: '34.122.252.236',
         user: 'root',
         password: '96804',
         database: 'videolist'

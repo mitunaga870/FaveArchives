@@ -1,6 +1,6 @@
 {
   "name": "favearchive",
-  "version": "1.0.0",
+  "version": "1.8.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -35,6 +35,9 @@
       "oneClick": false,
       "allowToChangeInstallationDirectory": true
     }
+  },
+  "devdependencies": {
+    "electron-builder": "^22.10.5"
   },
   "dependencies": {
     "dotenv": "^16.0.0",

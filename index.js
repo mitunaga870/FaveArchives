@@ -57,3 +57,10 @@ ipcMain.handle('comfirm',async (event, args) => {
         buttons: ['CANCEL', 'OK'],
     })).response;
 })
+
+ipcMain.handle('notice',async (event,args)=>{
+    return(await dialog.showMessageBox({
+        title:"通知",
+        message: args[0]
+    })).response;
+})

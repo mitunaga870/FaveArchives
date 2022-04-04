@@ -1,31 +1,4 @@
-header {
-    background-color: #414141;
-}
-.flex{
-    display: flex;
-}
-.headerlink{
-    height: 100%;
-    padding-left: 20px;
-    padding-right: 20px;
-    transition    : .10s;         /* なめらか変化 */
-}
-.headerlink:hover{
-    padding-left: 30px;
-    padding-right: 30px;
-    color: #414141;
-    position: relative;top: 5px;
-    background: #a7a7a7;
-}
-/*ここまでヘッダー*/
-th{
-    text-align: left;
-}
-a {
-    text-decoration: none;
-    color: #ececec;
-}
-/*ここまでデフォ*/
+
 #searchbox{
     height: 30%;
 }

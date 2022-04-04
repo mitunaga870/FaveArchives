@@ -7,6 +7,8 @@ const getsonglist = require('../generalfunc/sqlfanc/getsonglist');
 const getsongs = require('../GUIfunc/editsongsfunc/getsongs');
 const createuserselection = require('../GUIfunc/setuserselect');
 const setdetail = require('../generalfunc/sqlfanc/setvideodetail');
+const addhistory = require('../generalfunc/sqlfanc/addhistory');
+const chat = require('../GUIfunc/chatfunc/chat');
 const url = new URL(window.location.href);
 const params = url.searchParams;
 const id = params.get('v');
@@ -40,9 +42,14 @@ const sendsonglist = document.querySelector('#sendsong');
 const senddetail = document.querySelector('#senddetail');
 let rowid = 0;
 const Store = require('electron-store');
+let timechange = false;
+const fs = require("fs");
+const delay = require("../generalfunc/delay");
 const store = new Store();
+let log;
 
 (async ()=>{
+    addhistory(id);
     console.log(store.get('test'));
     //初期データ取得処理
     const stdata = await getstdata(id);
@@ -78,32 +85,44 @@ const store = new Store();
         songselect.appendChild(option);
     });
     //プレイヤーセット
+    let player;
     if(stdata.private==0) {
-        const prayer = document.createElement('iframe');
-        prayer.frameBorder =0;
-        prayer.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-        prayer.allowFullscreen=true;
-        prayer.src = "https://www.youtube.com/embed/" + id+"?autoplay=1";
-        prayer.id = "video";
-        prayer.enablejsapi = true;
-        video.appendChild(prayer);
+        player = document.createElement('iframe');
+        player.frameBorder =0;
+        player.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+        player.allowFullscreen=true;
+        player.src = "https://www.youtube.com/embed/" + id+"?autoplay=1";
+        player.id = "video";
+        player.enablejsapi = true;
+        video.appendChild(player);
     }else {
         if (true) {//設定の存在に左右させる
-            const prayer = document.createElement('video');
-            var src = "file:///E:/deta/OSHI/archives/list" +"/"+id+".mp4";
+            player = document.createElement('video');
+            var src = "file:///"+store.get('archivespath')+"\\"+id+".mp4";
             console.log(src)
-            prayer.src= src;
-            prayer.controls=true;
-            prayer.autoplay=true;
-            prayer.id = "video";
-            prayer.currentTime = await dts(stdata.time);
-            video.appendChild(prayer);
+            player.src= src;
+            player.controls=true;
+            player.autoplay=true;
+            player.id = "video";
+            player.addEventListener('seeked',async function () {
+                timechange = true;
+                await wait();
+                chat(stdata.private,log.log,player);
+            });
+            player.currentTime = await dts(stdata.time);
+            video.appendChild(player);
         }
     }
     settime(id);
     //既存曲リストを記載
     let songs = await getsongs(id);
     setsongs(songs);
+    //コメント読み込み
+    const chatpath = store.get('chatpath')+'\\'+id+'.json';
+    if(fs.existsSync(chatpath)){
+        log = JSON.parse(fs.readFileSync(chatpath));
+        chat(stdata.private,log.log,player);
+    }
     //タグ編集ポップあうと閉じるボタン
     closeButton.addEventListener("click", function () {
         edit.classList.toggle("closed");
@@ -193,7 +212,6 @@ const store = new Store();
 
 async function delchild(main){
     while (main.lastChild){
-        console.log(main.lastChild);
         main.removeChild(main.lastChild);
     }
 }
@@ -267,4 +285,16 @@ async function set(time){
         temp = temp[0];
         prayer.src = temp + "&start=" +t;
     }
+}
+
+async function wait(){
+    waitkey = false;
+    while (true){
+        if (waitkey)
+            break;
+        await delay(1);
+    }
+    console.log("待機終了")
+    waitkey = false;
+    return;
 }

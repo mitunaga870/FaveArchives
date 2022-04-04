@@ -4,36 +4,9 @@
     <meta charset="UTF-8">
     <title>メインメニュー</title>
     <link rel="stylesheet" href="setting.css">
+    <link rel="stylesheet" href="default.css">
 </head>
-<header id="header" >
-    <div class="flex">
-        <h1 align="center">
-            <a href="index.html">
-                <img src="../Asset/icon-long.png"  height="100" width="300"></a>
-            <select id="filler">
-                <option value="すべて">すべて</option>
-                <option value="歌雑談">歌雑談</option>
-                <option value="ゲーム">ゲーム</option>
-            </select>
-            <input type="text" id="search"  size="40">
-            <button class="searching">検索</button>
-        </h1>
-        <a href="songplayer.html">
-            <div class="headerlink">
-                <p>ランダムお歌</p>
-            </div>
-        </a>
-        <a href="sonlist.html">
-            <div class="headerlink">
-                <p>お歌リスト編集</p>
-            </div></a>
-        <a href="setting.html">
-            <div class="headerlink">
-                <p>設定</p>
-            </div></a>
-    </div>
-    <script src="../GUIfunc/getsearch.js"></script>
-</header>
+<script src="header.js"></script>
 <body bgcolor="#282828" text="#ececec">
 <div class="flex">
     <div id="sidebar" class="scroll">
@@ -54,7 +27,9 @@
         <div id="fileset" class="setting closed">
             <div id="filepath">
                 <p>アーカイブの保存ディレクトリ</p>
-                <input type="text" id="path">
+                <input type="text" id="archive-path">
+                <p>チャットログの保存ディレクトリ</p>
+                <input type="text" id="chat-path">
             </div>
         </div>
         </div>
