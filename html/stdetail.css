@@ -1,15 +1,18 @@
+
 th{
     text-align: left;
 }
-header {
-    background-color: #414141;
+a {
+    text-decoration: none;
+    color: #ececec;
 }
-.flex{
-    display: flex;
+body{
+    height: 65%;
 }
-.headerlink{
-    padding  : 20px;
+html {
+    height: 100%;
 }
+/*ここまでデフォ*/
 /* 動画を囲うdiv */
 #videodiv {
     position: relative;
@@ -102,16 +105,27 @@ a {
 }
 #other {
     position: relative;
-    width: 30%; /* 横幅は100%で固定 */
-    height: 39.375%; /* 高さは0にしておく(padding-topで高さを指定するため) */
+    width:30%; /* 横幅は100%で固定 */
+    height:0px; /* 高さは0にしておく(padding-topで高さを指定するため) */
+    padding-top: 39.375%;
 }
+#innerother{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
 #buttons2{
     position: relative;
-    height: 20%;
+    height: 10%;
 }
 #coment{
     position: relative;
-    height: 80%;
+    height: 90%;
+    width: 100%;
+    display: block;
 }
 #popouttable{
     height: 220px;
@@ -140,4 +154,12 @@ a {
 }
 #detailtabel{
     height: 150px;
+}
+.item{
+    display: block;
+    width: 100%;
+}
+.username{
+    margin-right: 10px;
+    color: #a7a7a7;
 }

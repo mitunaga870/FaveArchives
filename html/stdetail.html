@@ -4,37 +4,9 @@
         <meta charset="UTF-8">
         <title>アーカイブの詳細</title>
         <link rel="stylesheet" href="stdetail.css">
+        <link rel="stylesheet" href="default.css">
     </head>
-    <header id="header" >
-        <div class="flex">
-            <h1 align="center">
-                <a href="index.html">
-                    <img src="../Asset/icon-long.png"  height="100" width="300"></a>
-                <select id="filler">
-                    <option value="すべて">すべて</option>
-                    <option value="歌雑談">歌雑談</option>
-                    <option value="ゲーム">ゲーム</option>
-                </select>
-                <input type="text" id="search"  size="40">
-                <button class="searching">検索</button>
-            </h1>
-            <div class="headerlink">
-                <a href="songplayer.html">
-                    <p>ランダムお歌</p>
-                </a>
-            </div>
-            <div class="headerlink">
-                <a href="sonlist.html">
-                    <p>お歌リスト編集</p>
-                </a>
-            </div>
-            <a href="setting.html">
-                <div class="headerlink">
-                    <p>設定</p>
-                </div></a>
-        </div>
-        <script src="../GUIfunc/getsearch.js"></script>
-    </header>
+    <script src="header.js"></script>
     <body bgcolor="#282828" text="#ececec">
         <h1 id="title"></h1>
         <details id="description">
@@ -133,10 +105,12 @@
     <div id="prayer">
         <div id =videodiv></div>
         <div id="other">
+            <div id="innerother">
             <div id="buttons2">
                 <button onclick="document.getElementById('edetailbox').classList.toggle('closed');">詳細情報編集</button>
             </div>
-            <div id="coment"></div>
+            <div id="coment" class="scroll"></div>
+            </div>
         </div>
     </div>
     <div class="editsongsbox closed" id="editsongsbox">

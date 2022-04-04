@@ -4,7 +4,7 @@ const store = require('../../generalfunc/store');
 module.exports = async (id,rate,filter,onlyexist =  true) =>{
     let q = "";
     var result;
-    if(Array.isArray(id)){
+    if(Array.isArray(id)&&id.length != 0){
         var temp ="\'";
         for (var i in id){
             temp+=id[i]+"\'"

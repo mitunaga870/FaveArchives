@@ -4,46 +4,28 @@
     <meta charset="UTF-8">
     <title>ランダムお歌</title>
     <link rel="stylesheet" href="songplayer.css">
+    <link rel="stylesheet" href="default.css">
+    <script src="https://www.youtube.com/iframe_api"></script>
 </head>
-<header id="header" >
-    <div class="flex">
-        <h1 align="center">
-            <a href="index.html">
-                <img src="../Asset/icon-long.png"  height="100" width="300"></a>
-            <select id="filler">
-                <option value="すべて">すべて</option>
-                <option value="歌雑談">歌雑談</option>
-                <option value="ゲーム">ゲーム</option>
-            </select>
-            <input type="text" id="search"  size="40">
-            <button class="searching">検索</button>
-        </h1>
-        <a href="songplayer.html">
-            <div class="headerlink">
-                <p>ランダムお歌</p>
-            </div>
-        </a>
-        <a href="sonlist.html">
-            <div class="headerlink">
-                <p>お歌リスト編集</p>
-            </div></a>
-        <a href="setting.html">
-            <div class="headerlink">
-                <p>設定</p>
-            </div></a>
-    </div>
-    <script src="../GUIfunc/getsearch.js"></script>
-</header>
+<script src="header.js"></script>
 <body bgcolor="#282828" text="#ececec">
 <h1 id="title"></h1>
 <div id="prayer">
     <div id =videodiv>
     </div>
     <div id="other">
+        <div id="innerother">
         <div id="buttons2">
             <button id="skip">次の曲</button>
         </div>
-        <div id="coment" class="scroll"></div>
+        <div id="list" class="scroll"></div>
+        </div>
+    </div>
+</div>
+<div id="controler">
+    <input id="SeekBar" type="range" min="0" onchange="if(stdata.private){player.currentTime=parseInt(document.getElementById('SeekBar').value)}else {player.seekTo(parseInt(document.getElementById('SeekBar').value))}">
+    <div id="volume">
+        <input id="vol" type="range" min="0" max="100" onchange="store.set('songvol',parseInt(document.getElementById('vol').value))">
     </div>
 </div>
 <script src="../GUIfunc/songplayer.js"></script>

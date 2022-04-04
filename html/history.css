@@ -1,0 +1,36 @@
+#main{
+    width: 70%;
+    height: 100%;
+}
+
+#sub{
+    margin-top: 10%;
+    width: 30%;
+    height: 90%;
+}
+
+#over{
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.title{
+    font-size: large;
+}
+#list{
+    overflow: scroll;
+    height: 100%;
+}
+.description{
+    overflow: hidden;
+    height: 100px;
+    font-size: 15px;
+    color: #a7a7a7;
+}
+h1{
+    height: 10%;
+}
+.item{
+    margin-bottom: 10px;
+}
