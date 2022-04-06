@@ -1,47 +1,47 @@
-const quary = require('./generalfunc/sqlfanc/query');
-const fs = require("fs");
-const store = require('./generalfunc/store');
+const puppeteer = require('puppeteer');
+const delay = require('./generalfunc/delay');
+const headless = false;
+const width = 1280, height = 800;
+const args = [
+];
 
-(async ()=>{
-    const dir = "E:/deta/OSHI/archives/chat/"; // ← 変更してね
-    const fileNameList = fs.readdirSync(dir);
-    const targetFileNames = fileNameList.filter(RegExp.prototype.test, /.*\.txt$/); // ← 変更してね
-    for (const filename of targetFileNames) {
-        console.log(filename);
-        const base = fs.readFileSync(dir+filename,'utf8');
-        const row = base.split(/\n/g);
-        let log = [];
-        for (const item of row) {
-            console.log(item)
-            const temp = item.split(/,/);
-            if(temp.length!=2)
-                continue
-            const time = await getsec(temp[0]);
-            const user = "";
-            const chat = temp[1].split(/\r/)[0];
-            log.push({
-                time:time,
-                user:user,
-                chat:chat
-            })
+
+(async () => {
+    const browser = await puppeteer.launch({ headless, args });
+    const page = (await browser.pages())[0];
+    await page.setViewport({ width, height });
+    await page.goto('https://www.youtube.com/watch?v=IOZVEw9Svbk');
+    await delay(3);
+    let src = await page.$$eval("iframe", (list) => {
+        for(let ele of list) {
+            if (ele.src.match('live_chat_replay')) {
+                return ele.src
+            }
         }
-        console.log(log);
-        let name = dir+filename.split('.')[0]+'.json';
-        fs.writeFileSync(name,JSON.stringify({log},null,'  '));
-        if(log.length == 0||log[0].time==0){
-            fs.unlinkSync(dir+filename);
+    });
+    console.log(src);
+    await page.setJavaScriptEnabled(false);
+    let res = [];
+    while (true){
+        await page.goto(src);
+        let str;
+        while (str==undefined) {
+            str = await page.$$eval("script", (list) => {
+                for (let ele of list) {
+                    if (ele.textContent.match('ytInitialData')) {
+                        return ele.textContent;
+                    }
+                }
+            });
+            await delay(0.5);
         }
+        let chat_obj = JSON.parse(str.slice(26,-1));
+        let continue_url = chat_obj["continuationContents"]["liveChatContinuation"]["continuations"][0]["liveChatReplayContinuationData"]["continuation"]
+        src = "https://www.youtube.com/live_chat_replay?continuation=" + continue_url;
+        if (continue_url == undefined)
+            break;
+        res.push(chat_obj["continuationContents"]["liveChatContinuation"]["actions"]);
+        console.log(continue_url);
     }
-
-})()
-
-async function getsec(src){
-    if(src[0].match(/-/))
-        return 0;
-    let temp = src.split(/:/g);
-    if(temp.length == 3) {
-        return parseInt(temp[0] * 60 * 60) + parseInt(temp[1] * 60) + parseInt(temp[2]);
-    }else {
-        return parseInt(temp[0] * 60) + parseInt(temp[1]);
-    }
-}
+    console.log(res);
+})();
