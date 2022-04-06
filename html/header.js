@@ -21,6 +21,10 @@ document.write(
     '\t\t<div class="headerlink">\n' +
     '\t\t\t<p>お歌リスト編集</p>\n' +
     '\t\t</div></a>\n' +
+    '\t\t<a href="videolist.html">\n' +
+    '\t\t\t<div class="headerlink">\n' +
+    '\t\t\t\t<p>アーカイブリスト編集</p>\n' +
+    '\t\t\t</div></a>\n' +
     '\t\t<a href="history.html">\n' +
     '\t\t\t<div class="headerlink">\n' +
     '\t\t\t\t<p>履歴</p>\n' +
