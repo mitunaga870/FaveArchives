@@ -189,8 +189,6 @@ let log;
         let senddata = [];
         for(var row of addsonlist.rows){
             let temp = [];
-            if(parseInt(row.rowIndex)==0)
-                continue;
             for (var cell of row.cells){
                 if(parseInt(cell.cellIndex)==3)
                     continue;
@@ -199,7 +197,7 @@ let log;
             senddata.push(temp);
         }
         console.log(senddata);
-        await (id,senddata);
+        await addsong(id,senddata);
         let songs = await getsongs(id);
         await setsongs(songs);
         editsongsbox.classList.toggle('closed');
