@@ -15,6 +15,13 @@ const schema = {
         minimum:0,
         maximum:100,
         default:100,
+    },
+    savechat:{
+        type:'boolean',
+        default:false
+    },
+    cookie:{
+        type:'string'
     }
 };
 module.exports = new Store({schema});
