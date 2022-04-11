@@ -159,7 +159,17 @@ a {
     display: block;
     width: 100%;
 }
+.flex{
+    display: flex;
+}
 .username{
     margin-right: 10px;
     color: #a7a7a7;
+}
+.chat{
+    display: flex;
+}
+.stump{
+    width: 1em;
+    height: 1em;
 }

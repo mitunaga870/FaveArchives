@@ -8,7 +8,10 @@ const getsongs = require('../GUIfunc/editsongsfunc/getsongs');
 const createuserselection = require('../GUIfunc/setuserselect');
 const setdetail = require('../generalfunc/sqlfanc/setvideodetail');
 const addhistory = require('../generalfunc/sqlfanc/addhistory');
+const delay = require('../generalfunc/delay');
 const chat = require('../GUIfunc/chatfunc/chat');
+const chatmaneger = require('../GUIfunc/chatfunc/chatmaneger');
+const store = require('../generalfunc/store');
 const url = new URL(window.location.href);
 const params = url.searchParams;
 const id = params.get('v');
@@ -40,15 +43,19 @@ const editsongsbox = document.querySelector('#editsongsbox');
 const editsongsbutton = document.querySelector('#editsongs');
 const sendsonglist = document.querySelector('#sendsong');
 const senddetail = document.querySelector('#senddetail');
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 let rowid = 0;
-const Store = require('electron-store');
 let timechange = false;
 const fs = require("fs");
-const delay = require("../generalfunc/delay");
-const store = new Store();
 let log;
+let chatdata;
 
 (async ()=>{
+    console.log(store.get('chatpath'))
+    await wait();
     addhistory(id);
     console.log(store.get('test'));
     //初期データ取得処理
@@ -87,14 +94,23 @@ let log;
     //プレイヤーセット
     let player;
     if(stdata.private==0) {
-        player = document.createElement('iframe');
-        player.frameBorder =0;
-        player.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-        player.allowFullscreen=true;
-        player.src = "https://www.youtube.com/embed/" + id+"?autoplay=1";
-        player.id = "video";
-        player.enablejsapi = true;
-        video.appendChild(player);
+        let iframe = document.createElement('div');
+        iframe.id = 'video'
+        video.appendChild(iframe);
+        player = new YT.Player('video', {
+            videoId: id,
+            events: {
+                'onReady': onPlayerReady
+            },
+            playerVars: {
+                autoplay:1,
+                rel:0,
+                enablejsapi:1,
+                modestbranding:1,
+                html5: 1
+            }
+        });
+        await wait();
     }else {
         if (true) {//設定の存在に左右させる
             player = document.createElement('video');
@@ -107,7 +123,8 @@ let log;
             player.addEventListener('seeked',async function () {
                 timechange = true;
                 await wait();
-                chat(stdata.private,log.log,player);
+                console.log(chatdata);
+                chat(chatdata[0],chatdata[1],chatdata[2]);
             });
             player.currentTime = await dts(stdata.time);
             video.appendChild(player);
@@ -120,8 +137,11 @@ let log;
     //コメント読み込み
     const chatpath = store.get('chatpath')+'\\'+id+'.json';
     if(fs.existsSync(chatpath)){
+        console.log('チャットあり')
         log = JSON.parse(fs.readFileSync(chatpath));
         chat(stdata.private,log.log,player);
+    }else if(stdata.private==0){
+        chatmaneger(stdata.private,player,id);
     }
     //タグ編集ポップあうと閉じるボタン
     closeButton.addEventListener("click", function () {
@@ -295,4 +315,12 @@ async function wait(){
     console.log("待機終了")
     waitkey = false;
     return;
+}
+
+function onYouTubeIframeAPIReady() {
+    waitkey = true;
+}
+function onPlayerReady(event){
+    console.log('ready')
+    waitkey = true;
 }
