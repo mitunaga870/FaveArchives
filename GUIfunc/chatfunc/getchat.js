@@ -2,7 +2,6 @@ const puppeteer = require('puppeteer');
 const delay = require('../../generalfunc/delay');
 const fs = require("fs");
 const headless = false;
-const executablePath = 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe';
 const store = require('../../generalfunc/store');
 const cookies = JSON.parse(store.get('cookie'));
 const args = [
@@ -11,7 +10,7 @@ const args = [
 
 
 module.exports = async (id) =>{
-    const browser = await puppeteer.launch({ headless, args, executablePath});
+    const browser = await puppeteer.launch({ headless, args});
     const page = (await browser.pages())[0];
     const session = await page.target().createCDPSession();
     const {windowId} = await session.send('Browser.getWindowForTarget');

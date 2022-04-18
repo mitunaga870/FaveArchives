@@ -118,7 +118,7 @@ const store = require('../generalfunc/store');
     randbutton.addEventListener('click',async function () {
         let q = 'select videoid from videodetail';
         if(store.get('privatefilter')){
-            q += ' where private != \'1\''
+            q += ' where private = \'0\''
         }
         q += ' order by RAND() LIMIT 1;';
         const temp = await quary(q);
