@@ -12,9 +12,7 @@ async function getartists(artists){
     for(var artist of artists){
         res+=artist.name+"・";
     }
-    console.log(res)
-    const result = res.slice(-1,0);
-    console.log(result)
+    const result = res.slice(0,-1);
     return res;
 }
 

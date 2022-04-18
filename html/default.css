@@ -2,6 +2,9 @@ header {
     height: 35%;
     background-color: #414141;
 }
+#headerwrap{
+    height: 100%;
+}
 .flex{
     display: flex;
 }
@@ -17,6 +20,31 @@ header {
     color: #414141;
     position: relative;top: 5px;
     background: #a7a7a7;
+}
+#logo{
+    height: 100%;
+}
+#searchform{
+    width: 50%;
+    height: 100%;
+    display: block;
+}
+#filler{
+    margin-top: 4%;
+    width: 30%;
+    height: 20%;
+}
+#textandbutton{
+    width: 100%;
+    height: 30%;
+}
+#search{
+    height: 100%;
+    width: 80%;
+}
+.searching{
+    height: 110%;
+    width: 20%  ;
 }
 /*ここまでヘッダー*/
 th{

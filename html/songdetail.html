@@ -3,11 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>ランダムお歌</title>
-    <link rel="stylesheet" href="sonlist.css">
+    <link rel="stylesheet" href="songdetail.css">
     <link rel="stylesheet" href="default.css">
 </head>
 <script src="header.js"></script>
 <body bgcolor="#282828" text="#ececec">
+    <div id="head" class="flex">
+        <div id="detaildata">
+            <h1>現在の登録済み情報</h1>
+            <p id="title"></p>
+            <div id="singer"></div>
+            <div id="duration"></div>
+        </div>
+        <div id="archives">
+            <p>歌ってるアーカイブ</p>
+        </div>
+    </div>
     <h1>詳細情報編集</h1>
     <select id="idtype" onchange="changetype(document.getElementById('idtype').value);">
         <option value="spotify">spotify連携</option>

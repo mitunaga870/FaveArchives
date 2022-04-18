@@ -1,21 +1,23 @@
 document.write(
     '<header id="header" >\n' +
-    '\t\t<div class="flex">\n' +
-    '\t\t<h1 align="center">\n' +
+    '\t\t<div id="headerwrap" class="flex">\n' +
     '\t\t\t<a href="index.html">\n' +
-    '\t\t\t\t<img src="../Asset/icon-long.png"  height="100" width="300"></a>\n' +
+    '\t\t\t\t<img id="logo" src="../Asset/icon-long.png"  height="100" width="300"></a>\n' +
+    '\t\t\t\t<div id="searchform">'+
     '\t\t\t<select id="filler">\n' +
     '\t\t\t\t<option value="すべて">すべて</option>\n' +
     '\t\t\t\t<option value="歌雑談">歌雑談</option>\n' +
     '\t\t\t\t<option value="ゲーム">ゲーム</option>\n' +
     '\t\t\t</select>\n' +
-    '\t\t<input type="text" id="search"  size="40">\n' +
+    '<div id="textandbutton" class="flex">' +
+    '\t\t<input type="text" id="search">\n' +
     '\t\t<button class="searching">検索</button>\n' +
-    '\t\t</h1>\n' +
+    '\t\t</div>' +
+    '</div> '+
     '\t\t\t<a href="songplayer.html">\n' +
     '\t\t<div class="headerlink">\n' +
     '\t\t\t\t<p>ランダムお歌</p>\n' +
-    '\t\t</div>\n' +
+    '\t\t</div>' +
     '\t\t</a>\n' +
     '\t\t<a href="sonlist.html">\n' +
     '\t\t<div class="headerlink">\n' +
