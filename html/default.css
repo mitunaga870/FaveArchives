@@ -22,7 +22,8 @@ header {
     background: #a7a7a7;
 }
 #logo{
-    height: 100%;
+    margin-top: 10%;
+    width: 100%;
 }
 #searchform{
     width: 50%;
@@ -59,5 +60,8 @@ body{
 }
 html {
     height: 100%;
+}
+.none{
+    display: none;
 }
 /*ここまでデフォ*/

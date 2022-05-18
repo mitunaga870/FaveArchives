@@ -3,8 +3,8 @@ const {ipcRenderer} = require("electron");
 
 module.exports = async (id) => {
     const name = document.getElementById('songname').value;
-    const singer = document.getElementById('singer').value;
-    const duration = document.getElementById('duration').value;
+    const singer = document.getElementById('insinger').value;
+    const duration = document.getElementById('induration').value;
     if (await ipcRenderer.invoke('comfirm',[
         name+"/"+singer+"を連帯させます。"
     ])){

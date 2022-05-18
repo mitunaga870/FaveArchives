@@ -5,6 +5,8 @@ const delay = require('../generalfunc/delay');
 const songlist = require('../GUIfunc/songplayerfunc/makesonglist');
 const seekbar = require('../GUIfunc/songplayerfunc/setSeekBar');
 const volmnage = require('../GUIfunc/songplayerfunc/songvol');
+const OniframestateChange = require('../GUIfunc/songplayerfunc/OniframestateChange');
+const OnvideostateChange = require('../GUIfunc/songplayerfunc/OnvideostateChange');
 const store = require('../generalfunc/store');
 const fs = require('fs');
 const video = document.getElementById('videodiv');
@@ -16,7 +18,7 @@ var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 document.getElementById('vol').value = String(store.get('songvol'));
 let changed,target,stdata,player;
-let waitkey = false,seekdel=false;
+let waitkey = false,seekdel=false,ended=false;
 let i = 0;
 
 (async ()=>{
@@ -26,6 +28,7 @@ let i = 0;
         console.log(playlist);
         songlist(playlist);
         while(i < playlist.length){
+            ended=false
             let btname = 'item:'+i;
             document.getElementById(btname).classList.add('selected');
             let item = playlist[i];
@@ -45,7 +48,8 @@ let i = 0;
                 player = new YT.Player('video', {
                     videoId: stdata.videoid,
                     events: {
-                        'onReady': onPlayerReady
+                        'onReady': onPlayerReady,
+                        'onStateChange':OniframestateChange
                     },
                     playerVars: {
                         autoplay:1,
@@ -68,6 +72,7 @@ let i = 0;
                     player.id = "video";
                     player.currentTime = await dts(stdata.timestump);
                     video.appendChild(player);
+                    OnvideostateChange();
                 }else {
                     i++;
                     document.getElementById(btname).classList.remove('selected');
