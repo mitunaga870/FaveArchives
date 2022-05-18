@@ -13,6 +13,8 @@ module.exports = (type,player,start,end)=>{
                 resolve(target)
             if (ct >= start + end || ct >= start + end||skip)
                 resolve(i + 1);
+            if (ended)
+                resolve(i + 1);
             await delay(1);
         }
     })
