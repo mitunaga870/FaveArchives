@@ -8,7 +8,7 @@
 </head>
 <script src="header.js"></script>
 <body bgcolor="#282828" text="#ececec">
-    <div style="height: 65%" class="flex">
+    <div style="height: 80%" class="flex">
         <div id="menu" class="scroll hide_xbar">
             <button id="go_addpage">アーカイブをデータベースに追加</button>
         </div>
@@ -25,7 +25,7 @@
                 </div>
                 <div id="discriptionform" class="heihgt_auto">
                     概要欄<br>
-                    <textarea cols="" rows=""></textarea>
+                    <textarea cols="" rows="" id="discriptionbox"></textarea>
                 </div>
                 <div id="contenttypeform" class="heihgt_auto">
                     コンテンツタイプ:
@@ -38,7 +38,10 @@
                     投稿者:
                     <select id="userbox"></select>
                     <div id="newuserform" class="none" style="height: auto">
-                        <input type="text" id="newnamebox">/<input type="text" id="newcostumebox"><br>
+                        <select id="newnamebox">
+                            <option value="M">マール</option>
+                            <option value="C">沙花叉</option>
+                        </select>/<input type="text" id="newcostumebox"><br>
                         <subtext>”ユーザー名/衣装名”の形で入力してください。</subtext>
                     </div>
                     <br>
