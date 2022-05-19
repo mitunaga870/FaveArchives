@@ -2,6 +2,12 @@ header {
     height: 35%;
     background-color: #414141;
 }
+div{
+    height: 100%;
+}
+.heihgt_auto{
+    height: auto;
+}
 #headerwrap{
     height: 100%;
 }
@@ -56,12 +62,17 @@ a {
     color: #ececec;
 }
 body{
-    height: 65%;
+    height: 100%;
 }
 html {
     height: 100%;
 }
 .none{
-    display: none;
+    display: none !important;
 }
-/*ここまでデフォ*/
+.scroll{
+    overflow: scroll !important;
+}
+.hide_xbar{
+    overflow-x: hidden !important;
+}
