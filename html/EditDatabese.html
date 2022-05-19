@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>メインメニュー</title>
+    <link rel="stylesheet" href="EditDatabese.css">
+    <link rel="stylesheet" href="default.css">
+</head>
+<script src="header.js"></script>
+<body bgcolor="#282828" text="#ececec">
+    <div style="height: 65%" class="flex">
+        <div id="menu" class="scroll hide_xbar">
+            <button id="go_addpage">アーカイブをデータベースに追加</button>
+        </div>
+        <div id="form">
+            <div id="addarchive">
+                <div class="form">
+                <h1>新規登録フォーム</h1>
+                <div id="idform" class="heihgt_auto">
+                    Video Id：<input type="text" id="idbox"><br>
+                    <subtext>※空欄にした場合は自動生成されます。</subtext>
+                </div>
+                <div id="titleform" class="heihgt_auto">
+                    タイトル：<input type="text" id="titlebox">
+                </div>
+                <div id="discriptionform" class="heihgt_auto">
+                    概要欄<br>
+                    <textarea cols="" rows=""></textarea>
+                </div>
+                <div id="contenttypeform" class="heihgt_auto">
+                    コンテンツタイプ:
+                    <select id="contenttypebox">
+                        <option value="video">動画</option>
+                        <option value="stream">配信</option>
+                    </select>
+                </div>
+                <div id="userform" class="heihgt_auto">
+                    投稿者:
+                    <select id="userbox"></select>
+                    <div id="newuserform" class="none" style="height: auto">
+                        <input type="text" id="newnamebox">/<input type="text" id="newcostumebox"><br>
+                        <subtext>”ユーザー名/衣装名”の形で入力してください。</subtext>
+                    </div>
+                    <br>
+                    <button  id="make_newuser">新規ユーザー/新衣装</button>
+                </div>
+                <div id="genreform" class="heihgt_auto">
+                    ジャンル：
+                    <select id="genrebox">
+                        <option value="歌雑談">歌雑談</option>
+                        <option value="ゲーム">ゲーム</option>
+                        <option value="ASMR">ASMR</option>
+                    </select>
+                </div>
+                <div id="priveteform" class="heihgt_auto">
+                    公開状況：
+                    <select id="privetebox">
+                        <option value="0">公開</option>
+                        <option value="1">非公開（録画あり）</option>
+                        <option value="-1">非公開（録画なし）</option>
+                    </select>
+                </div>
+                <div id="publishform" class="heihgt_auto">
+
+                </div>
+                </div>
+                <div id="addarchive_buttons" class="buttonbar">
+                    <button id="sendnew_archive">送信</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="../GUIfunc/EditD.B..js"></script>
+</body>
+</html>
