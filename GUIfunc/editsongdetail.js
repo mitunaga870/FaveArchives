@@ -63,7 +63,7 @@ let detail,waitkey;
             let div = document.createElement('div');
             div.appendChild(button);
             setsongdata(res, div);
-            div.className = "item";
+            div.className = "item heihgt_auto";
             document.getElementById('srecult').appendChild(div);
         }
     }

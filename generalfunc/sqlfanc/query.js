@@ -21,7 +21,6 @@ module.exports = async (query,arr) => {
         connection.end();
         return respond;
     }catch (e) {
-        console.log(e);
-        return e;
+        document.location = "timeout.html?url="+new URL(window.location.href)+"&detail="+e;
     }
 }
