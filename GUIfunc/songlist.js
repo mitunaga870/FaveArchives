@@ -8,11 +8,11 @@ const settype = require('../GUIfunc/songlistfanc/settype');
     for(var detail of list){
         let a = document.createElement('a');
         let main = document.createElement('div');
-        main.className = 'row';
+        main.className = 'row heihgt_auto';
         let title = document.createElement('div');
-        title.className = 'title';
+        title.className = 'title heihgt_auto';
         let singer = document.createElement('div');
-        singer.className = 'singer';
+        singer.className = 'singer heihgt_auto';
         title.innerText = detail.songname;
         singer.innerText = detail.singer;
         main.appendChild(title);
