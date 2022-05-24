@@ -76,3 +76,15 @@ html {
 .hide_xbar{
     overflow-x: hidden !important;
 }
+.popup_header{
+    height: 30px;
+    width: 100%;
+}
+.popup_footer{
+    height: 30px;
+    child-align: right;
+    width: 100%;
+}
+.popup_main{
+    height: calc(100% - 60px);
+}

@@ -12,20 +12,27 @@ const store = require('../generalfunc/store');
 const fs = require('fs');
 const video = document.getElementById('videodiv');
 const title = document.getElementById('title');
+const playlistpupup = document.getElementById('playlisteditor');
 require('dotenv').config();
 var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 document.getElementById('vol').value = String(store.get('songvol'));
-let changed,target,stdata,player,achiveurl;
+const url = new URL(window.location.href);
+const params = url.searchParams;
+let firstsong = params.get('s');
+let listid = params.get('li');
+let changed,target,stdata,player,achiveurl,nowid;
 let waitkey = false,seekdel=false,ended=false;
+let repeat_sw = document.getElementById('repeat')
 let i = 0;
 
 (async ()=>{
     await wait();
     while (true){
-        let playlist = await getplaylist();
+        let playlist = await getplaylist(firstsong,listid);
+        firstsong = null;
         console.log(playlist);
         songlist(playlist);
         while(i < playlist.length){
@@ -35,6 +42,7 @@ let i = 0;
             let item = playlist[i];
             title.innerText = item.songname + "/" + item.singer;
             stdata = await getid(item.songid);
+            nowid = item.songid;
             achiveurl = "stdetail.html?v=" + stdata.videoid;
             setctbutton();
             if(stdata==0){

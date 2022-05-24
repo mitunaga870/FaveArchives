@@ -72,3 +72,19 @@ a{
 #SeekBar{
     width: 100%;
 }
+#playlisteditor{
+    position: fixed;
+    display: block;
+    height: 20%;
+    width: 60%;
+    z-index: 100;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: #a7a7a7;
+    box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
+}
+#popupheader{
+    width: 100%;
+    height: auto;
+}

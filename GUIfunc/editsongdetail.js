@@ -2,6 +2,7 @@ const changetype = require('../GUIfunc/songdetailfanc/changetype');
 const makeoptional = require('../GUIfunc/songdetailfanc/makeoptional');
 const sendoptional = require('../GUIfunc/songdetailfanc/sendoptional');
 const delsong = require('../GUIfunc/songdetailfanc/delsong');
+const go_RANDsong = require('../GUIfunc/songdetailfanc/go_RANDsong');
 const spotify = require('../generalfunc/spotify');
 const getsongdata = require('../GUIfunc/songlistfanc/getsondata');
 const setsongdata = require('../generalfunc/spfunc');
