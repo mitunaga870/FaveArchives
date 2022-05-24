@@ -18,6 +18,7 @@
         <div id="buttons2">
             <button id="skip">次の曲</button>
             <button id="go_archive">アーカイブに移動</button>
+            <button id="addtoplaylist">＋</button>
         </div>
         <div id="list" class="scroll"></div>
         </div>
@@ -25,10 +26,28 @@
 </div>
 <div id="controler" class="heihgt_auto">
     <input id="SeekBar" type="range" min="0" onchange="if(stdata.private){player.currentTime=parseInt(document.getElementById('SeekBar').value)}else {player.seekTo(parseInt(document.getElementById('SeekBar').value))}">
-    <div id="volume">
-        <input id="vol" type="range" min="0" max="100" onchange="store.set('songvol',parseInt(document.getElementById('vol').value))">
+    <div id="subController" class="heihgt_auto flex">
+        <div id="volume" class="heihgt_auto">
+            <input id="vol" type="range" min="0" max="100" onchange="store.set('songvol',parseInt(document.getElementById('vol').value))">
+        </div>
+        <div id="repeatdiv" class="heihgt_auto">
+            <label><input id="repeat" type="checkbox">一曲リピート</label>
+        </div>
     </div>
 </div>
 <script src="../GUIfunc/songplayer.js"></script>
+<div id="playlisteditor" class="none">
+    <div class="popup_header">
+        <button id="close_playlisteditor">X</button>
+    </div>
+    <div class="popup_main">
+        <select id="playlistselector">
+            <option value="new">新規プレイリスト作成</option><input type="text" id="newplaylistname">
+        </select>
+    </div>
+    <div class="popup_footer">
+        <button id="playlist_update">送信</button>
+    </div>
+</div>
 </body>
 </html>
