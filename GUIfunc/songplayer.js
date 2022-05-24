@@ -7,6 +7,7 @@ const seekbar = require('../GUIfunc/songplayerfunc/setSeekBar');
 const volmnage = require('../GUIfunc/songplayerfunc/songvol');
 const OniframestateChange = require('../GUIfunc/songplayerfunc/OniframestateChange');
 const OnvideostateChange = require('../GUIfunc/songplayerfunc/OnvideostateChange');
+const setctbutton = require('../GUIfunc/songplayerfunc/button');
 const store = require('../generalfunc/store');
 const fs = require('fs');
 const video = document.getElementById('videodiv');
@@ -17,7 +18,7 @@ tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 document.getElementById('vol').value = String(store.get('songvol'));
-let changed,target,stdata,player;
+let changed,target,stdata,player,achiveurl;
 let waitkey = false,seekdel=false,ended=false;
 let i = 0;
 
@@ -34,6 +35,8 @@ let i = 0;
             let item = playlist[i];
             title.innerText = item.songname + "/" + item.singer;
             stdata = await getid(item.songid);
+            achiveurl = "stdetail.html?v=" + stdata.videoid;
+            setctbutton();
             if(stdata==0){
                 i++;
                 document.getElementById(btname).classList.remove('selected');

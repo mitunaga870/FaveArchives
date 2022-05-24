@@ -51,7 +51,7 @@ module.exports = () => {
         const senddata =[videoid,titlebox.value,discriptionbox.value,contenttypebox.value,usrid,genrebox.value,parseInt(privetebox.value)];
         const timedata =[videoid,null,null,null,null];
         console.log(senddata);
-        await quary('insert into publishedtime (videoid,videoid, publishedAt, scheduletime, actualStartTime, actualEndTime) values (?,?,?,?,?);',timedata);
+        await quary('insert into publishedtime (videoid, publishedAt, scheduletime, actualStartTime, actualEndTime) values (?,?,?,?,?);',timedata);
         await quary('insert into videodetail (videoid,title,description,contenttype,userid,type,private) values (?,?,?,?,?,?,?);',senddata);
     })
 }
