@@ -10,19 +10,20 @@
 <script src="header.js"></script>
 <body bgcolor="#282828" text="#ececec">
 <h1 id="title"></h1>
-<div id="prayer">
+<div id="prayer" class="heihgt_auto">
     <div id =videodiv>
     </div>
     <div id="other">
         <div id="innerother">
         <div id="buttons2">
             <button id="skip">次の曲</button>
+            <button id="go_archive">アーカイブに移動</button>
         </div>
         <div id="list" class="scroll"></div>
         </div>
     </div>
 </div>
-<div id="controler">
+<div id="controler" class="heihgt_auto">
     <input id="SeekBar" type="range" min="0" onchange="if(stdata.private){player.currentTime=parseInt(document.getElementById('SeekBar').value)}else {player.seekTo(parseInt(document.getElementById('SeekBar').value))}">
     <div id="volume">
         <input id="vol" type="range" min="0" max="100" onchange="store.set('songvol',parseInt(document.getElementById('vol').value))">
