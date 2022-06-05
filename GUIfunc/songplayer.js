@@ -8,6 +8,7 @@ const volmnage = require('../GUIfunc/songplayerfunc/songvol');
 const OniframestateChange = require('../GUIfunc/songplayerfunc/OniframestateChange');
 const OnvideostateChange = require('../GUIfunc/songplayerfunc/OnvideostateChange');
 const setctbutton = require('../GUIfunc/songplayerfunc/button');
+const setplaylist = require('../GUIfunc/songplayerfunc/playlistseter')
 const store = require('../generalfunc/store');
 const fs = require('fs');
 const video = document.getElementById('videodiv');
@@ -30,6 +31,8 @@ let i = 0;
 
 (async ()=>{
     await wait();
+    setctbutton();
+    setplaylist();
     while (true){
         let playlist = await getplaylist(firstsong,listid);
         firstsong = null;
@@ -44,7 +47,6 @@ let i = 0;
             stdata = await getid(item.songid);
             nowid = item.songid;
             achiveurl = "stdetail.html?v=" + stdata.videoid;
-            setctbutton();
             if(stdata==0){
                 i++;
                 document.getElementById(btname).classList.remove('selected');
