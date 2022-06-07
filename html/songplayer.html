@@ -16,6 +16,9 @@
     <div id="other">
         <div id="innerother">
         <div id="buttons2">
+            <select id="list_selector">
+                <option value="">ランダム</option>
+            </select><br>
             <button id="skip">次の曲</button>
             <button id="go_archive">アーカイブに移動</button>
             <button id="addtoplaylist">＋</button>
@@ -37,16 +40,23 @@
 </div>
 <script src="../GUIfunc/songplayer.js"></script>
 <div id="playlisteditor" class="none">
-    <div class="popup_header">
-        <button id="close_playlisteditor">X</button>
+    <div class="popup_header flex">
+        <div class="headtext">
+            保存先...
+        </div>
+        <div class="closebutton">
+            <button id="close_playlisteditor">X</button>
+        </div>
     </div>
-    <div class="popup_main">
-        <select id="playlistselector">
-            <option value="new">新規プレイリスト作成</option><input type="text" id="newplaylistname">
-        </select>
+    <div class="popup_main" id="playlist_box">
     </div>
     <div class="popup_footer">
-        <button id="playlist_update">送信</button>
+        <button id="playlist_add">新規プレイリスト作成</button>
+        <div id="newlistform" class="none">
+            名前<br>
+            <input id="newname" type="text"><br>
+            <button id="send_newplaylist">送信</button>
+        </div>
     </div>
 </div>
 </body>

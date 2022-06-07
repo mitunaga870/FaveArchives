@@ -5,7 +5,8 @@ module.exports = async (firstid,listid) =>{
     let res;
     let x;
     if(listid){
-        res = await quary('select songid,duration,songname,singer from songlist s join playlist p on s.songid = p.songid where playlistid = ?;',[listid]);
+        res = await quary('select s.songid,s.duration,s.songname,s.singer from songlist s join playlist p on s.songid = p.songid where p.playlistid = ?;',[listid]);
+        x = res.length;
     }else {
         if (store.get('privatefilter')) {
             let temp = await quary('select songs.songid from songs join videodetail on songs.videoid = videodetail.videoid where videodetail.private = 0;');
