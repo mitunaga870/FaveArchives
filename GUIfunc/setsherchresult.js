@@ -1,4 +1,4 @@
-const getid = require('../GUIfunc/searchfunc/getid');
+const seach = require('../GUIfunc/searchfunc/seach_main');
 const getstdata = require("../GUIfunc/searchfunc/gettitleandtime");
 const abbreviation = require('../generalfunc/abbreviation');
 const url = new URL(window.location.href);
@@ -9,10 +9,7 @@ const keywords = params.get('q');
 const type = params.get('f');
 
 (async () => {
-    const res = await getid(keywords);
-    const resid = res.ids;
-    result.append("検索結果："+resid.length+"件");
-    var list = await getstdata(resid,res.rate,type);
+    const list = await seach(keywords);
     result.innerText = "";
     if (list.length==0){
         result.append("条件に一致するアーカイブはありません");
