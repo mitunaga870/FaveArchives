@@ -8,25 +8,27 @@ const volmnage = require('../GUIfunc/songplayerfunc/songvol');
 const OniframestateChange = require('../GUIfunc/songplayerfunc/OniframestateChange');
 const OnvideostateChange = require('../GUIfunc/songplayerfunc/OnvideostateChange');
 const setctbutton = require('../GUIfunc/songplayerfunc/button');
-const setplaylist = require('../GUIfunc/songplayerfunc/playlistseter')
+const setplaylist = require('../GUIfunc/songplayerfunc/playlistseter');
+const check_playlist = require('../GUIfunc/songplayerfunc/check_playlist');
 const store = require('../generalfunc/store');
 const fs = require('fs');
 const video = document.getElementById('videodiv');
 const title = document.getElementById('title');
 const playlistpupup = document.getElementById('playlisteditor');
-require('dotenv').config();
+let repeat_sw = document.getElementById('repeat');
+//iframe用の物作成
 var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 document.getElementById('vol').value = String(store.get('songvol'));
+
 const url = new URL(window.location.href);
 const params = url.searchParams;
 let firstsong = params.get('s');
 let listid = params.get('li');
 let changed,target,stdata,player,achiveurl,nowid;
 let waitkey = false,seekdel=false,ended=false;
-let repeat_sw = document.getElementById('repeat')
 let i = 0;
 
 (async ()=>{
@@ -46,6 +48,7 @@ let i = 0;
             title.innerText = item.songname + "/" + item.singer;
             stdata = await getid(item.songid);
             nowid = item.songid;
+            check_playlist();
             achiveurl = "stdetail.html?v=" + stdata.videoid;
             if(stdata==0){
                 i++;

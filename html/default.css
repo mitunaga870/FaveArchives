@@ -77,14 +77,14 @@ html {
     overflow-x: hidden !important;
 }
 .popup_header{
-    height: 30px;
+    height: 40px;
     width: 100%;
 }
 .popup_footer{
-    height: 30px;
+    height: 40px;
     child-align: right;
     width: 100%;
 }
 .popup_main{
-    height: calc(100% - 60px);
+    height: calc(100% - 80px);
 }
