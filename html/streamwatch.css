@@ -1,9 +1,21 @@
+
 /* 動画を囲うdiv */
-#videodiv {
+#videodiv.default {
     position: relative;
     width:70%; /* 横幅は100%で固定 */
     height:0; /* 高さは0にしておく(padding-topで高さを指定するため) */
     padding-top: 39.375%; /* 高さを指定(16:9) */
+}
+#videodiv.borderless{
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: 0;
+    padding-top: 56.25%; /* 高さを指定(16:9) */
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: calc((100vh - 56vw) / 2);
 }
 
 /* YouTube埋め込み用のiframe */
@@ -13,6 +25,25 @@ iframe {
     left: 0;
     width: 100%;
     height: 100%;
+}
+#borderlass_backgraund{
+    position: absolute;
+    top: calc((100vh - 56vw) / 2 * -1);;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #414141;
+}
+#borderlass_off{
+    position: absolute;
+    display: block;
+    z-index: 102;
+}
+#borderlass_backgraund:hover + #borderlass_off{
+    display: block;
+}
+#video:hover + #borderlass_off{
+    display: block;
 }
 video {
     position: absolute;

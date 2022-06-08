@@ -1,5 +1,4 @@
 const seach = require('../GUIfunc/searchfunc/seach_main');
-const getstdata = require("../GUIfunc/searchfunc/gettitleandtime");
 const abbreviation = require('../generalfunc/abbreviation');
 const url = new URL(window.location.href);
 const params = url.searchParams;

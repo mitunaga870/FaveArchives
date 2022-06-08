@@ -11,6 +11,7 @@ const addhistory = require('../generalfunc/sqlfanc/addhistory');
 const delay = require('../generalfunc/delay');
 const chat = require('../GUIfunc/chatfunc/chat');
 const chatmaneger = require('../GUIfunc/chatfunc/chatmaneger');
+const setborderless_event = require('../GUIfunc/borderlessfunc/borderless_event');
 const store = require('../generalfunc/store');
 const url = new URL(window.location.href);
 const params = url.searchParams;
@@ -54,9 +55,9 @@ let log;
 let chatdata;
 
 (async ()=>{
-    console.log(store.get('chatpath'))
-    await wait();
     addhistory(id);
+    setborderless_event();
+    await wait();
     console.log(store.get('test'));
     //初期データ取得処理
     const stdata = await getstdata(id);

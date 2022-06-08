@@ -103,18 +103,23 @@
         <div class="heihgt_auto" align="left"><button id="senddetail">送信</button></div>
     </div>
     <div id="prayer" class="heihgt_auto">
-        <div id =videodiv></div>
+        <div id ="videodiv" class="default">
+            <div id="borderlass_backgraund" class="none">
+                <button id="borderlass_off">X</button>
+            </div>
+        </div>
         <div id="other">
             <div id="innerother">
             <div id="buttons2">
                 <button onclick="document.getElementById('edetailbox').classList.toggle('closed');">詳細情報編集</button>
+                <button id="borderless_on">シネマモート</button>
             </div>
             <div id="coment" class="scroll"></div>
             </div>
         </div>
     </div>
     <div class="editsongsbox closed" id="editsongsbox">
-        <div align="left" class="heihgt_auto"><button onclick="document.getElementById('editsongsbox').classList.toggle('closed');">閉じる</button></div>
+        <div align="left" class="popup_header"><button onclick="document.getElementById('editsongsbox').classList.toggle('closed');">閉じる</button></div>
         <div id="popouttable">
             <table id="addsong">
                 <thead>
@@ -132,7 +137,7 @@
                 </thead>
             </table>
         </div>
-        <div>
+        <div class="inputdiv">
         <table>
             <tr>
                 <td>
