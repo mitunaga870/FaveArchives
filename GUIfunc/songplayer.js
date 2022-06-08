@@ -10,6 +10,7 @@ const OnvideostateChange = require('../GUIfunc/songplayerfunc/OnvideostateChange
 const setctbutton = require('../GUIfunc/songplayerfunc/button');
 const setplaylist = require('../GUIfunc/songplayerfunc/playlistseter');
 const check_playlist = require('../GUIfunc/songplayerfunc/check_playlist');
+const setborderless_event = require("../GUIfunc/borderlessfunc/borderless_event");
 const store = require('../generalfunc/store');
 const fs = require('fs');
 const video = document.getElementById('videodiv');
@@ -32,6 +33,7 @@ let waitkey = false,seekdel=false,ended=false;
 let i = 0;
 
 (async ()=>{
+    setborderless_event();
     await wait();
     setctbutton();
     setplaylist();

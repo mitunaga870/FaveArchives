@@ -10,7 +10,7 @@ document.write(
     '\t\t\t\t<option value="ゲーム">ゲーム</option>\n' +
     '\t\t\t</select>\n' +
     '<div id="textandbutton" class="flex">' +
-    '\t\t<input type="text" id="search">\n' +
+    '\t\t<input type="text" id="search" placeholder="検索">\n' +
     '\t\t<button class="searching">検索</button>\n' +
     '\t\t</div>' +
     '</div> '+

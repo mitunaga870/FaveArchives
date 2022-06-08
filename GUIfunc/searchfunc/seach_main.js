@@ -22,8 +22,7 @@ module.exports = async (basetxt) =>{
     main = await getrate(main,songs_id);
     main.sort((first,second)=>{
         return second.rate-first.rate
-    })
-    console.log(main);
+    });
     return main;
 }
 
@@ -43,6 +42,8 @@ async function getrate(base,check_id){
             };
             let newitem = await query(q,[item.videoid]);
             newitem = newitem[0];
+            if(!newitem)
+                continue;
             newitem.rate = 1;
             base.unshift(newitem);
         }
