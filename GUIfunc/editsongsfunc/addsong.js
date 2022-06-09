@@ -13,6 +13,9 @@ module.exports=async (id,songs)=>{
             console.log(id)
             songid = id[0].songid;
         }
-        await quary('insert into songs (videoid,songid,timestump) values (?,?,?);', [id, songid, time]);
+        if(value[3].match(/X/))
+            await quary('insert into songs (videoid,songid,timestump) values (?,?,?);', [id, songid, time]);
+        else
+            await quary('insert into songs (videoid,songid,timestump,endtime) values (?,?,?,?);', [id, songid, time, value[3]]);
     }
 }

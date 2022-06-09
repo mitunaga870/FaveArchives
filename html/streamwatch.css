@@ -85,3 +85,6 @@ a{
 .scroll{
     overflow: scroll;
 }
+#songlist{
+    width: 100px;
+}
