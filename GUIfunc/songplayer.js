@@ -11,6 +11,7 @@ const setctbutton = require('../GUIfunc/songplayerfunc/button');
 const setplaylist = require('../GUIfunc/songplayerfunc/playlistseter');
 const check_playlist = require('../GUIfunc/songplayerfunc/check_playlist');
 const setborderless_event = require("../GUIfunc/borderlessfunc/borderless_event");
+const delchildren = require("../generalfunc/delchildren");
 const store = require('../generalfunc/store');
 const fs = require('fs');
 const video = document.getElementById('videodiv');
@@ -38,15 +39,16 @@ let i = 0;
     setctbutton();
     setplaylist();
     while (true){
+        await delchildren(document.getElementById('list'));
         let playlist = await getplaylist(firstsong,listid);
         firstsong = null;
-        console.log(playlist);
         songlist(playlist);
         while(i < playlist.length){
             ended=false
             let btname = 'item:'+i;
             document.getElementById(btname).classList.add('selected');
             let item = playlist[i];
+            let durarion;
             title.innerText = item.songname + "/" + item.singer;
             stdata = await getid(item.songid);
             nowid = item.songid;
@@ -58,7 +60,11 @@ let i = 0;
                 console.log("アーカイブなし");
                 continue;
             }
-            console.log(stdata)
+            if(stdata.endtime!=null){
+                durarion = (await dts(stdata.endtime)-await dts(stdata.timestump))*1000;
+                console.log(durarion)
+            }else
+                durarion = item.duration;
             if(stdata.private==0) {
                 let iframe = document.createElement('div');
                 iframe.id = 'video'
@@ -82,7 +88,6 @@ let i = 0;
             }else {
                 player = document.createElement('video');
                 var src =store.get('archivespath')+'\\'+stdata.videoid+".mp4";
-                console.log(src);
                 if (fs.existsSync(src)){
                     player.src= "file:///"+src;
                     player.controls=true;
@@ -98,11 +103,10 @@ let i = 0;
                 }
 
             }
-            seekbar(stdata.private,player,await dts(stdata.timestump),item.duration/1000);
+            seekbar(stdata.private,player,await dts(stdata.timestump),durarion/1000);
             volmnage();
-            await timeconttoler(stdata.private,player,await dts(stdata.timestump),item.duration/1000).then(res=>{i=parseInt(res)});
+            await timeconttoler(stdata.private,player,await dts(stdata.timestump),durarion/1000).then(res=>{i=parseInt(res)});
             del('video');
-            console.log(i);
             changed = false;
             seekdel = true;
             document.getElementById(btname).classList.remove('selected');

@@ -1,4 +1,5 @@
-module.exports = (list)=>{
+
+module.exports = async (list)=>{
     let n = 0;
     for(var item of list){
         let temp = n;

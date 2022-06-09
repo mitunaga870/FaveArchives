@@ -1,7 +1,6 @@
 const getstdata = require('../generalfunc/sqlfanc/getalldata');
 const abb = require('../generalfunc/abbreviation');
 const addtag = require('../GUIfunc/edittagfunc/addtag');
-const addsong = require('../GUIfunc/editsongsfunc/addsong');
 const settime = require('../GUIfunc/setprayertime');
 const getsonglist = require('../generalfunc/sqlfanc/getsonglist');
 const getsongs = require('../GUIfunc/editsongsfunc/getsongs');
@@ -12,6 +11,7 @@ const delay = require('../generalfunc/delay');
 const chat = require('../GUIfunc/chatfunc/chat');
 const chatmaneger = require('../GUIfunc/chatfunc/chatmaneger');
 const setborderless_event = require('../GUIfunc/borderlessfunc/borderless_event');
+const add_songsevent = require('../GUIfunc/editsongsfunc/events');
 const store = require('../generalfunc/store');
 const url = new URL(window.location.href);
 const params = url.searchParams;
@@ -22,11 +22,7 @@ const tagbox = document.getElementById('taglist');
 const edittagbox = document.getElementById('edittag');
 const video = document.getElementById('videodiv');
 const newtagtxbox = document.getElementById('newtag');
-const setsongbutton = document.getElementById('setsong');
 const songselect = document.getElementById('songlist');
-const songtitlebox = document.getElementById('songlist')
-const newsongtitle = document.getElementById('songname');
-const songtime = document.getElementById('timestump');
 const addsonlist = document.getElementById('addsong');
 const songlist = document.getElementById('songlist0');
 const titlebox = document.getElementById('titlebox');
@@ -40,9 +36,6 @@ const editOverlay = document.querySelector("#overlay");
 const closeButton = document.querySelector("#close-edit");
 const openButton = document.querySelector("#open-edit");
 const settagsButton = document.querySelector("#sendnewtag");
-const editsongsbox = document.querySelector('#editsongsbox');
-const editsongsbutton = document.querySelector('#editsongs');
-const sendsonglist = document.querySelector('#sendsong');
 const senddetail = document.querySelector('#senddetail');
 var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
@@ -55,6 +48,7 @@ let log;
 let chatdata;
 
 (async ()=>{
+    add_songsevent();
     addhistory(id);
     setborderless_event();
     await wait();
@@ -174,54 +168,6 @@ let chatdata;
         newtagtxbox.value = "";
         edit.classList.toggle("closed");
         editOverlay.classList.toggle("closed");
-    });
-    //お歌リスト編集ページ
-    editsongsbutton.addEventListener('click',async function (){
-        editsongsbox.classList.toggle('closed');
-    });
-    //曲をテーブルに追加
-    setsongbutton.addEventListener('click',async function (){
-        let temprow = addsonlist.insertRow();
-        let tempid = rowid++;
-        temprow.id = String(tempid);
-        let tempcell = temprow.insertCell();
-        let songid = songtitlebox.value;
-        tempcell.appendChild(document.createTextNode(songid));
-        tempcell = temprow.insertCell();
-        if(parseInt(songid)==0){
-            tempcell.appendChild(document.createTextNode(newsongtitle.value));
-        }else {
-            tempcell.appendChild(document.createTextNode(songtitlebox.options[songtitlebox.selectedIndex].innerText));
-        }
-        tempcell = temprow.insertCell();
-        tempcell.appendChild(document.createTextNode(songtime.value));
-        tempcell = temprow.insertCell();
-        let delbutton = document.createElement('button');
-        delbutton.id = "del" + String(tempid);
-        delbutton.class = "del"
-        delbutton.innerText = "X"
-        delbutton.onclick = null;
-        delbutton.addEventListener('click',function (){del(String(tempid))});
-        tempcell.appendChild(delbutton);
-    });
-    //テーブル上の曲をDBに追加
-    sendsonglist.addEventListener('click',async function (){
-        console.log("送信します。");
-        let senddata = [];
-        for(var row of addsonlist.rows){
-            let temp = [];
-            for (var cell of row.cells){
-                if(parseInt(cell.cellIndex)==3)
-                    continue;
-                temp.push(cell.textContent);
-            }
-            senddata.push(temp);
-        }
-        console.log(senddata);
-        await addsong(id,senddata);
-        let songs = await getsongs(id);
-        await setsongs(songs);
-        editsongsbox.classList.toggle('closed');
     });
     senddetail.addEventListener('click',async function (){
         await setdetail(id,titlebox.value,detailbox2.value,ctypeselect.value,priselect.value,typeselect.value,userselect.value);

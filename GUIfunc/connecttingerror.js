@@ -3,6 +3,7 @@ const params = url.searchParams;
 const basepage = params.get('url');
 const detail = params.get('detail');
 const quarytxt = params.get('q');
+const quaryarr = params.get('arr');
 const link = document.getElementById('reload');
 const detailbox = document.getElementById('detail');
 
@@ -10,5 +11,8 @@ const detailbox = document.getElementById('detail');
     console.log(basepage);
     link.href=basepage;
     console.log(detail);
-    detailbox.innerText=detail+"\nquarytext:"+quarytxt;
+    let innerText=detail+"\nquarytext:"+quarytxt;
+    if(quaryarr!=undefined)
+        innerText +="\nquaryqrr:"+quaryarr;
+    detailbox.innerText=innerText;
 })();
