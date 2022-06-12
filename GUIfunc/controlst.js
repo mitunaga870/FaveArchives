@@ -53,10 +53,10 @@ let chatdata;
     add_songsevent();
     addhistory(id);
     setborderless_event();
-    await wait();
+    const reses = await Promise.all([wait(),getstdata(id)]);
     console.log(store.get('test'));
     //初期データ取得処理
-    const stdata = await getstdata(id);
+    const stdata = reses[1];
     titletag.textContent = stdata.title;
     detailbox.textContent = stdata.description;
     const desc = document.createElement('summary');

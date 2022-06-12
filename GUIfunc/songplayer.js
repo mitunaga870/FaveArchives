@@ -37,12 +37,11 @@ let i = 0;
 (async ()=>{
     UI();
     setborderless_event();
-    await wait();
+    const reses = await Promise.all([wait(),getplaylist(firstsong,listid)]);
+    let playlist = reses[1];
     setctbutton();
     setplaylist();
     while (true){
-        await delchildren(document.getElementById('list'));
-        let playlist = await getplaylist(firstsong,listid);
         firstsong = null;
         songlist(playlist);
         while(i < playlist.length){
@@ -115,6 +114,7 @@ let i = 0;
         }
         console.log('一周しました')
         i = 0;
+        playlist = await getplaylist(firstsong,listid);
     }
 })();
 
