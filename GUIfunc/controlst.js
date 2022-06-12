@@ -12,6 +12,7 @@ const chat = require('../GUIfunc/chatfunc/chat');
 const chatmaneger = require('../GUIfunc/chatfunc/chatmaneger');
 const setborderless_event = require('../GUIfunc/borderlessfunc/borderless_event');
 const add_songsevent = require('../GUIfunc/editsongsfunc/events');
+const ui = require('../GUIfunc/UI/stdetail');
 const store = require('../generalfunc/store');
 const url = new URL(window.location.href);
 const params = url.searchParams;
@@ -48,6 +49,7 @@ let log;
 let chatdata;
 
 (async ()=>{
+    ui();
     add_songsevent();
     addhistory(id);
     setborderless_event();

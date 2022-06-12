@@ -1,5 +1,7 @@
+window.jQuery = window.$ = require('jquery');
 
 module.exports = async (list)=>{
+    $('#list').empty();
     let n = 0;
     for(var item of list){
         let temp = n;

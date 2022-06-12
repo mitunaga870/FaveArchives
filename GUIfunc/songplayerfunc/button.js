@@ -1,4 +1,5 @@
 const uuid = require('node-uuid');
+window.jQuery = window.$ = require('jquery');
 const quary = require('../../generalfunc/sqlfanc/query');
 const setplaylist = require('../../GUIfunc/songplayerfunc/playlistseter');
 const check_playlist = require('../../GUIfunc/songplayerfunc/check_playlist');

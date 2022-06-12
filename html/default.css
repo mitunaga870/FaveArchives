@@ -27,9 +27,11 @@ div{
     position: relative;top: 5px;
     background: #a7a7a7;
 }
-#logo{
-    margin-top: 10%;
+#logoimg{
+    aspect-ratio: 670/226;
+    margin-top: auto;
     width: 100%;
+    height: calc(100%*(226/670));
 }
 #searchform{
     width: 50%;
@@ -87,4 +89,7 @@ html {
 }
 .popup_main{
     height: calc(100% - 80px);
+}
+#logp{
+    width: 40%
 }

@@ -65,7 +65,7 @@ a{
 }
 #list{
     width: 100%;
-    height: 90%;
+    height: auto;
 }
 #prayer{
     display: flex;
@@ -85,8 +85,10 @@ a{
 }
 
 #buttons2{
-    width: 100%;
-    height: 10%;
+    --width2:100%;
+    width: var(--width2);
+    --btheight:calc((1 + var(--width2)/280) * 60px);
+    height: var(--btheight);
 }
 .scroll{
     overflow: scroll;

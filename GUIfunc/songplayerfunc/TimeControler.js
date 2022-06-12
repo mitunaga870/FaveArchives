@@ -12,15 +12,15 @@ module.exports = (type,player,start,end)=>{
             if (changed)
                 resolve(target)
             if (ct >= start + end || ct >= start + end||skip)
-                if(!repeat_sw.checked)
-                    resolve(i + 1);
-                else
+                if(repeat_sw.checked)
                     resolve(i);
+                else
+                    resolve(i+1);
             if (ended)
-                if(!repeat_sw.checked)
-                    resolve(i + 1);
-                else
+                if(repeat_sw.checked)
                     resolve(i);
+                else
+                    resolve(i+1);
             await delay(1);
         }
     })

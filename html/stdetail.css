@@ -149,7 +149,7 @@ a {
 
 #buttons2{
     position: relative;
-    height: 10%;
+    height: auto;
 }
 #coment{
     position: relative;

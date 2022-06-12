@@ -1,8 +1,8 @@
 document.write(
     '<header id="header" >\n' +
     '\t\t<div id="headerwrap" class="flex">\n' +
-    '\t\t\t<a href="index.html">\n' +
-    '\t\t\t\t<img id="logo" src="../Asset/icon-long.png"  height="100" width="300"></a>\n' +
+    '\t\t\t<a id="logo" href="index.html">\n' +
+    '\t\t\t\t<img id="logoimg" src="../Asset/icon-long.png"  height="100" width="300"></a>\n' +
     '\t\t\t\t<div id="searchform">'+
     '\t\t\t<select id="filler">\n' +
     '\t\t\t\t<option value="すべて">すべて</option>\n' +
