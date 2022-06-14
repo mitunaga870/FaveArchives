@@ -19,6 +19,6 @@ const schema = {
     refresh_token:{
         type: 'string',
         default: 'AQAkYdBbFxi71yzq0wTumTHnfXtiBRlCnhs2tzL8EaEM7uglxUN4uvfZMpRyxSXr_48B2uCog9h0zLqMYQIfkwqFard_NkT2t3B5CKC--UWv3J0-1mWRkq9cvDiRT-g05ww'
-    }//非公開アーカイブの保存ディレクトリ
+    }
 };
 module.exports = new Store({schema});

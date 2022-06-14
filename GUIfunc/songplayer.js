@@ -30,6 +30,7 @@ const url = new URL(window.location.href);
 const params = url.searchParams;
 let firstsong = params.get('s');
 let listid = params.get('li');
+let splist = params.get('sp');
 let changed,target,stdata,player,achiveurl,nowid;
 let waitkey = false,seekdel=false,ended=false;
 let i = 0;
@@ -37,7 +38,7 @@ let i = 0;
 (async ()=>{
     UI();
     setborderless_event();
-    const reses = await Promise.all([wait(),getplaylist(firstsong,listid)]);
+    const reses = await Promise.all([wait(),getplaylist(firstsong,listid,splist)]);
     let playlist = reses[1];
     setctbutton();
     setplaylist();

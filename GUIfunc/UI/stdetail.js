@@ -1,4 +1,6 @@
 const autoevent = require('../../GUIfunc/UI/stdetail/autoevent');
+const {compileETag} = require("express/lib/utils");
+window.jQuery = window.$ = require('jquery');
 
 module.exports = () =>{
     let parentheight = $('#innerother').height();

@@ -1,5 +1,5 @@
 const SpotifyWebApi = require("spotify-web-api-node");
-const spstore = require("../generalfunc/spotityqouth");
+const spstore = require("./spotityqouth");
 module.exports = async () =>{
     var spotifyApi = new SpotifyWebApi({
         clientId: spstore.get('client_id'),

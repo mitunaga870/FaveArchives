@@ -1,0 +1,61 @@
+#suggestions{
+    display: flex;
+    height: 100vh;
+}
+#movie{
+    width: 50%;;
+}
+#movielist{
+    height: calc(100% + 1em);
+    display: flex;
+    overflow: auto;
+    flex-wrap: wrap;
+}
+#movielist::-webkit-scrollbar {
+    display: none;
+}
+#song{
+    width: 50%;
+}
+#playlist{
+    height: 50%;
+}
+#track{
+    height: 50%;
+}
+
+.items.song{
+    margin: 2.5vh;
+    height: 20vh;
+    width: 20vh;
+    background: #954b49;
+    flex: 0 0 auto;
+    background-size: cover;
+    background-position: center;
+}
+.playlistrow{
+    display: flex;
+    overflow-x: auto;
+    height: 25vh;
+    -ms-overflow-style: none;
+}
+.playlistrow::-webkit-scrollbar{
+    display: none;
+}
+.items.movie{
+    font-size: 10px;
+    margin: .5em;
+    height: calc((25vw - 2em)*(9/16));
+    width: calc(25vw - 2em);
+    background-size: cover;
+    background-position: center;
+}
+.songrow{
+    display: flex;
+    overflow-x: auto;
+    height: 25vh;
+    -ms-overflow-style: none;
+}
+.songrow::-webkit-scrollbar{
+    display: none;
+}

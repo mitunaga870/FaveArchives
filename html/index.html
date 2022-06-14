@@ -5,11 +5,11 @@
 		<title>メインメニュー</title>
 		<link rel="stylesheet" href="index.css">
 		<link rel="stylesheet" href="default.css">
+		<link rel="stylesheet" href="suggestions.css">
 	</head>
 	<script src="header.js"></script>
 	<body bgcolor="#282828" text="#ececec">
 		<div id="parent" class="heihgt_auto">
-			<div class="sidebar"></div>
 			<div id="child1"><p>推し速報</p>
 				<div id="staleatbox">
 				</div>
@@ -47,6 +47,28 @@
 				</div>
 			</div>
 		</div>
+		<h1>
+			あなたへのおすすめ
+		</h1>
+	<div id="suggestions">
+		<div id="movie">
+			アーカイブ
+			<div id="movielist"></div>
+		</div>
+		<div id="song">
+			プレイリスト
+			<div id="playlist">
+				<div class="playlistrow 0"></div>
+				<div class="playlistrow 1"></div>
+			</div>
+			お歌
+			<div id="track">
+				<div class="songrow 0"></div>
+				<div class="songrow 1"></div>
+			</div>
+		</div>
+		<script src="../GUIfunc/suggestions.js"></script>
+	</div>
 	</body>
 	<script src="../GUIfunc/indexbutton.js"></script>
 </html>
