@@ -1,7 +1,40 @@
 th{
     text-align: left;
 }
-#description{
+.description{
     font-size: small;
     color: #a7a7a7;
+    height: 90%;
+    overflow: hidden;
+}
+.item{
+    height: 200px;
+    width: calc(100% - 100px);
+    display: flex;
+    margin-bottom: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+.thumnail{
+    width: calc(200px / 9 * 16);
+    background-position: center;
+    background-size: cover;
+}
+#res_summary{
+    height: 10%;
+}
+#res_main{
+    height: 90%;
+    overflow: auto;
+}
+#result{
+    height: calc(100% - 100px);
+}
+.detail{
+    margin-right: 8px;
+    margin-left: 8px;
+    width: calc(100% - (200px / 9 * 16) - 16px);
+}
+.title{
+    height: 10%;
 }

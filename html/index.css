@@ -61,11 +61,11 @@ a {
 }
 .aleat{
     background: #954b49;
-    color: #414141;
-    text-shadow:1px 1px 0 #ececec, -1px -1px 0 #ececec,
-    -1px 1px 0 #ececec, 1px -1px 0 #ececec,
-    0px 1px 0 #ececec,  0-1px 0 #ececec,
-    -1px 0 0 #ececec, 1px 0 0 #ececec;
+    color: #ececec;
+    width: 30vw;
+    height: calc(30vw /16 * 9);
+    background-size: cover;
+    background-position: center;
 }
 #aleatmaintable{
     width: 100%;
@@ -75,4 +75,8 @@ a {
 }
 #goedit{
     width: 40%;
+}
+#no_stream{
+    font-family: AB-doramin Regular;
+    font-size: calc(100vw / 18);
 }

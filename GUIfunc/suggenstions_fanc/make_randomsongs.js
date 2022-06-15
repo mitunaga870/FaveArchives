@@ -27,7 +27,7 @@ module.exports = async () =>{
         const div = $('<div>',{
             "class":"items song",
             css:{
-                "background-image": "URL(" + res.body.album.images[0].url + ")"
+                "background-image": "linear-gradient(rgba(0,0,0,0.8),20%,rgba(0,0,0,0)), URL(" + res.body.album.images[0].url + ")"
             },
             text:item.songname+item.singer
         });

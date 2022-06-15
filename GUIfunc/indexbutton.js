@@ -15,7 +15,9 @@ const fitbit = document.getElementById('fitbitbt');
 const subfitbit = document.getElementById('subfitbitbt');
 const select = document.getElementById('aleatthing');
 const selection = document.querySelector('#aleatthing');
+window.jQuery = window.$ = require('jquery');
 const store = require('../generalfunc/store');
+const {text} = require("express");
 
 (async () => {
     let temp;
@@ -42,20 +44,31 @@ const store = require('../generalfunc/store');
         temp=JSON.parse(temp);
         for (var i in temp.streamdetail){
             var title = temp.streamdetail[i].title;
-            console.log(title)
             var op = document.createElement('option');
             op.innerText = "枠"+i+"："+title;
             op.value = i;
             select.appendChild(op);
-            let a = document.createElement('a');
-            a.href = "../html/streamwatch.html?id=" + temp.streamdetail[i].id;
-            let div = document.createElement('div');
-            div.className = "aleat";
-            div.innerText = temp.streamdetail[i].content+"\n"+temp.streamdetail[i].title+"\n"+temp.streamdetail[i].scheduletime;
-            a.appendChild(div);
-            document.getElementById('staleatbox').appendChild(a);
+            const a = $('<a>',{
+                href:"../html/streamwatch.html?id=" + temp.streamdetail[i].id,
+            });
+            const div = $('<div>',{
+                css:{
+                    "background-image": "linear-gradient(rgba(0,0,0,0.8),20%,rgba(0,0,0,0)), URL(https://img.youtube.com/vi/"+temp.streamdetail[i].id+"/0.jpg)"
+                },
+                text:+temp.streamdetail[i].content+"\n"+temp.streamdetail[i].title+"\n"+temp.streamdetail[i].scheduletime,
+                "class":"aleat"
+            });
+            a.append(div);
+            $('#staleatbox').append(a);
         }
     }).catch(error=>{console.log(error)});
+    if(temp.streamdetail.length==0) {
+        const div = $('<div>', {
+            text: "NO STREAM",
+            id: "no_stream"
+        });
+        $('#staleatbox').append(div);
+    }
     //対象変更時
     selection.addEventListener('change',async function (){
         console.log(select.value)

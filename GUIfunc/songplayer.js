@@ -1,3 +1,5 @@
+window.jQuery = window.$ = require('jquery');
+
 const getplaylist = require('../GUIfunc/songplayerfunc/gesplaylist');
 const getid = require('../GUIfunc/songplayerfunc/getst');
 const timeconttoler = require('../GUIfunc/songplayerfunc/TimeControler');
@@ -40,11 +42,11 @@ let i = 0;
     setborderless_event();
     const reses = await Promise.all([wait(),getplaylist(firstsong,listid,splist)]);
     let playlist = reses[1];
-    setctbutton();
+    await setctbutton();
     setplaylist();
     while (true){
         firstsong = null;
-        songlist(playlist);
+        await songlist(playlist);
         while(i < playlist.length){
             ended=false
             let btname = 'item:'+i;
@@ -112,6 +114,7 @@ let i = 0;
             changed = false;
             seekdel = true;
             document.getElementById(btname).classList.remove('selected');
+            $('#list').scrollTop(100*i);
         }
         console.log('一周しました')
         i = 0;

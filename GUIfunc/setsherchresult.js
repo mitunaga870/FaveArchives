@@ -1,39 +1,59 @@
 const seach = require('../GUIfunc/searchfunc/seach_main');
 const abbreviation = require('../generalfunc/abbreviation');
+const store = require("../generalfunc/store");
+window.jQuery = window.$ = require('jquery');
 const url = new URL(window.location.href);
 const params = url.searchParams;
-let table = document.createElement('table');
-const result = document.getElementById('result');
 const keywords = params.get('q');
 const type = params.get('f');
 
+const result_summary = $('#res_summary');
+const result_main = $('#res_main');
+
 (async () => {
     const list = await seach(keywords);
-    result.innerText = "";
+    result_summary.text("検索結果："+list.length+"件");
     if (list.length==0){
-        result.append("条件に一致するアーカイブはありません");
+        result_main.text("対象アーカイブは見つかりませんでした。");
         return;
     }
-    result.append("検索結果："+list.length+"件");
-    for (var i in list){
-        var tr = document.createElement('tr');
-        var tr2 = document.createElement('tr');
-        var des = document.createElement('th');
-        var title = document.createElement('th');
-        var link = document.createElement('a');
-        des.textContent = await abbreviation(list[i].description);
-        des.colSpan = 2;
-        des.id = "description";
-        title.id = "title";
-        link.textContent = list[i].title;
-        var url = "../html/stdetail.html?v="+list[i].videoid;
-        link.href = url;
-        title.appendChild(link);
-        tr.appendChild(title);
-        table.appendChild(tr);
-        tr2.appendChild(des);
-        table.appendChild(tr2);
+    for (var item of list){
+        let thumbnail;
+        if(item.private) {
+            thumbnail = store.get('thumbnailpath') +"/"+ item.videoid + ".jpg";
+            thumbnail = thumbnail.replace(/\\/g,"/");
+            if(!require('fs').existsSync(thumbnail))
+                thumbnail = "../Asset/no_thumbnail.png"
+        }else
+            thumbnail = "https://img.youtube.com/vi/"+item.videoid+"/0.jpg";
+        const a = $('<a>',{
+            href:"stdetail.html?v="+item.videoid
+        });
+        const main = $('<a>',{
+            class:"item",
+            href:"./stdetail.html?v="+item.videoid
+        });
+        const thumbnail_div = $('<div>',{
+            class:"thumnail",
+            css:{
+                "background-image": "URL("+thumbnail+")"
+            }
+        });
+        main.append(thumbnail_div);
+        const detail_div = $('<div>',{
+            class:"detail"
+        });
+        const title_div =$('<div>',{
+            class:"title",
+            text:item.title
+        });
+        detail_div.append(title_div);
+        const description_div =$('<div>',{
+            class:"description",
+            text:item.description
+        });
+        detail_div.append(description_div);
+        main.append(detail_div);
+        result_main.append(main);
     }
-    result.id = "result";
-    result.appendChild(table);
 })();

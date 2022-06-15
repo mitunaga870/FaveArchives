@@ -2,6 +2,7 @@ const store = require('../generalfunc/store');
 const change = require('../GUIfunc/settingfunc/change');
 const priselect = document.getElementById('priselection');
 const sendbt = document.querySelector('#sendbt');
+window.jQuery = window.$ = require('jquery');
 
 (async ()=>{
     let nowsection = 'generalset';
@@ -15,6 +16,7 @@ const sendbt = document.querySelector('#sendbt');
             await store.set('archivespath',document.getElementById('archive-path').value);
             await store.set('chatpath',document.getElementById('chat-path').value);
             await store.set('cookie',document.getElementById('cookie').value);
+            await store.set('thumbnailpath',$('#thumbnail-path').val());
         }
         setsettiong(target);
     })
@@ -37,4 +39,5 @@ function setsettiong(){
         document.getElementById('archive-path').value = path;
         document.getElementById('chat-path').value = store.get('chatpath');
         document.getElementById('cookie').value = store.get('cookie');
+        $('#thumbnail-path').val(store.get('thumbnailpath'));
 }

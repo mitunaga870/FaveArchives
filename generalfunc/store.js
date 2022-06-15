@@ -10,6 +10,9 @@ const schema = {
     chatpath:{
         type: 'string'
     },
+    thumbnailpath:{
+        type: 'string'
+    },
     songvol:{
         type:'number',
         minimum:0,

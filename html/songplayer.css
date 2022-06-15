@@ -64,8 +64,14 @@ a{
     display: flex;
 }
 #list{
-    width: 100%;
+    width: calc(100% - 40px);
     height: auto;
+    overflow: auto;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+#list::-webkit-scrollbar{
+    display: none;
 }
 #prayer{
     display: flex;
@@ -94,10 +100,18 @@ a{
     overflow: scroll;
 }
 .song{
+    transition:all 0.8s ease;
     width: 100%;
-    height: 15%;
+    height: 100px;
+    background-size: cover;
+    background-position: top;
+    overflow: hidden;
+}
+.song:hover{
+    height: calc(25vw - 40px);
 }
 .selected{
+    height: calc(25vw - 40px);
     background: #666666;
     color: #ececec;
 }
@@ -135,4 +149,23 @@ a{
 }
 .playlist_div{
     height: 10%;
+}
+.cover{
+    height: calc(25vw - 40px);
+    width: 100%;
+    display: table;
+    background-image: linear-gradient(rgba(0,0,0,0.8),20%,rgba(0,0,0,0)),URL(../Asset/no_cover.png);
+    background-size: cover;
+}
+.cover_title{
+    font-size: 50px;
+    text-align: center;
+    display: table-cell;
+    vertical-align:middle;
+    font-family: ab-doramin, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.title{
+    height: 0;
 }
