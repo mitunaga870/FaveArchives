@@ -1,7 +1,7 @@
 const quary = require('../../generalfunc/sqlfanc/query');
 
 module.exports = async () => {
-    let q = 'select songid,songname,singer,spotifyid,optional_ID from songlist'
+    let q = 'select songid,songname,singer,spotifyid,optional_ID,duration from songlist'
     q += ';';
     let res = await quary(q);
     for (let t in res){

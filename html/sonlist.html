@@ -19,6 +19,27 @@
     </select>
 </div>
 <div id="listbox" class="scroll"></div>
+<div id="playlisteditor" class="none">
+    <div class="popup_header flex">
+        <div class="headtext">
+            保存先...
+        </div>
+        <div class="closebutton">
+            <button id="close_playlisteditor">X</button>
+        </div>
+    </div>
+    <div class="popup_main" id="playlist_box">
+    </div>
+    <div class="popup_footer">
+        <button id="playlist_add">新規プレイリスト作成</button>
+        <div id="newlistform" class="none">
+            <div id="newlistform_inner" class="outer_form">
+                <input id="newname" type="text" placeholder="名前を入力...">
+                <button id="send_newplaylist">送信</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="../GUIfunc/songlist.js"></script>
 </body>
 </html>
