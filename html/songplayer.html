@@ -22,11 +22,13 @@
         <div id="buttons2">
             <select id="list_selector">
                 <option value="">ランダム</option>
-            </select><br>
+            </select>
+            <div class="flex" style="width:100%">
             <button id="skip">次の曲</button>
             <button id="go_archive">アーカイブに移動</button>
             <button id="borderless_on">シネマ</button>
             <button id="addtoplaylist">＋</button>
+            </div>
         </div>
         <div id="list"></div>
         </div>
@@ -58,9 +60,10 @@
     <div class="popup_footer">
         <button id="playlist_add">新規プレイリスト作成</button>
         <div id="newlistform" class="none">
-            名前<br>
-            <input id="newname" type="text"><br>
-            <button id="send_newplaylist">送信</button>
+            <div id="newlistform_inner" class="outer_form">
+                <input id="newname" type="text" placeholder="名前を入力...">
+                <button id="send_newplaylist">送信</button>
+            </div>
         </div>
     </div>
 </div>

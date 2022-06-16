@@ -1,26 +1,28 @@
-
-#searchbox{
-    height: 10%;
-}
 #listbox{
-    height: 90%;
-}
-.row{
-    margin-bottom: 10px;
-    background: #525252;
     display: flex;
+    overflow: auto;
+    flex-wrap: wrap;
+}
+.Icon{
+    height: 100px;
+    width: 100px;
+}
+.cover{
+    height: calc(25vw - 40px);
+    width: 100%;
+    display: table;
+    background-image: linear-gradient(rgba(0,0,0,0.8),20%,rgba(0,0,0,0)),URL(../Asset/no_cover.png);
+    background-size: cover;
+}
+.cover_title{
+    font-size: 50px;
+    text-align: center;
+    display: table-cell;
+    vertical-align:middle;
+    font-family: ab-doramin, sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 .title{
-    font-size: 20px;
-    width: 70%;
-}
-.singer{
-    font-size: 15px;
-    width: 30%;
-}
-.none{
-    display: none;
-}
-.none2{
-    display: none;
+    height: 0;
 }

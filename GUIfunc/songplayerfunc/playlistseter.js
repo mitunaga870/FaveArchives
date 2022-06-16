@@ -1,3 +1,4 @@
+window.jQuery = window.$ = require('jquery');
 const quary = require('../../generalfunc/sqlfanc/query');
 const del = require('../../generalfunc/delchildren');
 
@@ -15,8 +16,11 @@ module.exports = async () =>{
         //編集ページに追加
         const div = document.createElement('div');
         div.className = "playlist_div"
+        const inner_label = document.createElement('div');
+        inner_label.innerText = playlist.title;
+        inner_label.className = "inner_label"
         const label = document.createElement('label');
-        label.innerText = playlist.title;
+        label.appendChild(inner_label);
         const input = document.createElement('input');
         input.type="checkbox";
         input.className="playlists";

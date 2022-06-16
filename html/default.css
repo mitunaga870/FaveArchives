@@ -124,6 +124,9 @@ button, input, select, textarea {
     width: 100%;
 }
 .popup_main{
+    overflow: auto;
+    border-bottom: solid 2px #414141;
+    border-top: solid 2px #414141;
     height: calc(100% - 80px);
 }
 #logp{
@@ -138,4 +141,11 @@ button, input, select, textarea {
 #logo{
     position: relative;
     margin-right: 20vw;
+}
+.outer_form > input,.outer_form > button{
+    height: 100%;
+    background: 0;
+    border: 0;
+    margin: 0;
+    padding: 0;
 }

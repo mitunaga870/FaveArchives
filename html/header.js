@@ -16,12 +16,12 @@ document.write(
     '</div> '+
     '\t\t\t<a href="songplayer.html">\n' +
     '\t\t<div class="headerlink">\n' +
-    '\t\t\t\t<p>ランダムお歌</p>\n' +
+    '\t\t\t\t<p>お歌を聞く</p>\n' +
     '\t\t</div>' +
     '\t\t</a>\n' +
     '\t\t<a href="sonlist.html">\n' +
     '\t\t<div class="headerlink">\n' +
-    '\t\t\t<p>お歌リスト編集</p>\n' +
+    '\t\t\t<p>お歌<br>ライブラリ</p>\n' +
     '\t\t</div></a>\n' +
     '\t\t<a href="history.html">\n' +
     '\t\t\t<div class="headerlink">\n' +

@@ -6,8 +6,9 @@ module.exports = async () => {
     let res = await quary(q);
     for (let t in res){
         res[t].idtype = "undefined";
-        if(res[t].spotifyid)
+        if(res[t].spotifyid) {
             res[t].idtype = "spotify";
+        }
         if (res[t].optional_ID)
             res[t].idtype = "optional";
     }

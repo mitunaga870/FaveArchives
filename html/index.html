@@ -15,35 +15,23 @@
 				</div>
 			</div>
 			<div id="child2">
-				<p>アラートスイッチ</p><br>
+				<p>アラートスイッチ</p>
 				<select id="aleatthing"></select>
-				<table id="aleatmaintable">
-					<tr>
-						<td>
-							<button id="recbt" class="smallbt">録画<br>ON</button>
-						</td>
-						<td rowspan="2">
-							<button id="alexabt" class="longbt">Alexa<br>ON</button>
-						</td>
-						<td rowspan="2">
-							<button id="subalexabt" class="longbt">Alexa枠通知<br>ON</button>
-						</td>
-						<td rowspan="2">
-							<button id="fitbitbt" class="longbt">fitbit<br>ON</button>
-						</td>
-						<td rowspan="2">
-							<button id="subfitbitbt" class="longbt">fitbit枠通知<br>ON</button>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<button id="areambt" class="smallbt">アラーム<br>ON</button>
-						</td>
-					</tr>
-				</table><br>
+				<div id="aleatmaintable">
+					<div id="smallbts">
+						<button id="recbt" class="aleat_bt smallbt">録画<br>ON</button>
+						<button id="areambt" class="aleat_bt smallbt">アラーム<br>ON</button>
+					</div>
+					<button id="alexabt" class="aleat_bt longbt">Alexa<br>ON</button>
+					<button id="subalexabt" class="aleat_bt longbt">Alexa枠通知<br>ON</button>
+					<button id="fitbitbt" class="aleat_bt longbt">fitbit<br>ON</button>
+					<button id="subfitbitbt" class="aleat_bt longbt">fitbit枠通知<br>ON</button>
+				</div>
 				<div class="flex">
-				<button id="rand">ランダムアーカイブ</button>
-				<a id="goedit" href="EditDatabese.html">データベース編集</a>
+				<button id="rand" class="aleat_bt">ランダムアーカイブ</button>
+					<a id="goedit" href="EditDatabese.html">
+						<div id="inner_goedit" class="aleat_bt">データベース編集</div>
+					</a>
 				</div>
 			</div>
 		</div>

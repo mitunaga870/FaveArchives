@@ -1,26 +1,32 @@
+window.jQuery = window.$ = require('jquery');
 const getlist = require('../GUIfunc/songlistfanc/getlist');
-const listbox = document.getElementById('listbox');
+const listbox = $('#listbox');
 const search = require('../generalfunc/searchid');
 const settype = require('../GUIfunc/songlistfanc/settype');
 
 (async ()=>{
+    let ids = [],targets = [];
     const list = await getlist();
-    for(var detail of list){
-        let a = document.createElement('a');
-        let main = document.createElement('div');
-        main.className = 'row heihgt_auto';
-        let title = document.createElement('div');
-        title.className = 'title heihgt_auto';
-        let singer = document.createElement('div');
-        singer.className = 'singer heihgt_auto';
-        title.innerText = detail.songname;
-        singer.innerText = detail.singer;
-        main.appendChild(title);
-        main.appendChild(singer);
-        a.appendChild(main);
-        a.id = detail.songname+detail.singer;
-        a.href = "../html/songdetail.html?id="+detail.songid;
-        a.classList.add(detail.idtype)
-        listbox.appendChild(a);
-    }
+    Array.prototype.forEach.call(list,(item)=> {
+        const main = $('<div>', {
+            text:item.songname+"/"+item.singer,
+            class: "Icon",
+            id:item.songid
+        });
+        if(item.spotifyid!=null) {
+            ids.push(item.spotifyid);
+            targets.push(item.songid);
+        }else {
+            const cover = $('<div>',{
+                class:"cover",
+            });
+            const cover_title = $('<div>',{
+                class:"cover_title",
+                text:item.songname
+            })
+            cover.append(cover_title);
+            main.append(cover);
+        }
+       listbox.append(main);
+    });
 })();
