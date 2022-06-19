@@ -4,10 +4,9 @@ const listbox = $('#listbox');
 const SetCover =require('../GUIfunc/UI/SetCover');
 const add_playlist = require('../GUIfunc/songlistfanc/add_playlist_buttons');
 const set_playlist = require('../GUIfunc/songlistfanc/set_playlist');
+const set_serchfanc = require('../GUIfunc/songlistfanc/seachfanc');
 const playlist_checker = require('../GUIfunc/playlistfunc/check_playlist');
-const search = require('../generalfunc/searchid');
-const settype = require('../GUIfunc/songlistfanc/settype');
-
+const delay = require("../generalfunc/delay");
 let nowid;
 
 (async ()=>{
@@ -15,6 +14,7 @@ let nowid;
     const list = await getlist();
     add_playlist();
     set_playlist();
+    set_serchfanc();
     Array.prototype.forEach.call(list,async (item)=> {
         const main = $('<div>', {
             class: "Icon",
@@ -89,18 +89,28 @@ let nowid;
         })));
         buttons.append($('<button>',{
             class:"add_playlist",
-            text:"+"
+            text:"プレイリストに追加"
         }).on('click',async ()=>{
             nowid=item.songid;
             $('#playlisteditor').removeClass("none");
         }));
+        buttons.append($('<button>',{
+            class:"other",
+            text:"その他"
+        }).on('click',async ()=>{
+        }));
         detail.append(description);
         main.append(detail)
         //クリックイベント追加
-        main.on('click',()=>{
-            $('.detail:not(.open)').removeClass("open");
+        cover.on('click',async ()=>{
+            $('.detail').not(detail).removeClass("open");
             playlist_checker();
             detail.toggleClass("open");
+            $('#listbox').scrollTop(detail.position().top+$('#listbox').scrollTop()-150);
+            for(let i = 0;i < 9; i++){
+                $('#listbox').scrollTop(detail.position().top+$('#listbox').scrollTop()-150);
+                await delay(0.1);
+            }
         })
         listbox.append(main);
     });

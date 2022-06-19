@@ -7,6 +7,7 @@
     flex-wrap: wrap;
 }
 .Icon{
+    transition-duration: 0.8s;
     height: auto;
     width: auto;
     margin: auto;
@@ -29,6 +30,7 @@
     font-style: normal;
 }
 .title{
+    margin: 0;
     height: 30%
 }
 .singer{
@@ -46,26 +48,33 @@
     width: 25%;
     height: 100%;
 }
+.button > *:hover{
+    background: #4c265b;
+}
 .detail{
     transition:0.5s;
     overflow: hidden;
     width: 0;
-    height: 300px;
+    height: 30vw;
 }
 .go_detail{
     border-radius: 10px 0 0 10px;
-    color: #525252;
+    color: #ececec;
     border-left: solid 2px #414141;
-    background: #ececec;
+    background: #673b6e;
     height: 100%;
     width: 100%;
 }
 .go_randsong{
-    color: #525252;
+    color: #ececec;
     border-left: solid 2px #414141;
-    background: #ececec;
+    background: #673b6e;
     height: 100%;
     width: 100%;
+}
+.other{
+    width: 25%;
+    border-radius: 0 10px 10px 0;
 }
 .detail.open{
     width: 70vw;
@@ -75,6 +84,9 @@
     width: 30vw;
 }
 .description{
+    margin-bottom: 10px;
+    margin-top: 10px;
+    height: calc(100% - 20px);
     width: 60%;
 }
 #playlisteditor{
@@ -175,8 +187,29 @@ button{
 .add_playlist{
     border-left: solid 2px #414141;
     border-right: solid 2px #414141;
-    color: #525252;
+    color: #ececec;
     width: 25%;
     height: 100%;
-    background: #ececec;
+    background: #673b6e;
+}
+#songname{
+    border: 0;
+    margin: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 0;
+    height: calc(100% - 20px);
+    width: 30vw;
+    border-right: solid 1px #282828;
+    border-radius: 10px 0% 0% 10px;
+}
+#idtype{
+    border: 0;
+    margin: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 0;
+    height: calc(100% - 20px);
+    width: 20vw;
+    border-radius: 0 10px 10px 0;
 }

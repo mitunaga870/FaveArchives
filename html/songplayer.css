@@ -35,9 +35,13 @@ iframe {
     background: #414141;
 }
 #borderlass_off{
+    background: 0;
     position: absolute;
     display: block;
-    z-index: 102;
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+    z-index: 1000;
 }
 #borderlass_backgraund:hover + #borderlass_off{
     display: block;
@@ -192,7 +196,7 @@ a{
     height: auto;
 }
 #buttons2 > select:hover,button:hover{
-    background: #a7a7a7;
+    background: #4c265b;
 }
 #skip{
     border-radius: 0 0 0 5px;

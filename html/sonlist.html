@@ -9,9 +9,10 @@
 </head>
 <script src="header.js"></script>
 <body bgcolor="#282828" text="#ececec">
+<div id="main_window">
 <div id="searchbox">
-    <input type="text" id="songname" onchange="search('songname','listbox')">
-    <select id="idtype" onchange="settype(document.getElementById('idtype'))">
+    <input type="text" id="songname">
+    <select id="idtype">
         <option value="all">すべて</option>
         <option value="spotify">Spotify連帯済み</option>
         <option value="optional">任意情報指定済み</option>
@@ -41,5 +42,6 @@
     </div>
 </div>
 <script src="../GUIfunc/songlist.js"></script>
+</div>
 </body>
 </html>

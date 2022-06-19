@@ -60,8 +60,7 @@ a {
     font-size: calc(100vw / 18);
 }
 .aleat_bt{
-    color: #414141;
-    background: #ececec;
+    background: #673b6e;
     transition:all 0.4s ease;
     border: 0;
     margin: 0;
@@ -73,8 +72,7 @@ a {
     cursor        : pointer;     /* カーソル   */
 }
 .aleat_bt:hover{
-    background: #525252;
-    color: #a7a7a7;
+    background: #4c265b;
 }
 #smallbts{
     width: 20%;

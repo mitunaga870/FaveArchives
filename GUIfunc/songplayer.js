@@ -62,13 +62,13 @@ let i = 0;
                 i++;
                 document.getElementById(btname).classList.remove('selected');
                 console.log("アーカイブなし");
+                $('#list').scrollTop(100*i);
                 continue;
             }
             if(stdata.endtime!=null){
                 durarion = (await dts(stdata.endtime)-await dts(stdata.timestump))*1000;
-                console.log(durarion)
             }else
-                durarion = item.duration;
+                durarion = item.duration + 1500;
             if(stdata.private==0) {
                 let iframe = document.createElement('div');
                 iframe.id = 'video'
@@ -103,6 +103,7 @@ let i = 0;
                 }else {
                     i++;
                     document.getElementById(btname).classList.remove('selected');
+                    $('#list').scrollTop(100*i);
                     continue;
                 }
 

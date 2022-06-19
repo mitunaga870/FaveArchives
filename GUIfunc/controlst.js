@@ -1,6 +1,6 @@
+const add_timetableevent = require('../GUIfunc/edittimetable/events');
 const getstdata = require('../generalfunc/sqlfanc/getalldata');
 const abb = require('../generalfunc/abbreviation');
-const addtag = require('../GUIfunc/edittagfunc/addtag');
 const settime = require('../GUIfunc/setprayertime');
 const getsonglist = require('../generalfunc/sqlfanc/getsonglist');
 const getsongs = require('../GUIfunc/editsongsfunc/getsongs');
@@ -13,14 +13,14 @@ const chatmaneger = require('../GUIfunc/chatfunc/chatmaneger');
 const setborderless_event = require('../GUIfunc/borderlessfunc/borderless_event');
 const add_songsevent = require('../GUIfunc/editsongsfunc/events');
 const ui = require('../GUIfunc/UI/stdetail');
+const add_tag_events = require('../GUIfunc/edittagfunc/events');
+const tag_refresh = require('../GUIfunc/edittagfunc/refresh');
 const store = require('../generalfunc/store');
 const url = new URL(window.location.href);
 const params = url.searchParams;
 const id = params.get('v');
 const titletag = document.getElementById('title');
 const detailbox = document.getElementById('description');
-const tagbox = document.getElementById('taglist');
-const edittagbox = document.getElementById('edittag');
 const video = document.getElementById('videodiv');
 const newtagtxbox = document.getElementById('newtag');
 const songselect = document.getElementById('songlist');
@@ -32,11 +32,6 @@ const userselect = document.getElementById('userselect');
 const ctypeselect = document.getElementById('ctypeselect');
 const typeselect = document.getElementById('typeselect');
 const priselect = document.getElementById('priselect');
-const edit = document.querySelector("#edit");
-const editOverlay = document.querySelector("#overlay");
-const closeButton = document.querySelector("#close-edit");
-const openButton = document.querySelector("#open-edit");
-const settagsButton = document.querySelector("#sendnewtag");
 const senddetail = document.querySelector('#senddetail');
 var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
@@ -51,27 +46,20 @@ let chatdata;
 (async ()=>{
     ui();
     add_songsevent();
+    add_tag_events();
+    add_timetableevent();
     addhistory(id);
     setborderless_event();
     const reses = await Promise.all([wait(),getstdata(id)]);
     console.log(store.get('test'));
     //初期データ取得処理
     const stdata = reses[1];
+    tag_refresh(stdata.tags);
     titletag.textContent = stdata.title;
     detailbox.textContent = stdata.description;
     const desc = document.createElement('summary');
     desc.textContent = await abb(stdata.description);
     detailbox.appendChild(desc);
-    for(var i in stdata.tags){
-        var tag = document.createElement('div');
-        tag.textContent = stdata.tags[i].tag;
-        tag.className = "tag";
-        tagbox.appendChild(tag);
-        var tag2 = document.createElement('div');
-        tag2.textContent = stdata.tags[i].tag;
-        tag2.className = "edittag";
-        edittagbox.appendChild(tag2);
-    }
     //詳細情報セット
     await createuserselection(userselect);
     titlebox.value = stdata.title;
@@ -140,37 +128,6 @@ let chatdata;
     }else if(stdata.private==0){
         chatmaneger(stdata.private,player,id);
     }
-    //タグ編集ポップあうと閉じるボタン
-    closeButton.addEventListener("click", function () {
-        edit.classList.toggle("closed");
-        editOverlay.classList.toggle("closed");
-    });
-
-    //タグ編集ポップあうと開くボタン
-    openButton.addEventListener("click", function () {
-        edit.classList.toggle("closed");
-        editOverlay.classList.toggle("closed");
-    });
-    
-    //タグ追加処理
-    settagsButton.addEventListener("click", async function () {
-        await delchild(tagbox);
-        await delchild(edittagbox);
-        var newtag =  await addtag(id,newtagtxbox.value);
-        for(var i in newtag){
-            var tag = document.createElement('div');
-            tag.textContent = newtag[i];
-            tag.className = "tag";
-            tagbox.appendChild(tag);
-            var tag2 = document.createElement('div');
-            tag2.textContent = newtag[i];
-            tag2.className = "tag";
-            edittagbox.appendChild(tag2);
-        }
-        newtagtxbox.value = "";
-        edit.classList.toggle("closed");
-        editOverlay.classList.toggle("closed");
-    });
     senddetail.addEventListener('click',async function (){
         await setdetail(id,titlebox.value,detailbox2.value,ctypeselect.value,priselect.value,typeselect.value,userselect.value);
         document.getElementById('edetailbox').classList.toggle('closed');

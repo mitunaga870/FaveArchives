@@ -18,6 +18,7 @@
     width: 50%;
 }
 #playlist{
+    position: relative;
     height: 50%;
 }
 #track{

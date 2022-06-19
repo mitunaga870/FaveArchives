@@ -9,25 +9,31 @@
     </head>
     <script src="header.js"></script>
     <body bgcolor="#282828" text="#ececec">
+    <div id="main_window">
         <h1 id="title"></h1>
         <details id="description">
         </details>
         <div class="overlay closed" id="overlay"></div>
         <div class="edit closed" id="edit"><!--タグ編集用ポップアウト-->
         <div class="edit-guts">
-            <table>
+            <div class="popup_header flex">
+                <div class="header_txt">タグを編集...</div>
+                <button class="close-edit" id="close-edit">X</button>
+            </div>
+            <table class="popup_main">
                 <tr>
-                    <td>
-                    <button class="close-edit" id="close-edit">編集完了</button>
-                    </td>
                     <td id = "edittag"></td>
                 </tr>
                 <tr>
                     <td colspan="2" align="center">
-                        <input id="newtag" type="text"><button id="sendnewtag">送信</button>
+                        <input id="newtag" type="text" placeholder="新規タグ名を入力"><button id="sendnewtag">送信</button>
                     </td>
                 </tr>
             </table>
+            <div class="popup_footer">
+                <button id="tag_send">送信</button>
+                <button id="tag_cancel">取り消し</button>
+            </div>
         </div>
     </div>
     <table>
@@ -40,7 +46,7 @@
         </tr>
     </table>
     <div id="edetailbox" class="edetailbox closed">
-        <div align="left" class="heihgt_auto"><button onclick="document.getElementById('edetailbox').classList.toggle('closed');">閉じる</button></div>
+        <div align="left" class="heihgt_auto"><button class="close-pupup" onclick="document.getElementById('edetailbox').classList.toggle('closed');">閉じる</button></div>
         <div class="scroll" id="detailtabel">
         <table>
             <thead>
@@ -114,13 +120,19 @@
             <div id="buttons2">
                 <button onclick="document.getElementById('edetailbox').classList.toggle('closed');">詳細情報編集</button>
                 <button id="borderless_on">シネマモート</button>
+                <div id="coment_head">
+                    チャット
+                </div>
             </div>
-            <div id="coment" class="scroll"></div>
+            <div id="coment"></div>
             </div>
         </div>
     </div>
     <div class="editsongsbox closed" id="editsongsbox">
-        <div align="left" class="popup_header"><button onclick="document.getElementById('editsongsbox').classList.toggle('closed');">閉じる</button></div>
+        <div align="left" class="popup_header" id="song_head">
+            <button class="close-pupup" onclick="document.getElementById('editsongsbox').classList.toggle('closed');">X</button>
+            <div class="header_txt">曲リスト編集...</div>
+        </div>
         <div id="popouttable">
             <table id="addsong">
                 <thead>
@@ -142,28 +154,24 @@
             </table>
         </div>
         <div class="inputdiv">
-        <table>
-            <tr>
-                <td>
+            <div id="songnform">
+                <div id="addedsong">
                     <input onchange="TEST_OBJECT.onSearchFieldChange(this.value,'songlist');"  type="text" id="searchsongs"><br>
                     <select id="songlist">
                         <option value="0">新規曲追加</option>
                     </select>
-                </td>
-                <td>
+                </div>
+                <div id="newsong">
                     <input type="text" id="songname">
-                </td>
-                <td>
-                    <input type="time" id="timestump_start" step="1">
-                </td>
-                <td>
-                    <input type="time" id="timestump_end" step="1">
-                </td>
-                <td>
-                    <button id="setsong">セット</button>
-                </td>
-            </tr>
-        </table>
+                </div>
+            </div>
+            <div id="timeandsend" class="flex">
+                <div id="time">
+                    <label for="timestump_start">開始時間<input type="time" id="timestump_start" step="1"></label>
+                    <label for="timestump_end">終了時間<input type="time" id="timestump_end" step="1"></label>
+                </div>
+                <button id="setsong">セット</button>
+            </div>
         </div>
         <script language="javascript" type="text/javascript">
             var TEST_OBJECT = {
@@ -192,21 +200,32 @@
         </script>
         <button id="sendsong">送信</button>
     </div>
+    <div class="closed" id="edittimetable">
+        <div class="popup_header flex">
+            <div class="pupup_text">目次を編集...</div>
+            <button class="close-pupup">X</button>
+        </div>
+    </div>
     <div id="manu">
-        <div class="list">
-            目次<br>
-            <button id = "editcont">を編集</button><button id = "addnow">現在地点に追加</button>
-            <div id = "contentlist" class="scroll"></div>
+        <div class="list" style="border-right: solid 2px #525252;">
+            <div class="list_header">
+                目次<br>
+                <button id = "edittimestump" class="edit_times">編集</button>
+            </div>
+            <div class = "mainlist">
+            </div>
         </div>
         <div class="list">
-            曲リスト<br>
-            <button id = "editsongs">編集</button>
-            <div id = "mainlist" class="scroll">
+            <div class="list_header">
+                曲リスト<br>
+                <button id = "editsongs" class="edit_times">編集</button>
+            </div>
+            <div class = "mainlist">
                 <table id="songlist0"></table>
             </div>
         </div>
-        <div id ="oherarchive" class="list"></div>
     </div>
     <script src="../GUIfunc/controlst.js"></script>
+    </div>
     </body>
 </html>

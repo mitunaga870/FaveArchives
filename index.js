@@ -13,6 +13,7 @@ function createWindow() {
             nodeIntegration: true,
             contextIsolation: false
         },
+        frame:false,
         width: 800, height: 600,
         autoHideMenuBar: true,
         icon:__dirname +'/Asset/icon.png'
@@ -21,11 +22,6 @@ function createWindow() {
     // メインウィンドウに表示するURLを指定します
     // （今回はmain.jsと同じディレクトリのindex.html）
     mainWindow.loadFile('html/index.html');
-
-
-
-    // デベロッパーツールの起動
-    //mainWindow.webContents.openDevTools();
 
     // メインウィンドウが閉じられたときの処理
     mainWindow.on('closed', () => {
@@ -64,3 +60,20 @@ ipcMain.handle('notice',async (event,args)=>{
         message: args[0]
     })).response;
 })
+
+ipcMain.handle('close',()=>{
+    BrowserWindow.fromId(mainWindow.id).close();
+});
+
+ipcMain.handle('maximize',()=>{
+    console.log("max")
+    const win = BrowserWindow.fromId(mainWindow.id);
+    if(win.isMaximized())
+        win.unmaximize();
+    else
+        win.maximize();
+});
+ipcMain.handle('minimize',()=>{
+    console.log("min")
+    BrowserWindow.fromId(mainWindow.id).minimize();
+});
