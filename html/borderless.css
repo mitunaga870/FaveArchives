@@ -1,0 +1,9 @@
+#borderlass_off {
+    background: 0;
+    position: absolute;
+    display: block;
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+    z-index: 1000;
+}

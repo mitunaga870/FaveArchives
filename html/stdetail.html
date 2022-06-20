@@ -5,6 +5,8 @@
         <title>アーカイブの詳細</title>
         <link rel="stylesheet" href="stdetail.css">
         <link rel="stylesheet" href="default.css">
+        <link rel="stylesheet" href="suggestions.css">
+        <link rel="stylesheet" href="borderless.css">
         <script src="../GUIfunc/UI/default.js"></script>
     </head>
     <script src="header.js"></script>
@@ -202,17 +204,31 @@
     </div>
     <div class="closed" id="edittimetable">
         <div class="popup_header flex">
-            <div class="pupup_text">目次を編集...</div>
-            <button class="close-pupup">X</button>
+            <div class="header_txt">目次を編集...</div>
+            <button id="close-edit_timetable" class="close-pupup">X</button>
+        </div>
+        <div id="timetable-e" class="popup_main">
+        </div>
+        <div class="popup_footer">
+            <div id="timetableform" class="flex">
+                <div id="timetable_inputs">
+                    <input type="text" placeholder="内容を入力" id="contentbox">
+                    <input type="time" id="timestump_content" step="1">
+                </div>
+                <button id="add_timetable">追加</button>
+            </div>
+            <div id="send_div">
+                <button id="send_timetable">送信</button>
+            </div>
         </div>
     </div>
     <div id="manu">
         <div class="list" style="border-right: solid 2px #525252;">
             <div class="list_header">
                 目次<br>
-                <button id = "edittimestump" class="edit_times">編集</button>
+                <button id = "open-edit_timetable" class="edit_times">編集</button>
             </div>
-            <div class = "mainlist">
+            <div class = "mainlist" id="timetable">
             </div>
         </div>
         <div class="list">
@@ -225,7 +241,8 @@
             </div>
         </div>
     </div>
-    <script src="../GUIfunc/controlst.js"></script>
+        <script src="../GUIfunc/controlst.js"></script>
+        <script src="../GUIfunc/suggestions.js"></script>
     </div>
     </body>
 </html>

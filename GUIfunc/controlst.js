@@ -39,6 +39,7 @@ var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 let rowid = 0;
 let timechange = false;
+let player;
 const fs = require("fs");
 let log;
 let chatdata;
@@ -77,7 +78,6 @@ let chatdata;
         songselect.appendChild(option);
     });
     //プレイヤーセット
-    let player;
     if(stdata.private==0) {
         let iframe = document.createElement('div');
         iframe.id = 'video'
