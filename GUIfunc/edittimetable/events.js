@@ -1,6 +1,7 @@
 window.jQuery = window.$ = require('jquery');
 const query = require('../../generalfunc/sqlfanc/query');
 const refresh = require('../../GUIfunc/edittimetable/refresh');
+const {ipcRenderer} = require("electron");
 
 module.exports = () => {
     refresh();
@@ -40,6 +41,7 @@ module.exports = () => {
     });
     //一時てーぶる上のデータを送信
     $('#send_timetable').on('click',async ()=>{
+        ipcRenderer.invoke('notice',["書き込みを開始します。"]);
         let senddeta = [],deldeta = [];
        $('.timeteble_row.foredit.new').each((i,ele)=>{
            let temp =[id];
@@ -61,5 +63,6 @@ module.exports = () => {
             await query('delete from timetable where videoid = ? and (content,timestump) in ?;',[id,[deldeta]]);
         await refresh();
         popout.addClass("closed")
+        ipcRenderer.invoke('notice',["書き込みを完了しました。"]);
     });
 }

@@ -5,7 +5,6 @@ const headless = false;
 const store = require('../../generalfunc/store');
 const cookies = JSON.parse(store.get('cookie'));
 const args = [
-    '--incognito',
 ];
 
 

@@ -56,7 +56,7 @@ module.exports = async () =>{
     });
     //テーブル上の曲をDBに追加
     sendsonglist.addEventListener('click',async function (){
-        console.log("送信します。");
+        ipcRenderer.invoke('notice',["書き込みを開始します。"]);
         let senddata = [];
         for(var row of addsonlist.rows){
             let temp = [];
@@ -72,5 +72,6 @@ module.exports = async () =>{
         let songs = await getsongs(id);
         await setsongs(songs);
         editsongsbox.classList.toggle('closed');
+        ipcRenderer.invoke('notice',["書き込みを完了しました。"]);
     });
 }

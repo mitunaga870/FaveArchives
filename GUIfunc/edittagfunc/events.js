@@ -1,4 +1,5 @@
 window.jQuery = window.$ = require('jquery');
+const {ipcRenderer} = require('electron');
 
 const query = require('../../generalfunc/sqlfanc/query');
 const refresh = require('../../GUIfunc/edittagfunc/refresh');
@@ -27,6 +28,7 @@ module.exports = async () => {
     });
     //一時テーブルをDBに追加
     $('#tag_send').on('click',async ()=>{
+        ipcRenderer.invoke('notice',["書き込みを開始します。"]);
         let newitem = false,newtags = [],delitem = false,deltags = [];
         $('.etag.new').each((i,ele)=>{
             const temp = [id,$(ele).text().slice(0,-1)];
@@ -43,6 +45,7 @@ module.exports = async () => {
             await query('insert into tags (videoid,tag) values ?;',[newtags]);
         await refresh();
         edit.toggleClass("closed");
+        ipcRenderer.invoke('notice',["書き込みを完了しました。"]);
     })
     //タグ編集ポップあうと閉じるボタン
     const closeButton = $('#close-edit');

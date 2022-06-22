@@ -8,8 +8,7 @@ const createuserselection = require('../GUIfunc/setuserselect');
 const setdetail = require('../generalfunc/sqlfanc/setvideodetail');
 const addhistory = require('../generalfunc/sqlfanc/addhistory');
 const delay = require('../generalfunc/delay');
-const chat = require('../GUIfunc/chatfunc/chat');
-const chatmaneger = require('../GUIfunc/chatfunc/chatmaneger');
+const chatmaneger = require('../GUIfunc/chatfanc_var2/chatmaneger');
 const setborderless_event = require('../GUIfunc/borderlessfunc/borderless_event');
 const add_songsevent = require('../GUIfunc/editsongsfunc/events');
 const ui = require('../GUIfunc/UI/stdetail');
@@ -52,7 +51,7 @@ let chatdata;
     addhistory(id);
     setborderless_event();
     const reses = await Promise.all([wait(),getstdata(id)]);
-    console.log(store.get('test'));
+    chatmaneger(id,player);
     //初期データ取得処理
     const stdata = reses[1];
     tag_refresh(stdata.tags);
@@ -107,9 +106,6 @@ let chatdata;
             player.id = "video";
             player.addEventListener('seeked',async function () {
                 timechange = true;
-                await wait();
-                console.log(chatdata);
-                chat(chatdata[0],chatdata[1],chatdata[2]);
             });
             player.currentTime = await dts(stdata.time);
             video.appendChild(player);
@@ -120,14 +116,6 @@ let chatdata;
     let songs = await getsongs(id);
     setsongs(songs);
     //コメント読み込み
-    const chatpath = store.get('chatpath')+'\\'+id+'.json';
-    if(fs.existsSync(chatpath)){
-        console.log('チャットあり')
-        log = JSON.parse(fs.readFileSync(chatpath));
-        chat(stdata.private,log.log,player);
-    }else if(stdata.private==0){
-        chatmaneger(stdata.private,player,id);
-    }
     senddetail.addEventListener('click',async function (){
         await setdetail(id,titlebox.value,detailbox2.value,ctypeselect.value,priselect.value,typeselect.value,userselect.value);
         document.getElementById('edetailbox').classList.toggle('closed');
