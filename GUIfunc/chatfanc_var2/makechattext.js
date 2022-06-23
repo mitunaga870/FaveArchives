@@ -1,5 +1,4 @@
 module.exports = async (src) =>{
-    console.log(src);
     const chat = document.createElement('div');
     chat.className = 'chat';
     for(let run of src){

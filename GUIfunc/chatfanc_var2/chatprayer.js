@@ -1,6 +1,6 @@
 const delay = require('../../generalfunc/delay');
 const makechat = require('../../GUIfunc/chatfanc_var2/makechattext');
-let ct;
+let ct = 0;
 
 module.exports = async (log,player) => {
     getct(player);
@@ -12,9 +12,9 @@ module.exports = async (log,player) => {
             break;
         }
     }
+    console.log(start);
     for(let i = parseInt(start);i<log.length;i = i + 101){
         let rows = log.slice(i,i+100);
-        console.log(rows.length)
         await Promise.all(rows.map(async row => {
             let item = document.createElement('dev');
             let inner = document.createElement('div');
@@ -27,7 +27,7 @@ module.exports = async (log,player) => {
             inner.className= 'flex';
             item.appendChild(inner);
             item.className = 'item';
-            while (true) {
+            while (true) {;
                 if (row.duration <= ct) {
                     let comment = document.getElementById('coment');
                     comment.appendChild(item);
@@ -36,13 +36,11 @@ module.exports = async (log,player) => {
                 }
                 if (timechange) {
                     delchild(document.getElementById('coment'));
-                    waitkey = true;
                     return;
                 }
                 await delay(0.5);
             }
         }));
-        console.log('一周')
         await delay(1);
     }
 }
@@ -56,9 +54,9 @@ async function delchild(main){
 async function getct(player){
     while (true) {
         try {
-            ct = player.currentTime
+            ct = player.getCurrentTime();
         }catch (e) {
-            ct = player.getCurrentTime()
+            ct = player.currentTime
         }
         await delay(1);
     }

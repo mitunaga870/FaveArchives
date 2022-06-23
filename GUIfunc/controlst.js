@@ -51,7 +51,6 @@ let chatdata;
     addhistory(id);
     setborderless_event();
     const reses = await Promise.all([wait(),getstdata(id)]);
-    chatmaneger(id,player);
     //初期データ取得処理
     const stdata = reses[1];
     tag_refresh(stdata.tags);
@@ -111,6 +110,7 @@ let chatdata;
             video.appendChild(player);
         }
     }
+    chatmaneger(id,player);
     settime(id);
     //既存曲リストを記載
     let songs = await getsongs(id);

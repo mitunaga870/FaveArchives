@@ -2,8 +2,10 @@ const puppeteer = require('puppeteer');
 const delay = require("../../generalfunc/delay");
 const parselog = require('../../GUIfunc/chatfanc_var2/parselog');
 const play = require('../../GUIfunc/chatfanc_var2/chatprayer');
+const store = require("../../generalfunc/store");
+const fs = require("fs");
 
-module.exports = async (page,url,player) => {
+module.exports = async (page,url,player,number,tmppath) => {
     //ブラウザを開く
     await page.goto(url);
     let str = undefined;
@@ -26,5 +28,10 @@ module.exports = async (page,url,player) => {
     }
     const log = await parselog(chat_obj);
     play(log,player);
+    if(store.get('savechat'))
+        fs.writeFileSync(tmppath+'\\'+number+'.json', JSON.stringify({
+            log,
+            nexturl:url
+        }, null, '    '));
     return url;
 }
