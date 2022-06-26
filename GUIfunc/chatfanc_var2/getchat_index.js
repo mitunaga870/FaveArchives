@@ -47,6 +47,8 @@ module.exports = async (id,player) => {
         logs.push(log.log);
     });
     logs.sort((first,second)=>first.duration - second.duration);
-    if(store.get('savechat'))
-        fs.writeFileSync(store.get('savechat')+'\\'+id+'.json', JSON.stringify({log}, null, '    '));
+    if(store.get('savechat')) {
+        fs.writeFileSync(store.get('savechat') + '\\' + id + '.json', JSON.stringify({log}, null, '    '));
+        fs.rmdir(tmppath, { recursive: true });
+    }
 }

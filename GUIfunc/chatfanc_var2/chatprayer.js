@@ -5,14 +5,15 @@ let ct = 0;
 module.exports = async (log,player) => {
     getct(player);
     timechange = false;
-    let start = 0;
+    let start = -1;
     for (let i in log){
         if(log[i].duration >= (ct-60)){
             start = i;
             break;
         }
     }
-    console.log(start);
+    if(start==-1)
+        return;
     for(let i = parseInt(start);i<log.length;i = i + 101){
         let rows = log.slice(i,i+100);
         await Promise.all(rows.map(async row => {
