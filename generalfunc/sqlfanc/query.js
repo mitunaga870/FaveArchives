@@ -1,15 +1,10 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const util = require('util')
-
+const quoth = require('./quoth.json');
 
 module.exports = async (query,arr) => {
     try {
-        const connection = mysql.createConnection({
-            host: '34.122.252.236',
-            user: 'root',
-            password: '96804',
-            database: 'videolist'
-        });
+        const connection = mysql.createConnection(quoth);
         var respond;
         console.log(query);
         connection.query = util.promisify(connection.query);

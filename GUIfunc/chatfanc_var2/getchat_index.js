@@ -11,7 +11,8 @@ const args = [];
 module.exports = async (id,player) => {
     const tmppath = store.get('chatpath')+"\\"+id+"_tmp";
     //ブラウザ立ち上げ
-    const browser = await puppeteer.launch({headless, args});
+    const executablepath = puppeteer.executablePath().replace('app.asar','app.asar.unpacked');
+    const browser = await puppeteer.launch({headless, executablePath:executablepath, args});
     const page = (await browser.pages())[0];
     const session = await page.target().createCDPSession();
     const {windowId} = await session.send('Browser.getWindowForTarget');
