@@ -1,3 +1,5 @@
 /node_modules/
 dist/
+/generalfunc/sqlfanc/lan_quoth.json
+/generalfunc/sqlfanc/wan_quoth.json
 temp.js

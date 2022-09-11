@@ -1,140 +1,53 @@
 const quary = require('../generalfunc/sqlfanc/query');
-const gas = require('../generalfunc/gas');
-const randbutton = document.querySelector('#rand');
-const recbutton = document.querySelector('#recbt');
-const alexabutton = document.querySelector('#alexabt');
-const fitbitbutton = document.querySelector('#fitbitbt');
-const subalexabutton = document.querySelector('#subalexabt');
-const subfitbitbutton = document.querySelector('#subfitbitbt');
-const arambutton = document.querySelector('#areambt');
-const recbt = document.getElementById('recbt');
-const areambt = document.getElementById('areambt');
-const alexabt = document.getElementById('alexabt');
-const subalexabt = document.getElementById('subalexabt');
-const fitbit = document.getElementById('fitbitbt');
-const subfitbit = document.getElementById('subfitbitbt');
+const event = require('../GUIfunc/indexfunc/event');
 const select = document.getElementById('aleatthing');
-const selection = document.querySelector('#aleatthing');
 window.jQuery = window.$ = require('jquery');
-const store = require('../generalfunc/store');
-const {text} = require("express");
 
 (async () => {
     let temp;
-    await gas('getindexdata',[]).then(res=>{
-        console.log(res);
-        temp=res.data.response;
-        temp=temp.result;
-        recbt.innerText = "録画"+temp.recsw;
-        areambt.innerText = "アラーム"+temp.areamsw;
-        alexabt.innerText="アレクサ"+temp.alexasw;
-        subalexabt.innerText="アレクサ枠通知"+temp.subalexasw;
-        fitbit.innerText="fitbit"+temp.fitbitsw;
-        subfitbit.innerText="fitbit枠通知"+temp.subfitbitsw;
-    }).catch(error=>{console.log(error)});
+    //デフォルトのスイッチ状況を取得
+    const default_SW = await quary('Desc functionSW;');
+    for (let value of default_SW) {
+        if(parseInt(value.Default))
+            $('#' + value.Field).text("ON");
+        else
+            $('#' + value.Field).text("OFF");
+    }
     //アラートスイッチの対象を追加、及び配信中・待機中のとき速報追加及び視聴ボタン
     var def = document.createElement('option');
     def.innerText="すべて";
     def.value = "-1";
     select.appendChild(def);
-    await gas ('getStreamStatus',[]).then(res=>{
-        console.log(res);
-        temp=res.data.response.result;
-        console.log(temp)
-        temp=JSON.parse(temp);
-        for (var i in temp.streamdetail){
-            var title = temp.streamdetail[i].title;
-            var op = document.createElement('option');
-            op.innerText = "枠"+i+"："+title;
-            op.value = i;
-            select.appendChild(op);
-            const a = $('<a>',{
-                href:"../html/streamwatch.html?id=" + temp.streamdetail[i].id,
-            });
-            const div = $('<div>',{
-                css:{
-                    "background-image": "linear-gradient(rgba(0,0,0,0.8),20%,rgba(0,0,0,0)), URL(https://img.youtube.com/vi/"+temp.streamdetail[i].id+"/0.jpg)"
-                },
-                text:+temp.streamdetail[i].content+"\n"+temp.streamdetail[i].title+"\n"+temp.streamdetail[i].scheduletime,
-                "class":"aleat"
-            });
-            a.append(div);
-            $('#staleatbox').append(a);
-        }
-    }).catch(error=>{console.log(error)});
-    if(temp.streamdetail.length==0) {
+    const StreamStatus = await quary('select f.*,v.title,v.livestate,p.scheduletime from functionSW f join videodetail v on f.videoid = v.videoid join publishedtime p on f.videoid = p.videoid;');
+    for(let i in StreamStatus){
+        //リストに追加
+        const option = $('<option>');
+        option.text("枠："+i+StreamStatus[i].title);
+        option.val(i);
+        $('#aleatthing').append(option);
+        //推し速報に追加
+        const link = $('<a>');
+        link.attr("href","../html/streamwatch.html?id=" + StreamStatus[i].videoid);
+        //live/upcomingを変更
+        let livestate = "待機枠作成済み";
+        if(StreamStatus[i].livestate.match("live"))
+            livestate = "配信中";
+        const div = $('<div>',{
+            css:{
+                "background-image": "linear-gradient(rgba(0,0,0,0.8),20%,rgba(0,0,0,0)), URL(https://img.youtube.com/vi/"+StreamStatus[i].videoid+"/0.jpg)"
+            },
+            text:livestate+"\n"+StreamStatus[i].title+"\n"+StreamStatus[i].scheduletime,
+            "class":"aleat"
+        });
+        link.append(div);
+        $('#staleatbox').append(link);
+    }
+    if(!StreamStatus.length) {
         const div = $('<div>', {
             text: "NO STREAM",
             id: "no_stream"
         });
         $('#staleatbox').append(div);
     }
-    //対象変更時
-    selection.addEventListener('change',async function (){
-        console.log(select.value)
-        await gas ('getstaleat',[select.value]).then(res=>{
-            console.log(res);
-            temp=res.data.response;
-            temp=temp.result;
-            recbt.innerText = "録画"+temp.recsw;
-            areambt.innerText = "アラーム"+temp.areamsw;
-            alexabt.innerText="アレクサ"+temp.alexasw;
-            subalexabt.innerText="アレクサ枠通知"+temp.subalexasw;
-            fitbit.innerText="fitbit"+temp.fitbitsw;
-            subfitbit.innerText="fitbit枠通知"+temp.subfitbitsw;
-        }).catch(error=>{console.log(error)});
-    })
-    //録画オン・オフ
-    recbutton.addEventListener('click',async function () {
-        await gas('recsw',[select.value]).then(res=>{
-            temp = res.data.response.result;
-        }).catch(error=>{console.log(error)});
-        recbt.innerText = "録画"+temp;
-    });
-    //アラームオン・オフ
-    arambutton.addEventListener('click',async function () {
-        await gas('areamsw',[select.value]).then(res=>{
-            temp = res.data.response.result;
-        }).catch(error=>{console.log(error)});
-        areambt.innerText = "アラーム"+temp;
-    });
-    //alexaオン・オフ
-    alexabutton.addEventListener('click',async function () {
-        await gas('alexasw',[select.value]).then(res=>{
-            temp = res.data.response.result;
-        }).catch(error=>{console.log(error)});
-        alexabt.innerText = "Alexa"+temp;
-    });
-    //fitbitオン・オフ
-    fitbitbutton.addEventListener('click',async function () {
-        await gas('fitbitsw',[select.value]).then(res=>{
-            temp = res.data.response.result;
-        }).catch(error=>{console.log(error)});
-        fitbit.innerText = "Fitbit"+temp;
-    });
-    //alexa枠通知オン・オフ
-    subalexabutton.addEventListener('click',async function () {
-        await gas('subalexasw',[select.value]).then(res=>{
-            temp = res.data.response.result;
-        }).catch(error=>{console.log(error)});
-        subalexabt.innerText = "Alexa枠通知"+temp;
-    });
-    //fitbit枠通知オン・オフ
-    subfitbitbutton.addEventListener('click',async function () {
-        const button = document.getElementById('subfitbitbt');
-        await gas('subfitbitsw',[select.value]).then(res=>{
-            temp = res.data.response.result;
-        }).catch(error=>{console.log(error)});
-        subfitbit.innerText = "Fitbit枠通知"+temp;
-    });
-    //ランダムアーカイブボタン
-    randbutton.addEventListener('click',async function () {
-        let q = 'select videoid from videodetail';
-        if(store.get('privatefilter')){
-            q += ' where private = \'0\''
-        }
-        q += ' order by RAND() LIMIT 1;';
-        const temp = await quary(q);
-        document.location="../html/stdetail.html?v=" + temp[0].videoid;
-    });
+    event(default_SW,StreamStatus);
 })();

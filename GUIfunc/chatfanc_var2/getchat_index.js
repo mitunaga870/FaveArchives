@@ -31,7 +31,13 @@ module.exports = async (id,player) => {
         });
     }else {//取得状況が０のとき
         fs.mkdirSync(tmppath);
-        url = await getfirsturl(page, id);
+        try {
+            url = await getfirsturl(page, id);
+        }catch (e){
+            $('#coment').text("チャットのリプレイは利用できません。");
+            page.close();
+            return;
+        }
         count = 0;
     }
     while (url) {
@@ -49,7 +55,7 @@ module.exports = async (id,player) => {
     });
     logs.sort((first,second)=>first.duration - second.duration);
     if(store.get('savechat')) {
-        fs.writeFileSync(store.get('savechat') + '\\' + id + '.json', JSON.stringify({log}, null, '    '));
-        fs.rmdir(tmppath, { recursive: true });
+        fs.writeFileSync(store.get('chatpath') + '\\' + id + '.json', JSON.stringify({log}, null, '    '));
+        fs.rmdirSync(tmppath);
     }
 }

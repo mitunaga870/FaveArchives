@@ -1,6 +1,6 @@
 {
   "name": "favearchive",
-  "version": "4.0.0",
+  "version": "4.1.5",
   "main": "index.js",
   "scripts": {
     "start": "electron .",
@@ -39,6 +39,7 @@
     "asarUnpack": "node_modules/puppeteer/.local-chromium/win64-1002410/chrome-win/chrome.exe"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "dotenv": "^16.0.0",
     "electron-prompt": "^1.7.0",
     "electron-store": "^8.0.1",

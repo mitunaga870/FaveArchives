@@ -4,7 +4,12 @@ const make_randomsong = require("../GUIfunc/suggenstions_fanc/make_randomsongs")
 
 (async () => {
     const fs = require('fs');
-    const html = fs.readFileSync("./resources/app.asar//html/suggestions.html");
+    let html;
+    try {
+        html = fs.readFileSync("./resources/app.asar//html/suggestions.html");
+    }catch (e) {
+        html = fs.readFileSync("./html/suggestions.html");
+    }
     document.write(html);
     make_categoryplaylist();
     make_randomarchive();
