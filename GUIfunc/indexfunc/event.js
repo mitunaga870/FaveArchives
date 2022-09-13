@@ -8,8 +8,12 @@ module.exports = (default_SW,StreamStatus) => {
     //対象変更時
     let selectstream,tmp;
     selection.on('change',async function (){
-        selectstream = StreamStatus[selection.val()];
-        if(selectstream){
+        const  tmp = StreamStatus[selection.val()];
+        if(tmp){
+            let res = await quary('select * from functionSW f join videodetail v on f.videoid = v.videoid where f.videoid = ?;',[
+                tmp.videoid
+            ]);
+            selectstream = res[0];
             if(parseInt(selectstream.FitbitLiveNotice))
                 $('#FitbitLiveNotice').text("ON");
             else
@@ -35,6 +39,7 @@ module.exports = (default_SW,StreamStatus) => {
             else
                 $('#Aleam').text("OFF");
         }else {
+            const default_SW = await quary('Desc functionSW;');
             for (let value of default_SW) {
                 if(parseInt(value.Default))
                     $('#' + value.Field).text("ON");
@@ -47,7 +52,7 @@ module.exports = (default_SW,StreamStatus) => {
     RecBT.on('click',async function () {
         const valuediv = $('#AutoRec');
         if(selectstream) {
-            const res = await ToIS.ToggleFunctionBT('AutoRec', 'K3BqWvxGn4w');
+            const res = await ToIS.ToggleFunctionBT('AutoRec', selectstream.videoid);
             if(res.data.AfterValue)
                 valuediv.text("ON");
             else
@@ -64,7 +69,7 @@ module.exports = (default_SW,StreamStatus) => {
     $('#Aleam_bt').on('click',async () => {
         const valuediv = $('#Aleam');
         if(selectstream) {
-            const res = await ToIS.ToggleFunctionBT('Aleam', 'K3BqWvxGn4w');
+            const res = await ToIS.ToggleFunctionBT('Aleam', selectstream.videoid);
             if(res.data.AfterValue)
                 valuediv.text("ON");
             else
@@ -81,7 +86,7 @@ module.exports = (default_SW,StreamStatus) => {
     $('#AlexaLiveNotice_bt').on('click',async () => {
         const valuediv = $('#AlexaLiveNotice');
         if(selectstream) {
-            const res = await ToIS.ToggleFunctionBT('AlexaLiveNotice', 'K3BqWvxGn4w');
+            const res = await ToIS.ToggleFunctionBT('AlexaLiveNotice', selectstream.videoid);
             if(res.data.AfterValue)
                 valuediv.text("ON");
             else
@@ -98,7 +103,7 @@ module.exports = (default_SW,StreamStatus) => {
     $('#FitbitLiveNotice_bt').on('click',async () => {
         const valuediv = $('#FitbitLiveNotice');
         if(selectstream) {
-            const res = await ToIS.ToggleFunctionBT('FitbitLiveNotice', 'K3BqWvxGn4w');
+            const res = await ToIS.ToggleFunctionBT('FitbitLiveNotice', selectstream.videoid);
             if(res.data.AfterValue)
                 valuediv.text("ON");
             else
@@ -115,7 +120,7 @@ module.exports = (default_SW,StreamStatus) => {
     $('#AlexaUpcomingNotice_bt').on('click',async () => {
         const valuediv = $('#AlexaUpcomingNotice');
         if(selectstream) {
-            const res = await ToIS.ToggleFunctionBT('AlexaUpcomingNotice', 'K3BqWvxGn4w');
+            const res = await ToIS.ToggleFunctionBT('AlexaUpcomingNotice', selectstream.videoid);
             if(res.data.AfterValue)
                 valuediv.text("ON");
             else
@@ -132,7 +137,7 @@ module.exports = (default_SW,StreamStatus) => {
     $('#FitbitUpcomingNotice_bt').on('click',async () => {
         const valuediv = $('#FitbitUpcomingNotice');
         if(selectstream) {
-            const res = await ToIS.ToggleFunctionBT('FitbitUpcomingNotice', 'K3BqWvxGn4w');
+            const res = await ToIS.ToggleFunctionBT('FitbitUpcomingNotice', selectstream.videoid);
             if(res.data.AfterValue)
                 valuediv.text("ON");
             else

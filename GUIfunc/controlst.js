@@ -110,7 +110,7 @@ let chatdata;
             video.appendChild(player);
         }
     }
-    chatmaneger(id,player);
+    chatmaneger(id,player,stdata.livestate);
     settime(id);
     //既存曲リストを記載
     let songs = await getsongs(id);
