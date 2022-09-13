@@ -6,26 +6,180 @@
     <link rel="stylesheet" href="streamwatch.css">
     <link rel="stylesheet" href="default.css">
     <link rel="stylesheet" href="borderless.css">
+    <link rel="stylesheet" href="suggestions.css">
+    <link rel="stylesheet" href="ShareWatchpage.css">
     <script src="../GUIfunc/UI/default.js"></script>
 </head>
-<script src="header.js"></script>
 <body bgcolor="#282828" text="#ececec">
+<header id="header"></header>
 <div id="main_window">
-<h1 id="title"></h1>
-<div id="prayer">
-    <div id ="videodiv" class="default">
-        <div id="borderlass_backgraund" class="none">
-            <button id="borderlass_off">X</button>
+    <div id="main">
+        <h1 id="title"></h1>
+        <details id="description">
+        </details>
+        <div class="edit closed" id="edit"><!--タグ編集用ポップアウト-->
+            <div class="edit-guts">
+                <div class="popup_header flex">
+                    <div class="header_txt">タグを編集...</div>
+                    <button class="close-edit" id="close-edit">X</button>
+                </div>
+                <table class="popup_main">
+                    <tr>
+                        <td id = "edittag"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <input id="newtag" type="text" placeholder="新規タグ名を入力"><button id="sendnewtag">送信</button>
+                        </td>
+                    </tr>
+                </table>
+                <div class="popup_footer">
+                    <button id="tag_send">送信</button>
+                    <button id="tag_cancel">取り消し</button>
+                </div>
+            </div>
         </div>
+        <table>
+            <tr>
+                <td>
+                    <button id="open-edit" class="open-edit">タグを編集</button>
+                </td>
+                <td>タグ:</td>
+                <td id = "taglist"></td>
+            </tr>
+        </table>
+        <div id="player">
+            <div id ="videodiv" class="default">
+                <div id="borderlass_backgraund" class="none">
+                    <button id="borderlass_off">X</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="editsongsbox closed" id="editsongsbox">
+            <div align="left" class="popup_header" id="song_head">
+                <button class="close-pupup" onclick="document.getElementById('editsongsbox').classList.toggle('closed');">X</button>
+                <div class="header_txt">曲リスト編集...</div>
+            </div>
+            <div id="popouttable">
+                <table id="addsong">
+                    <thead>
+                    <tr>
+                        <td>
+                            id
+                        </td>
+                        <td>
+                            タイトル
+                        </td>
+                        <td>
+                            タイムスタンプ(開始・必須)
+                        </td>
+                        <td>
+                            タイムスタンプ(終了)
+                        </td>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="inputdiv">
+                <div id="songnform">
+                    <div id="addedsong">
+                        <input onchange="TEST_OBJECT.onSearchFieldChange(this.value,'songlist');"  type="text" id="searchsongs"><br>
+                        <select id="songlist">
+                            <option value="0">新規曲追加</option>
+                        </select>
+                    </div>
+                    <div id="newsong">
+                        <input type="text" id="songname">
+                    </div>
+                </div>
+                <div id="timeandsend" class="flex">
+                    <div id="time">
+                        <label for="timestump_start">開始時間<input type="time" id="timestump_start" step="1"></label>
+                        <label for="timestump_end">終了時間<input type="time" id="timestump_end" step="1"></label>
+                    </div>
+                    <button id="setsong">セット</button>
+                </div>
+            </div>
+            <script language="javascript" type="text/javascript">
+                var TEST_OBJECT = {
+                    onSearchFieldChange : function(value,target){
+                        var selectBox = document.getElementById(target);
+                        var items = selectBox.children;
+                        if (value === "") {
+                            for(var i=items.length-1; i>=0; i--){
+                                items[i].style.display = "";
+                                items[i].selected = false;
+                            }
+                            return;
+                        }
+
+                        var reg = new RegExp(".*"+value+".*","i");
+                        for(var i=items.length-1; i>=0; i--){
+                            if ( items[i].textContent.match(reg) ){
+                                items[i].style.display = "";
+                            } else {
+                                items[i].style.display = "none";
+                            }
+                            items[i].selected = false;
+                        }
+                    }
+                }
+            </script>
+            <button id="sendsong">送信</button>
+        </div>
+        <div class="closed" id="edittimetable">
+            <div class="popup_header flex">
+                <div class="header_txt">目次を編集...</div>
+                <button id="close-edit_timetable" class="close-pupup">X</button>
+            </div>
+            <div id="timetable-e" class="popup_main">
+            </div>
+            <div class="popup_footer">
+                <div id="timetableform" class="flex">
+                    <div id="timetable_inputs">
+                        <input type="text" placeholder="内容を入力" id="contentbox">
+                        <input type="time" id="timestump_content" step="1">
+                    </div>
+                    <button id="add_timetable">追加</button>
+                </div>
+                <div id="send_div">
+                    <button id="send_timetable">送信</button>
+                </div>
+            </div>
+        </div>
+        <div id="manu">
+            <div class="list" style="border-right: solid 2px #525252;">
+                <div class="list_header">
+                    目次<br>
+                    <button id = "open-edit_timetable" class="edit_times">編集</button>
+                </div>
+                <div class = "mainlist" id="timetable">
+                </div>
+            </div>
+            <div class="list">
+                <div class="list_header">
+                    曲リスト<br>
+                    <button id = "editsongs" class="edit_times">編集</button>
+                </div>
+                <div class = "mainlist">
+                    <table id="songlist0"></table>
+                </div>
+            </div>
+        </div>
+        <div id="suggestions"></div>
     </div>
-    <div id="other">
-        <div id="buttons2">
+    <div id="sub">
+        <div id="buttons">
             <button id="borderless_on">シネマ</button>
+            <button id="chat_popup">チャットをポップアップ</button>
         </div>
-        <div id="coment" class="scroll"></div>
+        <div id="info">
+
+        </div>
     </div>
 </div>
+<script src="../GUIfunc/default.js"></script>
 <script src="../GUIfunc/streamwatch.js"></script>
-</div>
 </body>
 </html>

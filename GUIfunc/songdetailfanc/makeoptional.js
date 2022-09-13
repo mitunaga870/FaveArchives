@@ -1,5 +1,4 @@
 const quary = require('../../generalfunc/sqlfanc/query');
-const {ipcRenderer} = require("electron");
 
 module.exports = async (id,detail) => {
     if (await ipcRenderer.invoke('comfirm',["任意情報を作成します（spotifyの連携は解除されます）"])) {

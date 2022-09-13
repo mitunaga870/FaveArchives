@@ -2,7 +2,6 @@ const getchat = require('../../GUIfunc/chatfunc/getchat');
 const chat = require('../../GUIfunc/chatfunc/chat');
 const store = require('../../generalfunc/store');
 const fs = require("fs");
-const {ipcRenderer} = require("electron");
 
 module.exports = async (type,player,id) => {
     if(store.get('cookie')==undefined)

@@ -1,6 +1,3 @@
-const {ipcRenderer} = require("electron");
-window.jQuery = window.$ = require('jquery');
-
 (async ()=>{
     $('#close').on('click',()=>{
         ipcRenderer.invoke('close');

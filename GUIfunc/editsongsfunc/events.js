@@ -1,8 +1,6 @@
 const addsong = require("../../GUIfunc/editsongsfunc/addsong");
 const getsongs = require("../../GUIfunc/editsongsfunc/getsongs");
 
-const {ipcRenderer} = require("electron");
-
 const songtitlebox = document.getElementById('songlist')
 const newsongtitle = document.getElementById('songname');
 const songtime = document.getElementById('timestump_start');

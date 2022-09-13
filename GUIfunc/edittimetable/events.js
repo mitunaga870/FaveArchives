@@ -1,7 +1,5 @@
-window.jQuery = window.$ = require('jquery');
 const query = require('../../generalfunc/sqlfanc/query');
 const refresh = require('../../GUIfunc/edittimetable/refresh');
-const {ipcRenderer} = require("electron");
 
 module.exports = () => {
     refresh();

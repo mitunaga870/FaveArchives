@@ -1,19 +1,35 @@
-const open = require('../generalfunc/openurl');
-const setborderless_event = require("../GUIfunc/borderlessfunc/borderless_event");
+const setborderless_event = require("../GUIfunc/borderlessfunc/borderless_event_withchat");
+const event = require('../GUIfunc/StreamWatchEvent/event');
+const loaddata = require('../GUIfunc/StreamandArchive/load');
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 const url = new URL(window.location.href);
 const params = url.searchParams;
 const id = params.get('id');
 const video = document.getElementById('videodiv');
+let CurrentTime,player;
 
 (async ()=>{
-    setborderless_event();
-    const prayer = document.createElement('iframe');
-    prayer.frameBorder =0;
-    prayer.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-    prayer.allowFullscreen=true;
-    prayer.src = "https://www.youtube.com/embed/" + id+"?autoplay=1";
-    prayer.id = "video";
-    prayer.enablejsapi = true;
-    video.appendChild(prayer);
-    open(["https://www.youtube.com/live_chat?is_popout=1&v=" + id]);
+    setborderless_event(id);
+    event(id);
+    loaddata(id);
+    ipcRenderer.invoke('openchat',[id]);
 })();
+
+function onYouTubeIframeAPIReady() {
+    let iframe = document.createElement('div');
+    iframe.id = 'video'
+    video.appendChild(iframe);
+    player = new YT.Player('video', {
+        videoId: id,
+        playerVars: {
+            autoplay:1,
+            rel:0,
+            enablejsapi:1,
+            modestbranding:1,
+            html5: 1
+        }
+    });
+}

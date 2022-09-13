@@ -1,5 +1,4 @@
 const quary = require('../../generalfunc/sqlfanc/query');
-const {ipcRenderer} = require("electron");
 
 module.exports = async (id) => {
     const name = document.getElementById('songname').value;

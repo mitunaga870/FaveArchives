@@ -1,4 +1,3 @@
-const {ipcRenderer} = require("electron");
 const quary = require('../../generalfunc/sqlfanc/query');
 
 module.exports = async (id) =>{
